@@ -6,4 +6,8 @@ class AppAssets {
   static const String favIcon="assets/icons/favourite.svg";
   static const String watchIcon="assets/icons/watch.svg";
   static const String starIcon="assets/icons/star.svg";
+  static const String homeIcon="assets/icons/homeIcon.svg";
+  static const String searchIcon="assets/icons/searchIcon.svg";
+  static const String profileIcon="assets/icons/Profiel.svg";
+  static const String exploreIcon="assets/icons/explore.svg";
 }
