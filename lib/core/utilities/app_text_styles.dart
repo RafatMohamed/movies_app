@@ -1,1 +1,3 @@
-class AppTextStyles {}
+class AppTextStyles {
+
+}
