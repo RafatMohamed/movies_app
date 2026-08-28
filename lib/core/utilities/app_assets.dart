@@ -1,3 +1,9 @@
 class AppAssets {
   static const String exitIconSvg="assets/icons/exit.svg";
+  static const String watchPlaying="assets/images/png/watch_playing_img.png";
+  static const String archiveSvg="assets/icons/archives.svg";
+  static const String arrowBackDetails="assets/icons/arrow_back_details.svg";
+  static const String favIcon="assets/icons/favourite.svg";
+  static const String watchIcon="assets/icons/watch.svg";
+  static const String starIcon="assets/icons/star.svg";
 }

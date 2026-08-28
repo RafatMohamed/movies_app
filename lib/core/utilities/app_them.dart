@@ -4,8 +4,9 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 class AppThem {
   // static ThemeData lightThem = ThemeData();
   static ThemeData darkThem = ThemeData(
+    scaffoldBackgroundColor: AppColors.deepBlack,
     fontFamily: "Roboto",
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       labelLarge: TextStyle(
         fontSize: 36,
         fontWeight: .w500, //medium
@@ -40,4 +41,10 @@ class AppThem {
 
     ),
   );
+}
+
+
+extension ScreenUtilsContext on BuildContext {
+  double get height => MediaQuery.sizeOf(this).height;
+  double get width => MediaQuery.sizeOf(this).width;
 }
