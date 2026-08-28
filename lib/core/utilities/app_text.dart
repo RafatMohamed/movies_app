@@ -1,3 +1,3 @@
 class AppText {
-  static const String  title = "MoviesApp";
+  static const String title = "MoviesApp";
 }
