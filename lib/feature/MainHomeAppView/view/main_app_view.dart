@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 import '../../../core/widgets/default_bottom_nav_bar.dart';
+import '../../Search/view/search_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -15,7 +16,7 @@ class _MainViewState extends State<MainView> {
 
   final List<Widget> _screens = [
     const Placeholder(),
-    const Placeholder(),
+    const SearchView(),
     const Placeholder(),
     const Placeholder(),
   ];
