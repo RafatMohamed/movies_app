@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/utilities/app_them.dart';
-import 'feature/MovieDetails/view/movie_details_view.dart';
+import 'feature/MainHomeAppView/view/main_app_view.dart';
 
 void main() {
   runApp(const MoviesApp());
@@ -14,7 +14,7 @@ class MoviesApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppThem.darkThem,
       themeMode: .dark,
-      home:const MovieDetailsView(),
+      home:const MainView(),
     );
   }
 }
