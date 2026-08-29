@@ -19,52 +19,54 @@ class CustomMovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = context.width;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return Stack(
-      alignment: .topStart,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadiusGeometry.circular(
-            AppBorderRadius.r16
+    return InkWell(
+      onTap: () {
+        // Handle card tap
+      },
+      child: Stack(
+        alignment: .topStart,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
+            child: Image.asset(pathImage, fit: .fill, width: width),
           ),
-          child: Image.asset(
-            pathImage,
-            fit: .fill,
-            width: width,
-          ),
-        ),
-        Positioned.directional(
-          textDirection: .ltr,
-          start: AppPadding.p8,
-          top: AppPadding.p8,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppBorderRadius.r8),
-              color: AppColors.deepBlack.withValues(alpha: 0.7),
-            ),
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: AppPadding.p8,vertical:AppPadding.p4),
-            child: Row(
-              mainAxisSize: .min,
-              children: [
-                Text(
-                  rate,
-                  style: textTheme.titleLarge?.copyWith(
-                    fontWeight: .w400,
-                    color: AppColors.white,
+          Positioned.directional(
+            textDirection: .ltr,
+            start: AppPadding.p8,
+            top: AppPadding.p8,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppBorderRadius.r8),
+                color: AppColors.deepBlack.withValues(alpha: 0.7),
+              ),
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppPadding.p8,
+                vertical: AppPadding.p4,
+              ),
+              child: Row(
+                mainAxisSize: .min,
+                children: [
+                  Text(
+                    rate,
+                    style: textTheme.titleLarge?.copyWith(
+                      fontWeight: .w400,
+                      color: AppColors.white,
+                    ),
                   ),
-                ),
-                const Gap(AppPadding.p8),
-                SvgPicture.asset(
-                  AppAssets.starIcon,
-                  colorFilter: const ColorFilter.mode(AppColors.gold, .srcIn),
-                  fit: .scaleDown,
-                  width: 16,
-                  height: 16,
-                ),
-              ],
+                  const Gap(AppPadding.p8),
+                  SvgPicture.asset(
+                    AppAssets.starIcon,
+                    colorFilter: const ColorFilter.mode(AppColors.gold, .srcIn),
+                    fit: .scaleDown,
+                    width: 16,
+                    height: 16,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
