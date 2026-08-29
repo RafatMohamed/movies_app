@@ -5,6 +5,8 @@ import 'package:movies_app/feature/home_tap/view/widgets/watching_now_section.da
 import 'package:movies_app/models/film_model.dart';
 
 class HomeTap extends StatefulWidget {
+  const HomeTap({super.key});
+
   @override
   State<HomeTap> createState() => _HomeTapState();
 }
