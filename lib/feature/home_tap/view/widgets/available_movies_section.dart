@@ -8,6 +8,8 @@ class AvailableMoviesSection extends StatelessWidget {
   final List<FilmModel> movies = FilmModel.FilmList;
 
   CarouselSliderController controller = CarouselSliderController();
+
+  AvailableMoviesSection({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
