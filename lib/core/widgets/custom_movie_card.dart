@@ -23,14 +23,8 @@ class CustomMovieCard extends StatelessWidget {
       alignment: .topStart,
       children: [
         ClipRRect(
-          borderRadius: BorderRadiusGeometry.circular(
-            AppBorderRadius.r16
-          ),
-          child: Image.asset(
-            pathImage,
-            fit: .fill,
-            width: width,
-          ),
+          borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
+          child: Image.asset(pathImage, fit: .fill, width: width),
         ),
         Positioned.directional(
           textDirection: .ltr,
@@ -41,7 +35,10 @@ class CustomMovieCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppBorderRadius.r8),
               color: AppColors.deepBlack.withValues(alpha: 0.7),
             ),
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: AppPadding.p8,vertical:AppPadding.p4),
+            padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: AppPadding.p8,
+              vertical: AppPadding.p4,
+            ),
             child: Row(
               mainAxisSize: .min,
               children: [

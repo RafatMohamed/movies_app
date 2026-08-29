@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/feature/home_tap/view/home_tap.dart';
 
 import '../../../core/widgets/default_bottom_nav_bar.dart';
 import '../../Search/view/search_view.dart';
@@ -15,7 +16,7 @@ class _MainViewState extends State<MainView> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const Placeholder(),
+    HomeTap(),
     const SearchView(),
     const Placeholder(),
     const Placeholder(),
@@ -45,4 +46,3 @@ class _MainViewState extends State<MainView> {
     );
   }
 }
-
