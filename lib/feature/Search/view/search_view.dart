@@ -3,7 +3,6 @@ import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/feature/Search/view/widgets/custom_text_field.dart';
 import 'package:movies_app/feature/Search/view/widgets/search_view_body.dart';
 import '../../../core/utilities/app_padding.dart';
-import '../../../core/widgets/custom_movie_card.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
