@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'core/utilities/app_them.dart';
 import 'feature/MainHomeAppView/view/main_app_view.dart';
+import 'feature/login/views/login_view.dart';
 
 void main() {
   runApp(const MoviesApp());
@@ -14,7 +15,7 @@ class MoviesApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppThem.darkThem,
       themeMode: .dark,
-      home:const MainView(),
+        home: const LoginView(),
     );
   }
 }
