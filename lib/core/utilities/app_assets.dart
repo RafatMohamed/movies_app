@@ -13,8 +13,7 @@ class AppAssets {
   static const String emptyMoviesImage = "assets/images/png/emptyMovies.png";
   static const String availableNowImage = "assets/images/png/available_now.png";
   static const String watchNowImage = "assets/images/png/watch_now.png";
-  static const String forgetPasswordImage =
-      "assets/images/png/forget_password.png";
+  static const String forgetPasswordImage ="assets/images/png/forget_password.png";
   static const String appLogo = "assets/images/png/logo_app.png";
   static const String emailIcon = "assets/icons/email.svg";
   static const String passwordIcon = "assets/icons/password.svg";
@@ -22,4 +21,9 @@ class AppAssets {
   static const String showPasswordIcon = "assets/icons/showPassword.svg";
   static const String englishIcon = "assets/icons/English.svg";
   static const String arabicIcon = "assets/icons/Arabic.svg";
+  static const String person1 = "assets/images/png/avatar_1.png";
+  static const String person2 = "assets/images/png/avatar_2.png";
+  static const String person3 = "assets/images/png/avatar_3.png";
+  static const String name = "assets/icons/person.svg";
+  static const String phone = "assets/icons/phone.svg";
 }

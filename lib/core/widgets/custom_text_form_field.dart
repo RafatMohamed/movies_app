@@ -74,11 +74,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
       },
       keyboardType: widget.keyboardType,
-      style: TextStyle(
-        color: themeColor.primaryColor,
+      style: const TextStyle(
+        color: AppColors.white,
         fontSize: 16,
-        fontWeight: .w400,
-        fontStyle: .normal,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
       ),
       textInputAction: widget.textInputAction,
       canRequestFocus: true,
