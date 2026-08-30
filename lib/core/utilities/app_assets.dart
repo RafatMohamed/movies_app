@@ -15,7 +15,6 @@ class AppAssets {
   static const String watchNowImage = "assets/images/png/watch_now.png";
   static const String forgetPasswordImage =
       "assets/images/png/forget_password.png";
-  static const String emailIcon = "assets/icons/email.svg";
   static const String appLogo = "assets/images/png/logo_app.png";
   static const String emailIcon = "assets/icons/email.svg";
   static const String passwordIcon = "assets/icons/password.svg";
