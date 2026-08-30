@@ -9,7 +9,7 @@ import 'package:movies_app/models/film_model.dart';
 class WatchingNowSection extends StatelessWidget {
   final List<FilmModel> movies = FilmModel.FilmList;
 
-   WatchingNowSection({super.key});
+  WatchingNowSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +86,7 @@ class WatchingNowSection extends StatelessWidget {
             },
           ),
         ),
+        const Gap(16),
       ],
     );
   }
