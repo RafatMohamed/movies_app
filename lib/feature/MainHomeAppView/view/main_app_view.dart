@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/feature/explore_tap/view/explore_tap.dart';
 import 'package:movies_app/feature/home_tap/view/home_tap.dart';
+import 'package:movies_app/feature/profile_tab/view/profile_tab.dart';
 
 import '../../../core/widgets/default_bottom_nav_bar.dart';
 import '../../Search/view/search_view.dart';
@@ -20,7 +21,7 @@ class _MainViewState extends State<MainView> {
     HomeTap(),
     const SearchView(),
     ExploreTap(),
-    const Placeholder(),
+    ProfileTab(),
   ];
 
   @override
