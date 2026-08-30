@@ -8,22 +8,34 @@ import 'package:movies_app/feature/profile_tab/view/widgets/tabs_view_section.da
 class ProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     return SafeArea(
       child: Container(
         color: AppColors.lightBlack,
         child: NestedScrollView(
+          controller: scrollController,
           body: const TabsViewSection(),
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const Gap(36),
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height * .19,
-                    child: HeaderSection(),
-                  ),
-                  ButtonSection(),
-                ],
+              child: AnimatedBuilder(
+                animation: scrollController,
+                builder: (context, child) {
+                  double opacity =
+                      1.0 - (scrollController.offset / 200).clamp(0.0, 1.0);
+
+                  return Opacity(opacity: opacity, child: child);
+                },
+                child: Column(
+                  children: [
+                    const Gap(36),
+                    SizedBox(
+                      height: MediaQuery.sizeOf(context).height * .17,
+                      child: HeaderSection(),
+                    ),
+                    const Gap(16),
+                    ButtonSection(),
+                  ],
+                ),
               ),
             ),
           ],
