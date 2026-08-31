@@ -119,9 +119,7 @@ class _RegisterViewState extends State<RegisterView> {
                     controller: phoneController,
                     withValidator: true,
                     keyboardType: TextInputType.phone,
-                    // NOTE: no phone icon exists in AppAssets yet.
-                    // Add one (e.g. AppAssets.phoneIcon) and pass it here
-                    // as prefixIconPath once the svg asset is added.
+                    prefixIconPath: AppAssets.phone,
                   ),
                   const Gap(AppPadding.p24),
                   CustomButtonApp(
@@ -203,8 +201,7 @@ class _RegisterViewState extends State<RegisterView> {
   }
 }
 
-/// Swipeable avatar carousel: person1, person2, person3 from AppAssets.
-/// The centered avatar is scaled up; the side ones shrink as they move away.
+
 class _AvatarCarousel extends StatefulWidget {
   const _AvatarCarousel();
 
@@ -248,7 +245,6 @@ class _AvatarCarouselState extends State<_AvatarCarousel> {
       height: _selectedSize,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          // Width of neighbouring pages actually visible in the viewport.
           final peekWidth = constraints.maxWidth * (1 - _viewportFraction) / 2;
           final unselectedSize = (peekWidth - 6).clamp(50.0, 90.0);
 
@@ -259,11 +255,6 @@ class _AvatarCarouselState extends State<_AvatarCarousel> {
               final distance = (index - _page).abs().clamp(0.0, 1.0);
               final size =
                   unselectedSize + (_selectedSize - unselectedSize) * (1 - distance);
-
-              // Slide the avatar toward whichever edge of its own page box
-              // stays inside the viewport, instead of leaving it centered
-              // in a box that's mostly scrolled off-screen — that's what
-              // was causing the side avatars to get cropped.
               final side = index > _page ? -1.0 : (index < _page ? 1.0 : 0.0);
               final alignment = Alignment(side * distance, 0);
 
