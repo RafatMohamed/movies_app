@@ -37,9 +37,8 @@ class CustomButtonApp extends StatelessWidget {
         child: Row(
           mainAxisAlignment: .center,
           children: [
-            Text(text, style: textStyle ?? them.textTheme.labelSmall),
-            if(withIcon)
-             SvgPicture.asset(AppAssets.exitIconSvg) ,
+            Text(text, style: textStyle ?? them.textTheme.titleLarge),
+            if (withIcon) SvgPicture.asset(AppAssets.exitIconSvg),
           ],
         ),
       ),
