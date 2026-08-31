@@ -94,7 +94,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.lightBlack,
-
         hintText: widget.hintText,
         suffixIcon: widget.isPassword == true
             ? GestureDetector(

@@ -16,4 +16,11 @@ class AppAssets {
   static const String forgetPasswordImage =
       "assets/images/png/forget_password.png";
   static const String emailIcon = "assets/icons/email.svg";
+  static const String appLogo = "assets/images/png/logo_app.png";
+  static const String emailIcon = "assets/icons/email.svg";
+  static const String passwordIcon = "assets/icons/password.svg";
+  static const String googleIcon = "assets/icons/Google.svg";
+  static const String showPasswordIcon = "assets/icons/showPassword.svg";
+  static const String englishIcon = "assets/icons/English.svg";
+  static const String arabicIcon = "assets/icons/Arabic.svg";
 }
