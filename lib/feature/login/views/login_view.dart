@@ -7,6 +7,8 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
+import 'package:movies_app/core/widgets/language_toggle.dart';
+import 'package:movies_app/feature/register/views/register_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -104,13 +106,13 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                   const Gap(AppPadding.p20),
-                  _buildCreateAccountRow(textTheme),
+                  _buildCreateAccountRow(context, textTheme),
                   const Gap(AppPadding.p24),
                   _buildOrDivider(),
                   const Gap(AppPadding.p24),
                   _buildGoogleButton(textTheme),
                   const Gap(AppPadding.p24),
-                  Center(child: _LanguageToggle()),
+                  const Center(child: LanguageToggle()),
                   const Gap(48),
                 ],
               ),
@@ -121,20 +123,19 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-
   Widget _buildLogo() {
     return Center(
       child: SizedBox(
         height: 150,
         width: 150,
-        child: Image.asset(AppAssets.appLogo, fit: .contain),
+        child: Image.asset(AppAssets.appLogo, fit: BoxFit.contain),
       ),
     );
   }
 
-  Widget _buildCreateAccountRow(TextTheme textTheme) {
+  Widget _buildCreateAccountRow(BuildContext context, TextTheme textTheme) {
     return Row(
-      mainAxisAlignment: .center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           "Don't Have Account ? ",
@@ -142,11 +143,14 @@ class _LoginViewState extends State<LoginView> {
         ),
         GestureDetector(
           onTap: () {
-            // TODO: navigate to register screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const RegisterView()),
+            );
           },
           child: Text(
             "Create One",
-            style: textTheme.titleMedium?.copyWith(fontWeight: .bold),
+            style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
       ],
@@ -155,8 +159,8 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildOrDivider() {
     return const Row(
-      mainAxisAlignment: .center,
-      children: const [
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
         SizedBox(
           width: 60,
           child: Divider(color: AppColors.gold, thickness: 1),
@@ -182,14 +186,14 @@ class _LoginViewState extends State<LoginView> {
         // TODO: handle Google sign in
       },
       child: Container(
-        alignment: .center,
+        alignment: Alignment.center,
         padding: const EdgeInsetsDirectional.all(AppPadding.p16),
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(AppBorderRadius.r16),
           color: AppColors.gold,
         ),
         child: Row(
-          mainAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(AppAssets.googleIcon, width: 22, height: 22),
             const Gap(AppPadding.p8),
@@ -198,67 +202,6 @@ class _LoginViewState extends State<LoginView> {
               style: textTheme.labelSmall?.copyWith(color: AppColors.deepBlack),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _LanguageToggle extends StatefulWidget {
-  @override
-  State<_LanguageToggle> createState() => _LanguageToggleState();
-}
-
-class _LanguageToggleState extends State<_LanguageToggle> {
-  bool isArabic = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppBorderRadius.r24),
-        border: Border.all(color: AppColors.gold, width: 2),
-      ),
-      child: Row(
-        mainAxisSize: .min,
-        children: [
-          _flagCircle(
-            AppAssets.englishIcon,
-            selected: !isArabic,
-            onTap: () {
-              if (isArabic) setState(() => isArabic = false);
-            },
-          ),
-          _flagCircle(
-            AppAssets.arabicIcon,
-            selected: isArabic,
-            onTap: () {
-              if (!isArabic) setState(() => isArabic = true);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _flagCircle(
-      String iconPath, {
-        required bool selected,
-        required VoidCallback onTap,
-      }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 36,
-        height: 36,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: selected ? AppColors.gold : Colors.transparent,
-        ),
-        padding: EdgeInsets.all(selected ? 5 : 3),
-        child: ClipOval(
-          child: SvgPicture.asset(iconPath, fit: .cover),
         ),
       ),
     );

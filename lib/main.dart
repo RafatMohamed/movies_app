@@ -16,8 +16,8 @@ class MoviesApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppThem.darkThem,
       themeMode: .dark,
-        //home: const LoginView(),
-      home: const MainView(),
+      home: const LoginView(),
+      //home: const MainView(),
       //  home: ProfileTab(),
     );
   }
