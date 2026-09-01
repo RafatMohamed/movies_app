@@ -98,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                   const Gap(AppPadding.p24),
                   CustomButtonApp(
                     text: "Login",
-                    textStyle: textTheme.titleMedium?.copyWith(
+                    textStyle: textTheme.labelSmall?.copyWith(
                       color: AppColors.deepBlack,
                     ),
                     onTap: () {

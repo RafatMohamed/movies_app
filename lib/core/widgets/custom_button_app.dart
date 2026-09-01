@@ -30,7 +30,7 @@ class CustomButtonApp extends StatelessWidget {
       child: Container(
         alignment: .center,
         width: double.infinity,
-        padding: const EdgeInsetsDirectional.all(AppPadding.p16),
+        padding: const EdgeInsetsDirectional.all(AppPadding.p14),
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(AppBorderRadius.r16),
           color: background,
