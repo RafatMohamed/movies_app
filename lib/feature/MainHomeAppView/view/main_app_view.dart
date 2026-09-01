@@ -7,14 +7,14 @@ import 'package:movies_app/feature/profile_tab/view/profile_tab.dart';
 import '../../../core/widgets/default_bottom_nav_bar.dart';
 import '../../Search/view/search_view.dart';
 
-class MainView extends StatefulWidget {
-  const MainView({super.key});
+class MainAppView extends StatefulWidget {
+  const MainAppView({super.key});
 
   @override
-  State<MainView> createState() => _MainViewState();
+  State<MainAppView> createState() => _MainAppViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class _MainAppViewState extends State<MainAppView> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
