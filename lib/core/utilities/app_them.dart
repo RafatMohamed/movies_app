@@ -22,27 +22,30 @@ class AppThem {
         fontWeight: .w400, //regular
         color: AppColors.white,
       ),
+      bodyMedium: TextStyle(
+        fontSize: 18,
+        fontWeight: .normal,
+        color: AppColors.white,
+      ),
 
       titleLarge: TextStyle(
         fontSize: 16,
         fontWeight: .w600,
-        color: AppColors.deepBlack
+        color: AppColors.deepBlack,
       ),
       titleMedium: TextStyle(
         fontSize: 15,
         fontWeight: .w400,
-        color: AppColors.gold
+        color: AppColors.gold,
       ),
       titleSmall: TextStyle(
         fontSize: 14,
         fontWeight: .w400,
-        color: AppColors.gold
+        color: AppColors.gold,
       ),
-
     ),
   );
 }
-
 
 extension ScreenUtilsContext on BuildContext {
   double get height => MediaQuery.sizeOf(this).height;
