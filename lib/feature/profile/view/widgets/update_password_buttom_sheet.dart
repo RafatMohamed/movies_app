@@ -18,7 +18,11 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
 
   final TextEditingController newPasswordFailed = TextEditingController();
 
-  bool showMassegeEror = false;
+  final TextEditingController confirmNewPasswordFailed = TextEditingController();
+
+  bool showMessageForConfirmError = false;
+  bool showMessageErrorForCurrent = false;
+  bool showMessageErrorOldPassWithCurrent = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,35 +57,59 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
               hintText: 'New password',
               isPassword: true,
             ),
-            if (!showMassegeEror) const SizedBox(height: 16),
+            const SizedBox(height: 16),
+            CustomTextFormField(
+              controller: confirmNewPasswordFailed,
+              withValidator: true,
+              hintText: 'Confirm New password',
+              isPassword: true,
+            ),
+            if (!showMessageForConfirmError || !showMessageErrorForCurrent || !showMessageErrorOldPassWithCurrent) const SizedBox(height: 16),
             Visibility(
-              visible: showMassegeEror,
+              visible: showMessageForConfirmError ||showMessageErrorForCurrent || showMessageErrorOldPassWithCurrent,
               child: PasswordDidNotMatch(
                 onDismissed: () {
                   setState(() {
-                    showMassegeEror = false;
+                    showMessageForConfirmError = false;
+                    showMessageErrorForCurrent = false;
+                    showMessageErrorOldPassWithCurrent = false;
                   });
                 },
-                isVisible: showMassegeEror,
-                child: const Text(
-                  'Passwords do not match',
-                  style: TextStyle(color: Colors.red, fontSize: 14),
+                isVisible: showMessageForConfirmError || showMessageErrorForCurrent|| showMessageErrorOldPassWithCurrent,
+                child:  Text(
+                  showMessageForConfirmError ? 'Passwords do not match':showMessageErrorForCurrent ?'old password is Incorrect':showMessageErrorOldPassWithCurrent?"New password must be another for current":"",
+                  style: const TextStyle(color: Colors.red, fontSize: 14),
                 ),
               ),
             ),
+            const SizedBox(height: 16),
 
             CustomButtonApp(
               onTap: () {
-                if (currentFailed.text != newPasswordFailed.text) {
+                final oldPassword ="12345678";
+                if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
                   setState(() {
-                    showMassegeEror = true;
+                    showMessageForConfirmError = true;
+                  });
+                  return;
+                }
+                if (currentFailed.text != oldPassword) {
+                  setState(() {
+                    showMessageErrorForCurrent = true;
+                  });
+                  return;
+                }
+                if (currentFailed.text == newPasswordFailed.text) {
+                  setState(() {
+                    showMessageErrorOldPassWithCurrent = true;
                   });
                   return;
                 }
                 if (formKey.currentState!.validate() &&
                     currentFailed.text.isNotEmpty &&
                     newPasswordFailed.text.isNotEmpty &&
-                    currentFailed.text == newPasswordFailed.text) {
+                    confirmNewPasswordFailed.text.isNotEmpty &&
+                    confirmNewPasswordFailed.text == newPasswordFailed.text) {
                   // Implement your password reset logic here
 
                   Navigator.pop(context);

@@ -5,8 +5,8 @@ import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_border_radius.dart';
 import '../../../../core/utilities/app_padding.dart';
 
-class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+class CustomTextFieldSearch extends StatefulWidget {
+  const CustomTextFieldSearch({
     super.key,
     required this.onSubmitted,
     required this.onClear,
@@ -14,10 +14,10 @@ class CustomTextField extends StatefulWidget {
   final Function(String) onSubmitted;
   final Function(void) onClear;
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextFieldSearch> createState() => _CustomTextFieldSearchState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomTextFieldSearchState extends State<CustomTextFieldSearch> {
   TextEditingController queryController = TextEditingController();
   @override
   void dispose() {
