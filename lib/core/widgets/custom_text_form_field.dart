@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -92,6 +93,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
+        hintStyle: const TextStyle(color: AppColors.white),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppPadding.p16),
+          borderSide: .none,
+        ),
         filled: true,
         fillColor: AppColors.lightBlack,
         hintText: widget.hintText,

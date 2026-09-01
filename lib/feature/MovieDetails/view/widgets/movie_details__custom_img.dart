@@ -23,7 +23,7 @@ class CustomMovieDetailsImage extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadiusGeometry.directional(
               bottomStart: Radius.circular(AppBorderRadius.r16),
-              bottomEnd:  Radius.circular(AppBorderRadius.r16),
+              bottomEnd: Radius.circular(AppBorderRadius.r16),
             ),
             child: Image.asset(
               "assets/images/png/onBoarding1.png",
@@ -32,19 +32,31 @@ class CustomMovieDetailsImage extends StatelessWidget {
               height: height * 0.8,
             ),
           ),
-          const Positioned(
+          Positioned(
             left: AppPadding.p16,
             right: AppPadding.p16,
             top: AppPadding.p32,
             child: Row(
               mainAxisAlignment: .spaceBetween,
               children: [
-                DefaultIconDetails(pathIcon: AppAssets.arrowBackDetails),
-                DefaultIconDetails(pathIcon: AppAssets.archiveSvg),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 24,
+                    width: 24,
+                    color: Colors.transparent,
+                    child: const DefaultIconDetails(
+                      pathIcon: AppAssets.arrowBackDetails,
+                    ),
+                  ),
+                ),
+                const DefaultIconDetails(pathIcon: AppAssets.archiveSvg),
               ],
             ),
           ),
-           Image.asset(
+          Image.asset(
             AppAssets.watchPlaying,
             width: width * 0.25,
             fit: .scaleDown,
@@ -61,7 +73,7 @@ class CustomMovieDetailsImage extends StatelessWidget {
                   style: textTheme.labelMedium,
                   textAlign: .center,
                 ),
-                 Text(
+                Text(
                   "2020",
                   style: textTheme.labelSmall?.copyWith(
                     fontWeight: .bold,

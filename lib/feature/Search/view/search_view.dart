@@ -43,7 +43,7 @@ class _SearchViewState extends State<SearchView> {
               horizontal: AppPadding.p16,
               vertical: AppPadding.p16,
             ),
-            child: CustomTextField(
+            child: CustomTextFieldSearch(
               onSubmitted: onSubmittedSearch,
               onClear: (p0) {
                 clearSearch();
