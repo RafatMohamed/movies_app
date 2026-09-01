@@ -40,11 +40,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isSecureValue = widget.isPassword;
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeColor = Theme.of(context);
     return TextFormField(
       obscureText: isSecureValue,
       controller: widget.controller,
-      cursorColor: themeColor.primaryColor,
+      cursorColor: AppColors.gold,
       cursorHeight: 25,
       maxLines: widget.maxLines,
       validator: (value) {
@@ -82,6 +81,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
       textInputAction: widget.textInputAction,
       canRequestFocus: true,
+      autofocus: false,
       onTapOutside: (_) {
         FocusManager.instance.primaryFocus?.unfocus(
           disposition: UnfocusDisposition.previouslyFocusedChild,
