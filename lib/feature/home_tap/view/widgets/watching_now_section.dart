@@ -4,7 +4,7 @@ import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
-import 'package:movies_app/models/film_model.dart';
+import '../../../../core/models/film_model.dart';
 
 class WatchingNowSection extends StatelessWidget {
   final List<FilmModel> movies = FilmModel.filmList;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
-import 'package:movies_app/models/film_model.dart';
+import '../../../../core/models/film_model.dart';
 
 class TabViewByGenre extends StatelessWidget {
  final String genere;

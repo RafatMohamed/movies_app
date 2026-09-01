@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
-import 'package:movies_app/models/film_model.dart';
+import '../../../../core/models/film_model.dart';
 
 class AvailableMoviesSection extends StatefulWidget {
   const AvailableMoviesSection({super.key});
