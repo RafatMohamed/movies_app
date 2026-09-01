@@ -14,7 +14,7 @@ class FilmModel {
     // required this.duration,
   });
 
-  static List<FilmModel> FilmList = [
+  static List<FilmModel> filmList = [
     FilmModel(
       image: 'assets/images/png/film_poster_test.png',
       rate: '8.5',

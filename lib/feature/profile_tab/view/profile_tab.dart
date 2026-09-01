@@ -6,6 +6,7 @@ import 'package:movies_app/feature/profile_tab/view/widgets/header_section.dart'
 import 'package:movies_app/feature/profile_tab/view/widgets/tabs_view_section.dart';
 
 class ProfileTab extends StatelessWidget {
+  const ProfileTab({super.key});
   @override
   Widget build(BuildContext context) {
     ScrollController scrollController = ScrollController();
@@ -30,10 +31,10 @@ class ProfileTab extends StatelessWidget {
                     const Gap(36),
                     SizedBox(
                       height: MediaQuery.sizeOf(context).height * .17,
-                      child: HeaderSection(),
+                      child: const HeaderSection(),
                     ),
                     const Gap(16),
-                    ButtonSection(),
+                    const ButtonSection(),
                   ],
                 ),
               ),

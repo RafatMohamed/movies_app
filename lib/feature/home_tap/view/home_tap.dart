@@ -14,7 +14,7 @@ class HomeTap extends StatefulWidget {
 class _HomeTapState extends State<HomeTap> {
   int currentIndex = 0;
 
-  final filmList = FilmModel.FilmList;
+  final filmList = FilmModel.filmList;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _HomeTapState extends State<HomeTap> {
           ),
           SingleChildScrollView(
             child: Column(
-              children: [AvailableMoviesSection(), WatchingNowSection()],
+              children: [const AvailableMoviesSection(), WatchingNowSection()],
             ),
           ),
         ],

@@ -18,10 +18,10 @@ class _MainViewState extends State<MainView> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    HomeTap(),
+    const HomeTap(),
     const SearchView(),
-    ExploreTap(),
-    ProfileTab(),
+    const ExploreTap(),
+    const ProfileTab(),
   ];
 
   @override

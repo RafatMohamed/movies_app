@@ -4,6 +4,7 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class HeaderSection extends StatelessWidget {
+  const HeaderSection({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(

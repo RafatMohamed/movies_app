@@ -103,8 +103,8 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                           ),
                         ),
                       ),
-                      child: Column(
-                        children: const [
+                      child: const Column(
+                        children:  [
                           CustomTextFormField(
                             hintText: 'Enter your name',
                             isName: true,

@@ -7,7 +7,7 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/models/film_model.dart';
 
 class WatchingNowSection extends StatelessWidget {
-  final List<FilmModel> movies = FilmModel.FilmList;
+  final List<FilmModel> movies = FilmModel.filmList;
 
   WatchingNowSection({super.key});
 

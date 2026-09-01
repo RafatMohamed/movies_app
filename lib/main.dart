@@ -1,8 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/feature/Onboarding/view/starting_view.dart';
 import 'package:movies_app/feature/Splash/view/splash_view.dart';
-import 'package:movies_app/feature/MovieDetails/view/movie_details_view.dart';
 import 'core/utilities/app_them.dart';
 
 void main() {
@@ -30,7 +28,6 @@ class MoviesApp extends StatelessWidget {
       darkTheme: AppThem.darkThem,
       themeMode: .dark,
       home: const SplashView(),
-      home: const MovieDetailsView(),
       //home: const MainView(),
       //  home: ProfileTab(),
     );
