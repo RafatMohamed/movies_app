@@ -1,11 +1,17 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/feature/profile_tab/view/profile_tab.dart';
+import 'package:movies_app/feature/MovieDetails/view/movie_details_view.dart';
 import 'core/utilities/app_them.dart';
-import 'feature/MainHomeAppView/view/main_app_view.dart';
-import 'feature/login/views/login_view.dart';
 
 void main() {
-  runApp(const MoviesApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) {
+        return const MoviesApp();
+      },
+    ),
+  );
 }
 
 class MoviesApp extends StatelessWidget {
@@ -14,9 +20,14 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
+      locale: DevicePreview.locale(context),
+
+      builder: DevicePreview.appBuilder,
+
       darkTheme: AppThem.darkThem,
       themeMode: .dark,
-      home: const LoginView(),
+      home: const MovieDetailsView(),
       //home: const MainView(),
       //  home: ProfileTab(),
     );
