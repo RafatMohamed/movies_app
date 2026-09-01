@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:svg_flutter/svg.dart';
@@ -38,6 +39,8 @@ class CustomButtonApp extends StatelessWidget {
           mainAxisAlignment: .center,
           children: [
             Text(text, style: textStyle ?? them.textTheme.titleLarge),
+            Text(text, style: textStyle ?? them.textTheme.labelSmall),
+            const Gap(5),
             if (withIcon) SvgPicture.asset(AppAssets.exitIconSvg),
           ],
         ),

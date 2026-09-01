@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/core/utilities/app_them.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'movie_details__custom_cast.dart';
 import 'movie_details__custom_genres.dart';
@@ -16,7 +17,9 @@ class MovieDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height =context.height;
     return Column(
+      spacing: height*(AppPadding.p16/height),
       children: [
        const CustomMovieDetailsImage(),
         Padding(
@@ -24,9 +27,9 @@ class MovieDetailsViewBody extends StatelessWidget {
             horizontal: AppPadding.p16
           ),
           child: Column(
+            spacing: height*(AppPadding.p16/height),
             children: [
               CustomButtonApp(onTap: () {}, text: "watch", background: AppColors.red),
-              const Gap(AppPadding.p16),
               const CustomMovieDetailsInfoPopular(),
               const Gap(AppPadding.p16),
               const CustomMovieDetailsScreenShot(),
