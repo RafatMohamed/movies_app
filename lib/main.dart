@@ -53,7 +53,7 @@ class MoviesApp extends StatelessWidget {
 
       routes: routeApp,
 
-      initialRoute: AppOnRouteText.mainAppName,
+      initialRoute: AppOnRouteText.loginName,
       //home: AppOnRouteText.mainAppName,
       //  home: ProfileTab(),
     );

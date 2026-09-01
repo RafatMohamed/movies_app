@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
+import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
@@ -88,6 +89,7 @@ class _LoginViewState extends State<LoginView> {
                     child: GestureDetector(
                       onTap: () {
                         // TODO: navigate to forget password screen
+                        Navigator.pushNamed(context, AppOnRouteText.forgetPasswordName);
                       },
                       child: Text(
                         "Forget Password ?",
@@ -103,6 +105,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     onTap: () {
                       // TODO: handle login
+                      ///if login success
+                      Navigator.pushNamed(context, AppOnRouteText.mainAppName);
                     },
                   ),
                   const Gap(AppPadding.p20),
