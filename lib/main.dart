@@ -27,16 +27,17 @@ class MoviesApp extends StatelessWidget {
   const MoviesApp({super.key});
   @override
   Widget build(BuildContext context) {
-    Map<String ,WidgetBuilder > routeApp={
-      AppOnRouteText.splashName:(context) => const SplashView(),
-      AppOnRouteText.startingViewAppName:(context) => const StartingView(),
-      AppOnRouteText.onBoardingName:(context) => const OnboardingView(),
-      AppOnRouteText.loginName:(context) => const LoginView(),
-      AppOnRouteText.registerName:(context) => const RegisterView(),
-      AppOnRouteText.forgetPasswordName:(context) => const ForgetPasswordView(),
-      AppOnRouteText.updateProfileName:(context) => const UpdateProfileView(),
-      AppOnRouteText.mainAppName:(context) => const MainAppView(),
-      AppOnRouteText.detailsMoviesName:(context) => const MovieDetailsView(),
+    Map<String, WidgetBuilder> routeApp = {
+      AppOnRouteText.splashName: (context) => const SplashView(),
+      AppOnRouteText.startingViewAppName: (context) => const StartingView(),
+      AppOnRouteText.onBoardingName: (context) => const OnboardingView(),
+      AppOnRouteText.loginName: (context) => const LoginView(),
+      AppOnRouteText.registerName: (context) => const RegisterView(),
+      AppOnRouteText.forgetPasswordName: (context) =>
+          const ForgetPasswordView(),
+      AppOnRouteText.updateProfileName: (context) => const UpdateProfileView(),
+      AppOnRouteText.mainAppName: (context) => const MainAppView(),
+      AppOnRouteText.detailsMoviesName: (context) => const MovieDetailsView(),
     };
 
     return MaterialApp(
@@ -52,9 +53,8 @@ class MoviesApp extends StatelessWidget {
 
       routes: routeApp,
 
-      initialRoute: AppOnRouteText.loginName,
-
-      //home: const MainView(),
+      initialRoute: AppOnRouteText.mainAppName,
+      //home: AppOnRouteText.mainAppName,
       //  home: ProfileTab(),
     );
   }

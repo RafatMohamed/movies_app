@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/feature/profile/view/widgets/update_password_buttom_sheet.dart';
 import '../../../../core/utilities/app_colors.dart';
 import '../../../../core/utilities/app_padding.dart';
 import '../../../../core/widgets/custom_button_app.dart';
@@ -104,7 +105,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                         ),
                       ),
                       child: const Column(
-                        children:  [
+                        children: [
                           CustomTextFormField(
                             hintText: 'Enter your name',
                             isName: true,
@@ -123,7 +124,15 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (context) {
+                              return UpdatePasswordButtomSheet();
+                            },
+                          );
+                        },
                         child: const Text(
                           'Reset Password',
                           style: TextStyle(
@@ -137,6 +146,11 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                     const Spacer(),
                     const SizedBox(height: AppPadding.p16),
                     CustomButtonApp(
+                      textStyle: Theme.of(context).textTheme.labelSmall
+                          ?.copyWith(
+                            color: AppColors.white,
+                            fontWeight: .normal,
+                          ),
                       text: 'Delete Account',
                       background: AppColors.red,
                       onTap: () {},

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 
 class ButtonSection extends StatelessWidget {
@@ -21,7 +22,9 @@ class ButtonSection extends StatelessWidget {
                   color: AppColors.deepBlack,
                   fontWeight: .normal,
                 ),
-                onTap: () {},
+                onTap: () {
+                  onEditProfileButtonPressed(context);
+                },
                 text: "Edit Profile",
               ),
             ),
@@ -29,7 +32,11 @@ class ButtonSection extends StatelessWidget {
             Expanded(
               flex: 3,
               child: CustomButtonApp(
-                onTap: () {},
+                textStyle: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: AppColors.white,
+                  fontWeight: .normal,
+                ),
+                onTap: () => onExitButtonPressed(context),
                 text: "Exit",
                 withIcon: true,
                 background: AppColors.red,
@@ -39,5 +46,15 @@ class ButtonSection extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onExitButtonPressed(BuildContext context) {
+    // Implement the logic for the exit button press here
+    Navigator.pushNamed(context, AppOnRouteText.loginName);
+  }
+
+  void onEditProfileButtonPressed(BuildContext context) {
+    // Implement the logic for the edit profile button press here
+    Navigator.pushNamed(context, AppOnRouteText.updateProfileName);
   }
 }
