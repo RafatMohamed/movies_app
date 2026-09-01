@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
-import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/feature/Splash/view/widgets/splash_view_body.dart';
 
 class SplashView extends StatelessWidget {

@@ -6,6 +6,11 @@ class AppThem {
   static ThemeData darkThem = ThemeData(
     scaffoldBackgroundColor: AppColors.deepBlack,
     fontFamily: "Roboto",
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.gold,
+      selectionColor: AppColors.gold,
+      selectionHandleColor: AppColors.gold,
+    ),
     textTheme: const TextTheme(
       labelLarge: TextStyle(
         fontSize: 36,
