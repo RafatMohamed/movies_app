@@ -6,9 +6,9 @@ import 'package:movies_app/feature/MovieDetails/view/movie_details_view.dart';
 import 'package:movies_app/feature/Onboarding/view/onboarding_view.dart';
 import 'package:movies_app/feature/Splash/view/splash_view.dart';
 import 'package:movies_app/feature/forget_password/view/forget_password_view.dart';
-import 'package:movies_app/feature/login/views/login_view.dart';
+import 'package:movies_app/feature/login/view/login_view.dart';
 import 'package:movies_app/feature/profile/view/update_profile_view.dart';
-import 'package:movies_app/feature/register/views/register_view.dart';
+import 'package:movies_app/feature/register/view/register_view.dart';
 import 'core/utilities/app_them.dart';
 import 'feature/Onboarding/view/starting_view.dart';
 
