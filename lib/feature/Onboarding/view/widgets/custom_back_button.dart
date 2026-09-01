@@ -23,7 +23,9 @@ class CustomBackButton extends StatelessWidget {
         ),
         padding: const WidgetStatePropertyAll(EdgeInsets.all(AppPadding.p16)),
       ),
-      child: Text('Back', style: Theme.of(context).textTheme.titleMedium),
+      child: Text('Back', style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          color: AppColors.gold
+      )),
     );
   }
 }
