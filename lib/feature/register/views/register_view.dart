@@ -124,7 +124,7 @@ class _RegisterViewState extends State<RegisterView> {
                   const Gap(AppPadding.p24),
                   CustomButtonApp(
                     text: "Create Account",
-                    textStyle: textTheme.titleMedium?.copyWith(
+                    textStyle: textTheme.labelSmall?.copyWith(
                       color: AppColors.deepBlack,
                     ),
                     onTap: () {
