@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileTabItem extends StatelessWidget {
-  ProfileTabItem({required this.iconPath, required this.text});
-  String iconPath;
-  String text;
+ const ProfileTabItem({super.key, required this.iconPath, required this.text});
+ final String iconPath;
+ final String text;
 
   @override
   Widget build(BuildContext context) {

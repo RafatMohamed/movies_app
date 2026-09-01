@@ -106,8 +106,8 @@ class _StartingViewBodyState extends State<StartingViewBody>
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.deepBlack.withOpacity(0.1),
-                  AppColors.deepBlack.withOpacity(0.8),
+                  AppColors.deepBlack.withValues(alpha: 0.1),
+                  AppColors.deepBlack.withValues(alpha: 0.8),
                   AppColors.deepBlack,
                 ],
                 stops: const [0.0, 0.5, 0.85],

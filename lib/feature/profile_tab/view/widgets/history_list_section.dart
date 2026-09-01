@@ -6,9 +6,10 @@ import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class HistoryListSection extends StatelessWidget {
-  List<FilmModel> historyList = [];
+  const HistoryListSection({super.key,});
   @override
   Widget build(BuildContext context) {
+    final List<FilmModel> historyList = [];
     return Container(
       color: AppColors.deepBlack,
       child: historyList.isEmpty

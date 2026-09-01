@@ -4,11 +4,11 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/models/film_model.dart';
 
 class TabViewByGenre extends StatelessWidget {
-  String genere;
-  TabViewByGenre({required this.genere});
-  List<FilmModel> filmList = FilmModel.FilmList;
+ final String genere;
+  const TabViewByGenre({super.key, required this.genere});
   @override
   Widget build(BuildContext context) {
+    final List<FilmModel> filmList = FilmModel.filmList;
     return GridView.builder(
       itemCount: filmList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

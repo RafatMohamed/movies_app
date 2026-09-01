@@ -67,8 +67,8 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  currentOnboarding.appColors.withOpacity(0),
-                  currentOnboarding.appColors.withOpacity(0.9),
+                  currentOnboarding.appColors.withValues(alpha: 0),
+                  currentOnboarding.appColors.withValues(alpha: 0.9),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,

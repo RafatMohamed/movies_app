@@ -6,10 +6,10 @@ import 'package:movies_app/models/film_model.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class WatchListSection extends StatelessWidget {
-  WatchListSection({super.key});
-  List<FilmModel> watchedList = FilmModel.FilmList;
+ const WatchListSection({super.key});
   @override
   Widget build(BuildContext context) {
+    List<FilmModel> watchedList = FilmModel.filmList;
     return Container(
       color: AppColors.deepBlack,
       child: watchedList.isEmpty

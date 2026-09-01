@@ -4,14 +4,30 @@ import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/models/film_model.dart';
 
-class AvailableMoviesSection extends StatelessWidget {
-  final List<FilmModel> movies = FilmModel.FilmList;
+class AvailableMoviesSection extends StatefulWidget {
+  const AvailableMoviesSection({super.key});
 
-  CarouselSliderController controller = CarouselSliderController();
+  @override
+  State<AvailableMoviesSection> createState() => _AvailableMoviesSectionState();
+}
 
-  AvailableMoviesSection({super.key});
+class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
+  late final CarouselSliderController controller;
+  @override
+  void initState() {
+    controller = CarouselSliderController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.stopAutoPlay();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final List<FilmModel> movies = FilmModel.filmList;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

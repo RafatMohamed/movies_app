@@ -35,7 +35,7 @@ class _TabsViewSectionState extends State<TabsViewSection>
             indicatorColor: AppColors.gold,
             indicatorSize: .tab,
             controller: tabController,
-            tabs: [
+            tabs: const [
               ProfileTabItem(
                 iconPath: 'assets/icons/watch_list.svg',
                 text: 'Watch List',
@@ -51,7 +51,7 @@ class _TabsViewSectionState extends State<TabsViewSection>
               color: AppColors.lightBlack,
               child: TabBarView(
                 controller: tabController,
-                children: [WatchListSection(), HistoryListSection()],
+                children: const [WatchListSection(), HistoryListSection()],
               ),
             ),
           ),

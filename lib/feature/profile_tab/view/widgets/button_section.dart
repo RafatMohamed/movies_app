@@ -4,7 +4,7 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 
 class ButtonSection extends StatelessWidget {
-  ButtonSection({super.key});
+  const ButtonSection({super.key});
 
   @override
   Widget build(BuildContext context) {

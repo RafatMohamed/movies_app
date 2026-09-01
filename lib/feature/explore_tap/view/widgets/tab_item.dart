@@ -3,10 +3,9 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class TabItem extends StatelessWidget {
-  // const TabItem({super.key});
-  String genre;
-  bool isSelected;
-  TabItem({super.key, required this.genre, required this.isSelected});
+  final String genre;
+ final bool isSelected;
+ const TabItem({super.key, required this.genre, required this.isSelected});
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
