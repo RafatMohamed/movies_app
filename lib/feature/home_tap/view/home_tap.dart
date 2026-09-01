@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/feature/home_tap/view/widgets/available_movies_section.dart';
 import 'package:movies_app/feature/home_tap/view/widgets/watching_now_section.dart';
-import 'package:movies_app/models/film_model.dart';
+import '../../../../core/models/film_model.dart';
 
 class HomeTap extends StatefulWidget {
   const HomeTap({super.key});
