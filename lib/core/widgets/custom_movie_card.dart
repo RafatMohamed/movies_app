@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_text.dart';
 import '../utilities/app_assets.dart';
 import '../utilities/app_border_radius.dart';
 import '../utilities/app_padding.dart';
@@ -21,7 +22,7 @@ class CustomMovieCard extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        // Handle card tap
+        Navigator.pushNamed(context, AppOnRouteText.detailsMoviesName);
       },
       child: Stack(
         alignment: .topStart,

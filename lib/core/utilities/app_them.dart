@@ -4,6 +4,16 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 class AppThem {
   // static ThemeData lightThem = ThemeData();
   static ThemeData darkThem = ThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.deepBlack,
+      modalBackgroundColor: AppColors.deepBlack,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: .circular(16),
+        ),
+      ),
+    ),
     scaffoldBackgroundColor: AppColors.deepBlack,
     fontFamily: "Roboto",
     textSelectionTheme: const TextSelectionThemeData(
