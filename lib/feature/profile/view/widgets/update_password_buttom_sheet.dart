@@ -20,9 +20,7 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
 
   final TextEditingController confirmNewPasswordFailed = TextEditingController();
 
-  bool showMessageForConfirmError = false;
-  bool showMessageErrorForCurrent = false;
-  bool showMessageErrorOldPassWithCurrent = false;
+  String? errorMessage;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,20 +62,18 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
               hintText: 'Confirm New password',
               isPassword: true,
             ),
-            if (!showMessageForConfirmError || !showMessageErrorForCurrent || !showMessageErrorOldPassWithCurrent) const SizedBox(height: 16),
+            if(errorMessage!=null)
             Visibility(
-              visible: showMessageForConfirmError ||showMessageErrorForCurrent || showMessageErrorOldPassWithCurrent,
+              visible:errorMessage!=null,
               child: PasswordDidNotMatch(
                 onDismissed: () {
                   setState(() {
-                    showMessageForConfirmError = false;
-                    showMessageErrorForCurrent = false;
-                    showMessageErrorOldPassWithCurrent = false;
+                    errorMessage=null;
                   });
                 },
-                isVisible: showMessageForConfirmError || showMessageErrorForCurrent|| showMessageErrorOldPassWithCurrent,
+                isVisible: errorMessage!=null,
                 child:  Text(
-                  showMessageForConfirmError ? 'Passwords do not match':showMessageErrorForCurrent ?'old password is Incorrect':showMessageErrorOldPassWithCurrent?"New password must be another for current":"",
+                  errorMessage!,
                   style: const TextStyle(color: Colors.red, fontSize: 14),
                 ),
               ),
@@ -89,19 +85,19 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
                 final oldPassword ="12345678";
                 if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
                   setState(() {
-                    showMessageForConfirmError = true;
+                    errorMessage= 'Passwords do not match';
                   });
                   return;
                 }
                 if (currentFailed.text != oldPassword) {
                   setState(() {
-                    showMessageErrorForCurrent = true;
+                    errorMessage="old password is Incorrect";
                   });
                   return;
                 }
                 if (currentFailed.text == newPasswordFailed.text) {
                   setState(() {
-                    showMessageErrorOldPassWithCurrent = true;
+                    errorMessage="New password must be another for current";
                   });
                   return;
                 }
