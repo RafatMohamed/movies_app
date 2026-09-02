@@ -22,23 +22,18 @@ class CustomMovieCard extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, AppOnRouteText.detailsMoviesName);
+        Navigator.pushNamed(context, AppOnRouteText.detailsMoviesName,arguments: pathImage);
       },
       child: Stack(
         alignment: .topStart,
         children: [
-          Hero(
-            tag:AppTextTags.movieImageTag,
-            curve: TreeSliver.defaultAnimationCurve,
-            transitionOnUserGestures: true,
-            child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-              child: Image.asset(
-                pathImage,
-                fit: .fill,
-                width: width,
-                height: .infinity,
-              ),
+          ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
+            child: Image.asset(
+              pathImage,
+              fit: .cover,
+              width: width,
+              height: .infinity,
             ),
           ),
           Positioned.directional(

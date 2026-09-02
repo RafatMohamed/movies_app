@@ -16,12 +16,15 @@ class MovieDetailsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imagePath =ModalRoute.of(context)!.settings.arguments as String;
     final height =context.height;
     final TextTheme textTheme =Theme.of(context).textTheme;
     return Column(
       spacing: height*(AppPadding.p16/height),
       children: [
-       const CustomMovieDetailsImage(),
+       CustomMovieDetailsImage(
+         imagePath: imagePath,
+       ),
         Padding(
           padding:const  EdgeInsetsDirectional.symmetric(
             horizontal: AppPadding.p16
