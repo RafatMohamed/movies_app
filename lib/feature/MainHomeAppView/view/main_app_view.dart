@@ -17,8 +17,8 @@ class MainAppView extends StatefulWidget {
 class _MainAppViewState extends State<MainAppView> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const HomeTap(),
+  late final List<Widget> _screens = [
+    HomeTap(onSeeMoreClicked: updateCurrentIndex),
     const SearchView(),
     const ExploreTap(),
     const ProfileTab(),
@@ -46,5 +46,11 @@ class _MainAppViewState extends State<MainAppView> {
         ],
       ),
     );
+  }
+
+  void updateCurrentIndex(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }
