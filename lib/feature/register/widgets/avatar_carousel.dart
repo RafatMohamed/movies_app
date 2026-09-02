@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 
@@ -10,6 +11,12 @@ class AvatarCarousel extends StatefulWidget {
     AppAssets.person1,
     AppAssets.person2,
     AppAssets.person3,
+    AppAssets.person4,
+    AppAssets.person5,
+    AppAssets.person6,
+    AppAssets.person7,
+    AppAssets.person8,
+    AppAssets.person9,
   ];
 
   @override
@@ -70,7 +77,7 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
                     shape: BoxShape.circle,
                     color: AppColors.lightBlack,
                   ),
-                  child: Image.asset(AvatarCarousel.avatars[index], fit: BoxFit.cover),
+                  child: SvgPicture.asset(AvatarCarousel.avatars[index], fit: BoxFit.cover),
                 ),
               );
             },

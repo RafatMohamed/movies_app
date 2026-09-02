@@ -54,9 +54,15 @@ class AppAssets {
   static const String showPasswordIcon = "assets/icons/showPassword.svg";
   static const String englishIcon = "assets/icons/English.svg";
   static const String arabicIcon = "assets/icons/Arabic.svg";
-  static const String person1 = "assets/images/png/avatar_1.png";
-  static const String person2 = "assets/images/png/avatar_2.png";
-  static const String person3 = "assets/images/png/avatar_3.png";
+  static const String person1 = "assets/icons/person1.svg";
+  static const String person2 = "assets/icons/person2.svg";
+  static const String person3 = "assets/icons/person3.svg";
+  static const String person4 = "assets/icons/person4.svg";
+  static const String person5 = "assets/icons/person5.svg";
+  static const String person6 = "assets/icons/person6.svg";
+  static const String person7 = "assets/icons/person7.svg";
+  static const String person8 = "assets/icons/person8.svg";
+  static const String person9 = "assets/icons/person9.svg";
   static const String name = "assets/icons/person.svg";
   static const String phone = "assets/icons/phone.svg";
 }
