@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import '../../../core/models/img_profile_model.dart';
 
 
 class AvatarCarousel extends StatefulWidget {
   const AvatarCarousel({super.key});
 
-  static const List<String> avatars = [
-    AppAssets.person1,
-    AppAssets.person2,
-    AppAssets.person3,
-    AppAssets.person4,
-    AppAssets.person5,
-    AppAssets.person6,
-    AppAssets.person7,
-    AppAssets.person8,
-    AppAssets.person9,
-  ];
 
   @override
   State<AvatarCarousel> createState() => _AvatarCarouselState();
@@ -50,6 +39,7 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    final List<ImgProfileModel> avatars = ImgProfileModel.avatars;
     return SizedBox(
       height: _selectedSize,
       child: LayoutBuilder(
@@ -59,7 +49,7 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
 
           return PageView.builder(
             controller: _controller,
-            itemCount: AvatarCarousel.avatars.length,
+            itemCount: avatars.length,
             itemBuilder: (context, index) {
               final distance = (index - _page).abs().clamp(0.0, 1.0);
               final size =
@@ -77,7 +67,7 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
                     shape: BoxShape.circle,
                     color: AppColors.lightBlack,
                   ),
-                  child: SvgPicture.asset(AvatarCarousel.avatars[index], fit: BoxFit.cover),
+                  child: SvgPicture.asset(avatars[index].imgPath, fit: BoxFit.cover),
                 ),
               );
             },

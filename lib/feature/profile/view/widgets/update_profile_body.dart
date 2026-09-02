@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/core/models/img_profile_model.dart';
 import 'package:movies_app/feature/profile/view/widgets/update_password_buttom_sheet.dart';
+import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_colors.dart';
 import '../../../../core/utilities/app_padding.dart';
 import '../../../../core/widgets/custom_button_app.dart';
@@ -14,7 +16,7 @@ class UpdateProfileBody extends StatefulWidget {
 }
 
 class _UpdateProfileBodyState extends State<UpdateProfileBody> {
-  String selectedAvatar = 'avatar_1.png';
+  String selectedAvatar = ImgProfileModel.avatars.first.imgPath;
 
   void _showAvatarBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -52,26 +54,25 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Center(
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () {
                           _showAvatarBottomSheet(context);
                         },
                         child: SizedBox(
                           width: 140,
                           height: 140,
-                          child: Image.asset(
-                            'assets/images/png/$selectedAvatar',
+                          child: SvgPicture.asset(
+                            selectedAvatar,
                             fit: BoxFit.contain,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const CircleAvatar(
-                                  radius: 70,
-                                  backgroundColor: AppColors.lightBlack,
-                                  child: Icon(
-                                    Icons.person,
-                                    size: 70,
-                                    color: AppColors.white,
-                                  ),
-                                ),
+                            placeholderBuilder: (context) =>const CircleAvatar(
+                              radius: 70,
+                              backgroundColor: AppColors.lightBlack,
+                              child: Icon(
+                                Icons.person,
+                                size: 70,
+                                color: AppColors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
