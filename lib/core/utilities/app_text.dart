@@ -31,3 +31,7 @@ class AppOnRouteText{
   static const String updateProfileName="/updateProfile";
   static const String updatePasswordName="/updatePass";
 }
+
+class AppTextTags{
+ static const String movieImageTag="/imageMovie";
+}
