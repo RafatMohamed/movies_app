@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
-import 'package:movies_app/feature/profile/view/widgets/password_did_not_match.dart';
+import 'package:movies_app/feature/update_profile/view/widgets/password_did_not_match.dart';
 
 class UpdatePasswordButtomSheet extends StatefulWidget {
   const UpdatePasswordButtomSheet({super.key});
