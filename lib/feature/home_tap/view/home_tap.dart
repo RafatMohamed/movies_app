@@ -4,6 +4,7 @@ import 'package:movies_app/feature/home_tap/view/widgets/available_movies_sectio
 import 'package:movies_app/feature/home_tap/view/widgets/watching_now_section.dart';
 import '../../../../core/models/film_model.dart';
 
+// ignore: must_be_immutable
 class HomeTap extends StatefulWidget {
   void Function(int index) onSeeMoreClicked;
   HomeTap({required this.onSeeMoreClicked, super.key});

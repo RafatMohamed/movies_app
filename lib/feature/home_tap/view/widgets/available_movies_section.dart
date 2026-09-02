@@ -5,6 +5,7 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import '../../../../core/models/film_model.dart';
 
+// ignore: must_be_immutable
 class AvailableMoviesSection extends StatefulWidget {
   void Function(int index) onPageChanged;
   AvailableMoviesSection({required this.onPageChanged, super.key});
