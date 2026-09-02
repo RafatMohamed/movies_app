@@ -6,6 +6,8 @@ import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
 import 'package:svg_flutter/svg.dart';
 
+import '../../../../core/utilities/app_text.dart';
+
 class CustomMovieDetailsImage extends StatelessWidget {
   const CustomMovieDetailsImage({super.key});
 
@@ -20,16 +22,21 @@ class CustomMovieDetailsImage extends StatelessWidget {
       child: Stack(
         alignment: .center,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadiusGeometry.directional(
-              bottomStart: Radius.circular(AppBorderRadius.r16),
-              bottomEnd: Radius.circular(AppBorderRadius.r16),
-            ),
-            child: Image.asset(
-              "assets/images/png/onBoarding1.png",
-              fit: .fill,
-              width: width,
-              height: height * 0.8,
+          Hero(
+            tag:AppTextTags.movieImageTag,
+            curve: TreeSliver.defaultAnimationCurve,
+            transitionOnUserGestures: true,
+            child: ClipRRect(
+              borderRadius: const BorderRadiusGeometry.directional(
+                bottomStart: Radius.circular(AppBorderRadius.r16),
+                bottomEnd: Radius.circular(AppBorderRadius.r16),
+              ),
+              child: Image.asset(
+                "assets/images/png/onBoarding1.png",
+                fit: .fill,
+                width: width,
+                height: height * 0.8,
+              ),
             ),
           ),
           Positioned(

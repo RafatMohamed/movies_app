@@ -27,13 +27,18 @@ class CustomMovieCard extends StatelessWidget {
       child: Stack(
         alignment: .topStart,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-            child: Image.asset(
-              pathImage,
-              fit: .fill,
-              width: width,
-              height: .infinity,
+          Hero(
+            tag:AppTextTags.movieImageTag,
+            curve: TreeSliver.defaultAnimationCurve,
+            transitionOnUserGestures: true,
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
+              child: Image.asset(
+                pathImage,
+                fit: .fill,
+                width: width,
+                height: .infinity,
+              ),
             ),
           ),
           Positioned.directional(

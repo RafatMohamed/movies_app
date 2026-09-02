@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/models/img_profile_model.dart';
-import 'package:movies_app/feature/profile/view/widgets/update_password_buttom_sheet.dart';
+import 'package:movies_app/feature/update_profile/view/widgets/update_password_buttom_sheet.dart';
 import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_colors.dart';
 import '../../../../core/utilities/app_padding.dart';
@@ -130,7 +130,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                             context: context,
                             isScrollControlled: true,
                             builder: (context) {
-                              return UpdatePasswordButtomSheet();
+                              return const UpdatePasswordButtomSheet();
                             },
                           );
                         },
