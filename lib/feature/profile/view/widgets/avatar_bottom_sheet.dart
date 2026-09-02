@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/core/models/img_profile_model.dart';
+import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_colors.dart';
 
 class AvatarBottomSheet extends StatefulWidget {
@@ -16,28 +18,10 @@ class AvatarBottomSheet extends StatefulWidget {
 }
 
 class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
-  late String currentSelected;
-
-  @override
-  void initState() {
-    super.initState();
-    currentSelected = widget.selectedAvatar;
-  }
-
-  final List<String> avatars = [
-    'avatar_1.png',
-    'avatar_2.png',
-    'avatar_3.png',
-    'avatar_4.png',
-    'avatar_5.png',
-    'avatar_6.png',
-    'avatar_7.png',
-    'avatar_8.png',
-    'avatar_9.png',
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final List<ImgProfileModel> avatars = ImgProfileModel.avatars;
     return Container(
       margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.all(16.0),
@@ -56,14 +40,11 @@ class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             children: avatars.map((avatarName) {
-              final isSelected = currentSelected == avatarName;
-
+              final isSelected = widget.selectedAvatar == avatarName.imgPath;
+              final int index = avatars.indexOf(avatarName);
               return GestureDetector(
                 onTap: () {
-                  setState(() {
-                    currentSelected = avatarName;
-                  });
-                  widget.onAvatarSelected(avatarName);
+                  widget.onAvatarSelected(avatarName.imgPath);
                   Navigator.pop(context);
                 },
                 child: Container(
@@ -79,8 +60,8 @@ class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(14),
-                    child: Image.asset(
-                      'assets/images/png/$avatarName',
+                    child: SvgPicture.asset(
+                      avatars[index].imgPath,
                       fit: BoxFit.contain,
                     ),
                   ),

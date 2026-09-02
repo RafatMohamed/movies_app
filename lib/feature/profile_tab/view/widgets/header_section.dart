@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
+import 'package:movies_app/core/models/img_profile_model.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:svg_flutter/svg.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
   @override
   Widget build(BuildContext context) {
+    final String imageProfile =ImgProfileModel.avatars.first.imgPath;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
       child: Row(
@@ -20,8 +23,8 @@ class HeaderSection extends StatelessWidget {
                 Expanded(
                   flex: 10,
                   child: FittedBox(
-                    child: Image.asset(
-                      'assets/images/png/gamer(1).png',
+                    child: SvgPicture.asset(
+                      imageProfile,
                       height: 118,
                       width: 118,
                       fit: .fill,
