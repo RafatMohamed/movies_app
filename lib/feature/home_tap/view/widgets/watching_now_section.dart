@@ -4,12 +4,14 @@ import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
+import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import '../../../../core/models/film_model.dart';
 
 class WatchingNowSection extends StatelessWidget {
   final List<FilmModel> movies = FilmModel.filmList;
+  final void Function(int index) onSeeMoreClicked;
 
-  WatchingNowSection({super.key});
+  WatchingNowSection({required this.onSeeMoreClicked, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,9 @@ class WatchingNowSection extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  onSeeMoreClicked(2);
+                },
                 child: Row(
                   children: [
                     Text(
@@ -66,26 +70,46 @@ class WatchingNowSection extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.25,
-          child: ListView.separated(
-            padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: AppPadding.p16,
+        if (movies.isNotEmpty)
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: ListView.separated(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppPadding.p16,
+              ),
+              separatorBuilder: (context, index) => const Gap(16),
+              scrollDirection: Axis.horizontal,
+              itemCount: movies.length,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: CustomMovieCard(
+                    pathImage: movies[index].image,
+                    rate: movies[index].rate,
+                  ),
+                );
+              },
             ),
-            separatorBuilder: (context, index) => const Gap(16),
-            scrollDirection: Axis.horizontal,
-            itemCount: movies.length,
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: MediaQuery.of(context).size.width * 0.35,
-                child: CustomMovieCard(
-                  pathImage: movies[index].image,
-                  rate: movies[index].rate,
-                ),
-              );
-            },
           ),
-        ),
+        if (movies.isEmpty)
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: ListView.separated(
+              padding: const EdgeInsetsDirectional.symmetric(
+                horizontal: AppPadding.p16,
+              ),
+              separatorBuilder: (context, index) => const Gap(16),
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  child: const MovieCardShimmer(),
+                );
+              },
+            ),
+          ),
+
         const Gap(16),
       ],
     );

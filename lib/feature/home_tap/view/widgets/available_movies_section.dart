@@ -2,10 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
+import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import '../../../../core/models/film_model.dart';
 
+// ignore: must_be_immutable
 class AvailableMoviesSection extends StatefulWidget {
-  const AvailableMoviesSection({super.key});
+  void Function(int index) onPageChanged;
+  AvailableMoviesSection({required this.onPageChanged, super.key});
 
   @override
   State<AvailableMoviesSection> createState() => _AvailableMoviesSectionState();
@@ -40,20 +43,39 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
             ],
           ),
         ),
-        CarouselSlider.builder(
-          options: CarouselOptions(
-            enableInfiniteScroll: true,
-            height: MediaQuery.of(context).size.height * .40,
-            viewportFraction: 0.55,
-            enlargeCenterPage: true,
+        if (movies.isNotEmpty)
+          CarouselSlider.builder(
+            options: CarouselOptions(
+              onPageChanged: (index, reason) {
+                widget.onPageChanged.call(index);
+              },
+              enableInfiniteScroll: true,
+              height: MediaQuery.of(context).size.height * .40,
+              viewportFraction: 0.55,
+              enlargeCenterPage: true,
+            ),
+            carouselController: controller,
+            itemCount: movies.length,
+            itemBuilder: (_, index, _) => CustomMovieCard(
+              pathImage: movies[index].image,
+              rate: movies[index].rate,
+            ),
           ),
-          carouselController: controller,
-          itemCount: movies.length,
-          itemBuilder: (_, index, _) => CustomMovieCard(
-            pathImage: movies[index].image,
-            rate: movies[index].rate,
+        if (movies.isEmpty)
+          CarouselSlider.builder(
+            options: CarouselOptions(
+              onPageChanged: (index, reason) {
+                widget.onPageChanged.call(index);
+              },
+              enableInfiniteScroll: true,
+              height: MediaQuery.of(context).size.height * .40,
+              viewportFraction: 0.55,
+              enlargeCenterPage: true,
+            ),
+            carouselController: controller,
+            itemCount: 5,
+            itemBuilder: (_, index, _) => const MovieCardShimmer(),
           ),
-        ),
       ],
     );
   }
