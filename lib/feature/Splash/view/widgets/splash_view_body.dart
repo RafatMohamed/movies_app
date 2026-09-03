@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/feature/MainHomeAppView/view/main_app_view.dart';
 import 'package:movies_app/feature/Onboarding/view/starting_view.dart';
 import 'package:movies_app/feature/Splash/view/widgets/splash_circle.dart';
 import 'package:movies_app/feature/Splash/view/widgets/triangle_painter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -41,12 +43,16 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
     if (!mounted) return;
 
+    final prefs = await SharedPreferences.getInstance();
+
+    final completed = prefs.getBool('onboardingCompleted') ?? false;
+
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 100),
         pageBuilder: (context, animation, secondaryAnimation) {
-          return const StartingView();
+          return completed ? const MainView() : const StartingView();
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(

@@ -8,6 +8,7 @@ import 'package:movies_app/core/utilities/app_them.dart'
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/feature/Onboarding/model/model_name/onboarding_model.dart';
 import 'package:movies_app/feature/Onboarding/view/widgets/custom_back_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingViewBody extends StatefulWidget {
   const OnboardingViewBody({super.key});
@@ -131,7 +132,15 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                           horizontal: AppPadding.p20,
                         ),
                         child: CustomButtonApp(
-                          onTap: nextPage,
+                          onTap: () async {
+                            nextPage();
+                            if (currentIndex == onboardingList.length - 1) {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+
+                              await prefs.setBool('onboardingCompleted', true);
+                            }
+                          },
                           text: currentIndex == onboardingList.length - 1
                               ? 'Finish'
                               : 'Next',
