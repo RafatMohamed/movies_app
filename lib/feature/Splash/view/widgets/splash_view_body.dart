@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/feature/MainHomeAppView/view/main_app_view.dart';
+import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
 import 'package:movies_app/feature/Onboarding/view/starting_view.dart';
 import 'package:movies_app/feature/Splash/view/widgets/splash_circle.dart';
 import 'package:movies_app/feature/Splash/view/widgets/triangle_painter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:movies_app/feature/login/view/login_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -33,26 +33,18 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   Future<void> startAnimation() async {
+
     await moveController.forward();
-
     await Future.delayed(const Duration(seconds: 1));
-
-    if (!mounted) return;
-
     await fadeController.forward();
-
-    if (!mounted) return;
-
-    final prefs = await SharedPreferences.getInstance();
-
-    final completed = prefs.getBool('onboardingCompleted') ?? false;
-
+    final completed =  IsFirstOpenApp.getIsFirstOpen();
+    if(!mounted) return;
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 100),
         pageBuilder: (context, animation, secondaryAnimation) {
-          return completed ? const MainView() : const StartingView();
+          return completed ? const LoginView() : const StartingView();
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(
