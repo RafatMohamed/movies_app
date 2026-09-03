@@ -4,6 +4,7 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_border_radius.dart';
 import '../../../../core/utilities/app_padding.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class CustomTextFieldSearch extends StatefulWidget {
   const CustomTextFieldSearch({
@@ -44,7 +45,7 @@ class _CustomTextFieldSearchState extends State<CustomTextFieldSearch> {
       cursorColor: AppColors.gold,
       autocorrect: true,
       decoration: InputDecoration(
-        hintText: "Search",
+        hintText: AppLocalizations.of(context)!.search,
         hintStyle: textTheme.titleMedium?.copyWith(color: AppColors.white),
         border: buildOutlineInputBorder(),
         focusedBorder: buildOutlineInputBorder(),

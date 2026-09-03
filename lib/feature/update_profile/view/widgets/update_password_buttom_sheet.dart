@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/feature/update_profile/view/widgets/password_did_not_match.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class UpdatePasswordButtomSheet extends StatefulWidget {
   const UpdatePasswordButtomSheet({super.key});
@@ -37,29 +38,29 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Reset Password',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              AppLocalizations.of(context)!.resetPassword,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
               controller: currentFailed,
               withValidator: true,
-              hintText: 'Current password',
+              hintText: AppLocalizations.of(context)!.currentPasswordHint,
               isPassword: true,
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
               controller: newPasswordFailed,
               withValidator: true,
-              hintText: 'New password',
+              hintText: AppLocalizations.of(context)!.newPasswordHint,
               isPassword: true,
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
               controller: confirmNewPasswordFailed,
               withValidator: true,
-              hintText: 'Confirm New password',
+              hintText: AppLocalizations.of(context)!.confirmNewPasswordHint,
               isPassword: true,
             ),
             if(errorMessage!=null)
@@ -85,19 +86,19 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
                 final oldPassword ="12345678";
                 if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
                   setState(() {
-                    errorMessage= 'Passwords do not match';
+                    errorMessage= AppLocalizations.of(context)!.passwordsDoNotMatch;
                   });
                   return;
                 }
                 if (currentFailed.text != oldPassword) {
                   setState(() {
-                    errorMessage="old password is Incorrect";
+                    errorMessage= AppLocalizations.of(context)!.oldPasswordIncorrect;
                   });
                   return;
                 }
                 if (currentFailed.text == newPasswordFailed.text) {
                   setState(() {
-                    errorMessage="New password must be another for current";
+                    errorMessage= AppLocalizations.of(context)!.newPasswordMustDiffer;
                   });
                   return;
                 }
@@ -112,7 +113,7 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
                 }
                 // Close the bottom sheet
               },
-              text: 'Reset Password',
+              text: AppLocalizations.of(context)!.resetPassword,
             ),
           ],
         ),

@@ -1,0 +1,99 @@
+{
+  "@@locale": "en",
+
+  "emailHint": "Email",
+  "@emailHint": {
+    "description": "Hint text for the email field on Login/Register"
+  },
+
+  "passwordHint": "Password",
+  "@passwordHint": {
+    "description": "Hint text for the password field"
+  },
+
+  "confirmPasswordHint": "Confirm Password",
+  "@confirmPasswordHint": {
+    "description": "Hint text for the confirm password field on Register"
+  },
+
+  "nameHint": "Name",
+  "@nameHint": {
+    "description": "Hint text for the name field on Register"
+  },
+
+  "phoneHint": "Phone Number",
+  "@phoneHint": {
+    "description": "Hint text for the phone field on Register"
+  },
+
+  "forgetPassword": "Forget Password ?",
+  "@forgetPassword": {
+    "description": "Link on Login that navigates to forget password screen"
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "Login button text and Register screen's link back to Login"
+  },
+
+  "dontHaveAccount": "Don't Have Account ? ",
+  "@dontHaveAccount": {
+    "description": "Text on Login before the Create One link"
+  },
+
+  "createOne": "Create One",
+  "@createOne": {
+    "description": "Link on Login that navigates to the Register screen"
+  },
+
+  "alreadyHaveAccount": "Already Have Account ? ",
+  "@alreadyHaveAccount": {
+    "description": "Text on Register before the Login link"
+  },
+
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Register button text"
+  },
+
+  "avatar": "Avatar",
+  "@avatar": {
+    "description": "Label under the avatar carousel on Register"
+  },
+
+  "register": "Register",
+  "@register": {
+    "description": "Register screen app bar title"
+  },
+
+  "orDivider": "OR",
+  "@orDivider": {
+    "description": "Divider label between the login form and the Google button"
+  },
+
+  "loginWithGoogle": "Login With Google",
+  "@loginWithGoogle": {
+    "description": "Google sign-in button text"
+  },
+  "editProfile": "Edit Profile",
+  "exit": "Exit",
+  "watchList": "Watch List",
+  "history": "History",
+  "search": "Search",
+  "home": "Home",
+  "explore": "Explore",
+  "profile": "Profile",  
+  "seeMore": "See More",
+    "pickAvatar": "Pick Avatar",
+  "enterYourName": "Enter your name",
+  "enterYourPhoneNumber": "Enter your phone number",
+  "resetPassword": "Reset Password",
+  "deleteAccount": "Delete Account",
+  "updateData": "Update Data",
+  "currentPasswordHint": "Current password",
+  "newPasswordHint": "New password",
+  "confirmNewPasswordHint": "Confirm New password",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "oldPasswordIncorrect": "old password is Incorrect",
+  "newPasswordMustDiffer": "New password must be another for current"
+}

@@ -11,6 +11,7 @@ import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/core/widgets/language_toggle.dart';
 import 'package:movies_app/feature/register/view/register_view.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -34,6 +35,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return AuthInputTheme(
       child: SingleChildScrollView(
@@ -47,7 +49,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               _buildLogo(),
               const Gap(48),
               CustomTextFormField(
-                hintText: "Email",
+                hintText: l10n.emailHint,
                 controller: emailController,
                 isEmail: true,
                 withValidator: true,
@@ -56,7 +58,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ),
               const Gap(AppPadding.p16),
               CustomTextFormField(
-                hintText: "Password",
+                hintText: l10n.passwordHint,
                 controller: passwordController,
                 isPassword: true,
                 withValidator: true,
@@ -64,18 +66,18 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ),
               const Gap(AppPadding.p10),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: AlignmentDirectional.centerEnd,
                 child: GestureDetector(
                   onTap: () {
                     // TODO: navigate to forget password screen
                     Navigator.pushNamed(context, AppOnRouteText.forgetPasswordName);
                   },
-                  child: Text("Forget Password ?", style: textTheme.titleSmall),
+                  child: Text(l10n.forgetPassword, style: textTheme.titleSmall),
                 ),
               ),
               const Gap(AppPadding.p24),
               CustomButtonApp(
-                text: "Login",
+                text: l10n.login,
                 textStyle: textTheme.labelSmall?.copyWith(
                   color: AppColors.deepBlack,
                 ),
@@ -86,11 +88,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 },
               ),
               const Gap(AppPadding.p20),
-              _buildCreateAccountRow(context, textTheme),
+              _buildCreateAccountRow(context, textTheme, l10n),
               const Gap(AppPadding.p24),
-              _buildOrDivider(),
+              _buildOrDivider(l10n),
               const Gap(AppPadding.p24),
-              _buildGoogleButton(textTheme),
+              _buildGoogleButton(textTheme, l10n),
               const Gap(AppPadding.p24),
               const Center(child: LanguageToggle()),
               const Gap(48),
@@ -111,12 +113,16 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     );
   }
 
-  Widget _buildCreateAccountRow(BuildContext context, TextTheme textTheme) {
+  Widget _buildCreateAccountRow(
+    BuildContext context,
+    TextTheme textTheme,
+    AppLocalizations l10n,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don't Have Account ? ",
+          l10n.dontHaveAccount,
           style: textTheme.titleMedium?.copyWith(color: AppColors.white),
         ),
         GestureDetector(
@@ -127,7 +133,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             );
           },
           child: Text(
-            "Create One",
+            l10n.createOne,
             style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
@@ -135,21 +141,21 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     );
   }
 
-  Widget _buildOrDivider() {
-    return const Row(
+  Widget _buildOrDivider(AppLocalizations l10n) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
+        const SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppPadding.p16),
-          child: Text("OR", style: TextStyle(color: AppColors.gold, fontSize: 14)),
+          padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+          child: Text(l10n.orDivider, style: const TextStyle(color: AppColors.gold, fontSize: 14)),
         ),
-        SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
+        const SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
       ],
     );
   }
 
-  Widget _buildGoogleButton(TextTheme textTheme) {
+  Widget _buildGoogleButton(TextTheme textTheme, AppLocalizations l10n) {
     return GestureDetector(
       onTap: () {
         // TODO: handle Google sign in
@@ -167,7 +173,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             SvgPicture.asset(AppAssets.googleIcon, width: 22, height: 22),
             const Gap(AppPadding.p8),
             Text(
-              "Login With Google",
+              l10n.loginWithGoogle,
               style: textTheme.labelSmall?.copyWith(color: AppColors.deepBlack),
             ),
           ],

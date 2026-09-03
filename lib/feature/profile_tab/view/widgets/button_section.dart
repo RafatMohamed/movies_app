@@ -3,12 +3,14 @@ import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class ButtonSection extends StatelessWidget {
   const ButtonSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: SizedBox(
@@ -25,7 +27,7 @@ class ButtonSection extends StatelessWidget {
                 onTap: () {
                   onEditProfileButtonPressed(context);
                 },
-                text: "Edit Profile",
+                text: l10n.editProfile,
               ),
             ),
             const Gap(10),
@@ -37,7 +39,7 @@ class ButtonSection extends StatelessWidget {
                   fontWeight: .normal,
                 ),
                 onTap: () => onExitButtonPressed(context),
-                text: "Exit",
+                text: l10n.exit,
                 withIcon: true,
                 background: AppColors.red,
               ),

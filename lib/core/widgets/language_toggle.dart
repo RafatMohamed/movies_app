@@ -3,45 +3,43 @@ import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_locale_controller.dart';
 
-/// Reusable English/Arabic toggle used on both Login and Register screens.
-class LanguageToggle extends StatefulWidget {
+
+class LanguageToggle extends StatelessWidget {
   const LanguageToggle({super.key});
 
   @override
-  State<LanguageToggle> createState() => _LanguageToggleState();
-}
-
-class _LanguageToggleState extends State<LanguageToggle> {
-  bool isArabic = false;
-
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppBorderRadius.r24),
-        border: Border.all(color: AppColors.gold, width: 2),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _flagCircle(
-            AppAssets.englishIcon,
-            selected: !isArabic,
-            onTap: () {
-              if (isArabic) setState(() => isArabic = false);
-            },
+    return ValueListenableBuilder<Locale>(
+      valueListenable: AppLocaleController.instance,
+      builder: (context, locale, _) {
+        final bool isArabic = locale.languageCode == 'ar';
+        return Container(
+          padding: EdgeInsets.zero,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppBorderRadius.r24),
+            border: Border.all(color: AppColors.gold, width: 2),
           ),
-          _flagCircle(
-            AppAssets.arabicIcon,
-            selected: isArabic,
-            onTap: () {
-              if (!isArabic) setState(() => isArabic = true);
-            },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _flagCircle(
+                AppAssets.englishIcon,
+                selected: !isArabic,
+                onTap: () =>
+                    AppLocaleController.instance.changeLocale(AppLocaleController.english),
+              ),
+              _flagCircle(
+                AppAssets.arabicIcon,
+                selected: isArabic,
+                onTap: () =>
+                    AppLocaleController.instance.changeLocale(AppLocaleController.arabic),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
