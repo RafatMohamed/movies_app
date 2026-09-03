@@ -4,6 +4,7 @@ import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:svg_flutter/svg.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class DefaultBottomNavigationBar extends StatelessWidget {
   const DefaultBottomNavigationBar({
@@ -15,16 +16,17 @@ class DefaultBottomNavigationBar extends StatelessWidget {
   final Function(int index) onCurrentIndexChange;
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
     List<BottomNavigationBarModel> itemsNav = [
-      BottomNavigationBarModel(iconPath: AppAssets.homeIcon, label: "Home"),
-      BottomNavigationBarModel(iconPath: AppAssets.searchIcon, label: 'Search'),
+      BottomNavigationBarModel(iconPath: AppAssets.homeIcon, label: l10n.home),
+      BottomNavigationBarModel(iconPath: AppAssets.searchIcon, label: l10n.search),
       BottomNavigationBarModel(
         iconPath: AppAssets.exploreIcon,
-        label: "Explore",
+        label: l10n.explore,
       ),
       BottomNavigationBarModel(
         iconPath: AppAssets.profileIcon,
-        label: "Profile",
+        label: l10n.profile,
       ),
     ];
     return ClipRRect(

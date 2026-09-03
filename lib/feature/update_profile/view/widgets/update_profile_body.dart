@@ -6,6 +6,7 @@ import '../../../../core/utilities/app_colors.dart';
 import '../../../../core/utilities/app_padding.dart';
 import '../../../../core/widgets/custom_button_app.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import 'avatar_bottom_sheet.dart';
 
 class UpdateProfileBody extends StatefulWidget {
@@ -64,7 +65,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                           child: SvgPicture.asset(
                             selectedAvatar,
                             fit: BoxFit.contain,
-                            placeholderBuilder: (context) =>const CircleAvatar(
+                            placeholderBuilder: (context) => const CircleAvatar(
                               radius: 70,
                               backgroundColor: AppColors.lightBlack,
                               child: Icon(
@@ -105,16 +106,16 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                           ),
                         ),
                       ),
-                      child: const Column(
+                      child: Column(
                         children: [
                           CustomTextFormField(
-                            hintText: 'Enter your name',
+                            hintText: AppLocalizations.of(context)!.enterYourName,
                             isName: true,
                             prefixIconPath: 'assets/icons/person.svg',
                           ),
-                          SizedBox(height: AppPadding.p16),
+                          const SizedBox(height: AppPadding.p16),
                           CustomTextFormField(
-                            hintText: 'Enter your phone number',
+                            hintText: AppLocalizations.of(context)!.enterYourPhoneNumber,
                             keyboardType: TextInputType.phone,
                             prefixIconPath: 'assets/icons/phone.svg',
                           ),
@@ -134,9 +135,9 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                             },
                           );
                         },
-                        child: const Text(
-                          'Reset Password',
-                          style: TextStyle(
+                        child: Text(
+                          AppLocalizations.of(context)!.resetPassword,
+                          style: const TextStyle(
                             color: AppColors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -152,13 +153,13 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                             color: AppColors.white,
                             fontWeight: .normal,
                           ),
-                      text: 'Delete Account',
+                      text: AppLocalizations.of(context)!.deleteAccount,
                       background: AppColors.red,
                       onTap: () {},
                     ),
                     const SizedBox(height: AppPadding.p10),
                     CustomButtonApp(
-                      text: 'Update Data',
+                      text: AppLocalizations.of(context)!.updateData,
                       background: AppColors.gold,
                       onTap: () {},
                     ),

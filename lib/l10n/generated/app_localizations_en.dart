@@ -52,4 +52,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loginWithGoogle => 'Login With Google';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get exit => 'Exit';
+
+  @override
+  String get watchList => 'Watch List';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get search => 'Search';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get explore => 'Explore';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get seeMore => 'See More';
+
+  @override
+  String get pickAvatar => 'Pick Avatar';
+
+  @override
+  String get enterYourName => 'Enter your name';
+
+  @override
+  String get enterYourPhoneNumber => 'Enter your phone number';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get updateData => 'Update Data';
+
+  @override
+  String get currentPasswordHint => 'Current password';
+
+  @override
+  String get newPasswordHint => 'New password';
+
+  @override
+  String get confirmNewPasswordHint => 'Confirm New password';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get oldPasswordIncorrect => 'old password is Incorrect';
+
+  @override
+  String get newPasswordMustDiffer =>
+      'New password must be another for current';
 }

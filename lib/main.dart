@@ -13,7 +13,7 @@ import 'package:movies_app/feature/register/view/register_view.dart';
 import 'core/utilities/app_them.dart';
 import 'feature/Onboarding/view/starting_view.dart';
 import 'feature/update_profile/view/update_profile_view.dart';
-import 'l10n/app_localizations.dart';
+import 'l10n/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

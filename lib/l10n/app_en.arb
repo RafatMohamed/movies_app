@@ -74,5 +74,26 @@
   "loginWithGoogle": "Login With Google",
   "@loginWithGoogle": {
     "description": "Google sign-in button text"
-  }
+  },
+  "editProfile": "Edit Profile",
+  "exit": "Exit",
+  "watchList": "Watch List",
+  "history": "History",
+  "search": "Search",
+  "home": "Home",
+  "explore": "Explore",
+  "profile": "Profile",  
+  "seeMore": "See More",
+    "pickAvatar": "Pick Avatar",
+  "enterYourName": "Enter your name",
+  "enterYourPhoneNumber": "Enter your phone number",
+  "resetPassword": "Reset Password",
+  "deleteAccount": "Delete Account",
+  "updateData": "Update Data",
+  "currentPasswordHint": "Current password",
+  "newPasswordHint": "New password",
+  "confirmNewPasswordHint": "Confirm New password",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "oldPasswordIncorrect": "old password is Incorrect",
+  "newPasswordMustDiffer": "New password must be another for current"
 }

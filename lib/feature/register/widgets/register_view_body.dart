@@ -10,7 +10,7 @@ import 'package:movies_app/core/widgets/auth_input_theme.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/core/widgets/language_toggle.dart';
-import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
