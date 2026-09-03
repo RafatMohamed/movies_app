@@ -51,7 +51,7 @@ class WatchingNowSection extends StatelessWidget {
                 child: Row(
                   children: [
                                         Text(
-                      AppLocalizations.of(context)!.seeMore,
+                      'Action',
                       style: textTheme.titleLarge?.copyWith(
                         color: AppColors.gold,
                         fontFamily: 'Roboto',
