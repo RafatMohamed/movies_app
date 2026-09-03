@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -40,11 +41,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isSecureValue = widget.isPassword;
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeColor = Theme.of(context);
     return TextFormField(
       obscureText: isSecureValue,
       controller: widget.controller,
-      cursorColor: themeColor.primaryColor,
+      cursorColor: AppColors.gold,
       cursorHeight: 25,
       maxLines: widget.maxLines,
       validator: (value) {
@@ -74,14 +74,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
       },
       keyboardType: widget.keyboardType,
-      style: TextStyle(
-        color: themeColor.primaryColor,
+      style: const TextStyle(
+        color: AppColors.white,
         fontSize: 16,
-        fontWeight: .w400,
-        fontStyle: .normal,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
       ),
       textInputAction: widget.textInputAction,
       canRequestFocus: true,
+      autofocus: false,
       onTapOutside: (_) {
         FocusManager.instance.primaryFocus?.unfocus(
           disposition: UnfocusDisposition.previouslyFocusedChild,
@@ -92,9 +93,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
+        hintStyle: const TextStyle(color: AppColors.white),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppPadding.p16),
+          borderSide: .none,
+        ),
         filled: true,
         fillColor: AppColors.lightBlack,
-
         hintText: widget.hintText,
         suffixIcon: widget.isPassword == true
             ? GestureDetector(

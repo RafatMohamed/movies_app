@@ -3,6 +3,7 @@ import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/utilities/app_them.dart'
     show ScreenUtilsContext;
 import 'package:movies_app/core/widgets/custom_button_app.dart';
@@ -68,8 +69,8 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  currentOnboarding.appColors.withOpacity(0),
-                  currentOnboarding.appColors.withOpacity(0.9),
+                  currentOnboarding.appColors.withValues(alpha: 0),
+                  currentOnboarding.appColors.withValues(alpha: 0.9),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:svg_flutter/svg.dart';
@@ -29,7 +30,7 @@ class CustomButtonApp extends StatelessWidget {
       child: Container(
         alignment: .center,
         width: double.infinity,
-        padding: const EdgeInsetsDirectional.all(AppPadding.p16),
+        padding: const EdgeInsetsDirectional.all(AppPadding.p14),
         decoration: BoxDecoration(
           borderRadius: BorderRadiusDirectional.circular(AppBorderRadius.r16),
           color: background,
@@ -37,7 +38,15 @@ class CustomButtonApp extends StatelessWidget {
         child: Row(
           mainAxisAlignment: .center,
           children: [
-            Text(text, style: textStyle ?? them.textTheme.titleLarge),
+            Text(
+              text,
+              style:
+                  textStyle ??
+                  them.textTheme.labelSmall?.copyWith(
+                    color: AppColors.deepBlack,
+                  ),
+            ),
+            const Gap(5),
             if (withIcon) SvgPicture.asset(AppAssets.exitIconSvg),
           ],
         ),

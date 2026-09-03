@@ -44,4 +44,25 @@ class AppAssets {
   static const String collectionPic26 = "assets/images/png/collectionPic26.png";
   static const String collectionPic27 = "assets/images/png/collectionPic27.png";
   static const String collectionPic28 = "assets/images/png/collectionPic28.png";
+  static const String availableNowImage = "assets/images/png/available_now.png";
+  static const String watchNowImage = "assets/images/png/watch_now.png";
+  static const String forgetPasswordImage ="assets/images/png/forget_password.png";
+  static const String appLogo = "assets/images/png/logo_app.png";
+  static const String emailIcon = "assets/icons/email.svg";
+  static const String passwordIcon = "assets/icons/password.svg";
+  static const String googleIcon = "assets/icons/Google.svg";
+  static const String showPasswordIcon = "assets/icons/showPassword.svg";
+  static const String englishIcon = "assets/icons/English.svg";
+  static const String arabicIcon = "assets/icons/Arabic.svg";
+  static const String person1 = "assets/icons/person1.svg";
+  static const String person2 = "assets/icons/person2.svg";
+  static const String person3 = "assets/icons/person3.svg";
+  static const String person4 = "assets/icons/person4.svg";
+  static const String person5 = "assets/icons/person5.svg";
+  static const String person6 = "assets/icons/person6.svg";
+  static const String person7 = "assets/icons/person7.svg";
+  static const String person8 = "assets/icons/person8.svg";
+  static const String person9 = "assets/icons/person9.svg";
+  static const String name = "assets/icons/person.svg";
+  static const String phone = "assets/icons/phone.svg";
 }
