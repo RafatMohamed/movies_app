@@ -10,6 +10,7 @@ import 'package:movies_app/core/widgets/auth_input_theme.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/core/widgets/language_toggle.dart';
+import 'package:movies_app/l10n/app_localizations.dart';
 
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
@@ -39,6 +40,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final AppLocalizations l10n = AppLocalizations.of(context)!;
 
     return AuthInputTheme(
       child: SingleChildScrollView(
@@ -49,16 +51,16 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Gap(16),
-              _buildAppBar(context, textTheme),
+              _buildAppBar(context, textTheme, l10n),
               const Gap(24),
               const AvatarCarousel(),
               const Gap(AppPadding.p8),
               Center(
-                child: Text("Avatar", style: textTheme.labelSmall?.copyWith(fontSize: 16)),
+                child: Text(l10n.avatar, style: textTheme.labelSmall?.copyWith(fontSize: 16)),
               ),
               const Gap(AppPadding.p24),
               CustomTextFormField(
-                hintText: "Name",
+                hintText: l10n.nameHint,
                 controller: nameController,
                 isName: true,
                 withValidator: true,
@@ -66,7 +68,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               const Gap(AppPadding.p16),
               CustomTextFormField(
-                hintText: "Email",
+                hintText: l10n.emailHint,
                 controller: emailController,
                 isEmail: true,
                 withValidator: true,
@@ -75,7 +77,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               const Gap(AppPadding.p16),
               CustomTextFormField(
-                hintText: "Password",
+                hintText: l10n.passwordHint,
                 controller: passwordController,
                 isPassword: true,
                 withValidator: true,
@@ -83,7 +85,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               const Gap(AppPadding.p16),
               CustomTextFormField(
-                hintText: "Confirm Password",
+                hintText: l10n.confirmPasswordHint,
                 controller: confirmPasswordController,
                 isPassword: true,
                 withValidator: true,
@@ -91,7 +93,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               const Gap(AppPadding.p16),
               CustomTextFormField(
-                hintText: "Phone Number",
+                hintText: l10n.phoneHint,
                 controller: phoneController,
                 withValidator: true,
                 keyboardType: TextInputType.phone,
@@ -99,7 +101,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               const Gap(AppPadding.p24),
               CustomButtonApp(
-                text: "Create Account",
+                text: l10n.createAccount,
                 textStyle: textTheme.labelSmall?.copyWith(
                   color: AppColors.deepBlack,
                 ),
@@ -107,7 +109,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 },
               ),
               const Gap(AppPadding.p20),
-              _buildLoginRow(context, textTheme),
+              _buildLoginRow(context, textTheme, l10n),
               const Gap(AppPadding.p24),
               const Center(child: LanguageToggle()),
               const Gap(48),
@@ -118,7 +120,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     );
   }
 
-  Widget _buildAppBar(BuildContext context, TextTheme textTheme) {
+  Widget _buildAppBar(BuildContext context, TextTheme textTheme, AppLocalizations l10n) {
     return SizedBox(
       height: 32,
       child: Stack(
@@ -137,7 +139,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             ),
           ),
           Text(
-            "Register",
+            l10n.register,
             style: textTheme.titleMedium?.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.w600,
@@ -149,12 +151,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     );
   }
 
-  Widget _buildLoginRow(BuildContext context, TextTheme textTheme) {
+  Widget _buildLoginRow(BuildContext context, TextTheme textTheme, AppLocalizations l10n) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Already Have Account ? ",
+          l10n.alreadyHaveAccount,
           style: textTheme.titleMedium?.copyWith(color: AppColors.white),
         ),
         GestureDetector(
@@ -165,7 +167,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             );
           },
           child: Text(
-            "Login",
+            l10n.login,
             style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),

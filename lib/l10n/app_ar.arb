@@ -1,0 +1,19 @@
+{
+  "@@locale": "ar",
+
+  "emailHint": "البريد الإلكتروني",
+  "passwordHint": "كلمة المرور",
+  "confirmPasswordHint": "تأكيد كلمة المرور",
+  "nameHint": "الاسم",
+  "phoneHint": "رقم الهاتف",
+  "forgetPassword": "نسيت كلمة المرور؟",
+  "login": "تسجيل الدخول",
+  "dontHaveAccount": "ليس لديك حساب؟ ",
+  "createOne": "إنشاء حساب",
+  "alreadyHaveAccount": "لديك حساب بالفعل؟ ",
+  "createAccount": "إنشاء حساب",
+  "avatar": "الصورة الرمزية",
+  "register": "التسجيل",
+  "orDivider": "أو",
+  "loginWithGoogle": "الدخول عبر جوجل"
+}
