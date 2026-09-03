@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
+import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
-import 'package:movies_app/core/utilities/app_text.dart';
-import 'package:movies_app/core/utilities/app_them.dart'
-    show ScreenUtilsContext;
+import 'package:movies_app/core/utilities/app_them.dart' show ScreenUtilsContext;
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/feature/Onboarding/model/model_name/onboarding_model.dart';
 import 'package:movies_app/feature/Onboarding/view/widgets/custom_back_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingViewBody extends StatefulWidget {
   const OnboardingViewBody({super.key});
@@ -136,10 +134,7 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                           onTap: () async {
                             nextPage();
                             if (currentIndex == onboardingList.length - 1) {
-                              final prefs =
-                                  await SharedPreferences.getInstance();
-
-                              await prefs.setBool('onboardingCompleted', true);
+                              IsFirstOpenApp.setIsFirstOpen(true);
                             }
                           },
                           text: currentIndex == onboardingList.length - 1

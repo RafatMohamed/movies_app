@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/feature/MainHomeAppView/view/main_app_view.dart';
 import 'package:movies_app/feature/MovieDetails/view/movie_details_view.dart';
@@ -12,7 +13,9 @@ import 'core/utilities/app_them.dart';
 import 'feature/Onboarding/view/starting_view.dart';
 import 'feature/update_profile/view/update_profile_view.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+ await IsFirstOpenApp.initSharedStorge();
   runApp(
     DevicePreview(
       enabled: true,
@@ -33,8 +36,7 @@ class MoviesApp extends StatelessWidget {
       AppOnRouteText.onBoardingName: (context) => const OnboardingView(),
       AppOnRouteText.loginName: (context) => const LoginView(),
       AppOnRouteText.registerName: (context) => const RegisterView(),
-      AppOnRouteText.forgetPasswordName: (context) =>
-          const ForgetPasswordView(),
+      AppOnRouteText.forgetPasswordName: (context) => const ForgetPasswordView(),
       AppOnRouteText.updateProfileName: (context) => const UpdateProfileView(),
       AppOnRouteText.mainAppName: (context) => const MainAppView(),
       AppOnRouteText.detailsMoviesName: (context) => const MovieDetailsView(),
@@ -53,9 +55,8 @@ class MoviesApp extends StatelessWidget {
 
       routes: routeApp,
 
-      initialRoute: AppOnRouteText.loginName,
-      //home: AppOnRouteText.mainAppName,
-      //  home: ProfileTab(),
+      initialRoute: IsFirstOpenApp.getIsFirstOpen()?AppOnRouteText.loginName:AppOnRouteText.splashName,
+
     );
   }
 }

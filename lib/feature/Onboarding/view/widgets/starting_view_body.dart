@@ -5,7 +5,6 @@ import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/feature/Onboarding/model/model_name/onboarding_model.dart';
-import 'package:movies_app/feature/Onboarding/view/onboarding_view.dart';
 import 'package:movies_app/feature/Onboarding/view/widgets/poster_column.dart';
 
 class StartingViewBody extends StatefulWidget {
@@ -139,11 +138,9 @@ class _StartingViewBodyState extends State<StartingViewBody>
                     const Gap(AppPadding.p32),
                     CustomButtonApp(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const OnboardingView(),
-                          ),
+                          AppOnRouteText.onBoardingName,
                         );
                       },
                       text: 'Explore Now',
