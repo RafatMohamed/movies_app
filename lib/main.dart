@@ -18,6 +18,7 @@ import 'l10n/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await IsFirstOpenApp.initSharedStorge();
   await AppLocaleController.initialize();
   runApp(
     DevicePreview(
