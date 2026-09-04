@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/feature/MainHomeAppView/view/main_app_view.dart';
@@ -68,7 +69,9 @@ class MoviesApp extends StatelessWidget {
 
           routes: routeApp,
 
-          initialRoute: AppOnRouteText.loginName,
+          initialRoute: IsFirstOpenApp.getIsFirstOpen()
+              ? AppOnRouteText.mainAppName
+              : AppOnRouteText.startingViewAppName,
           //home: AppOnRouteText.mainAppName,
           //  home: ProfileTab(),
         );
