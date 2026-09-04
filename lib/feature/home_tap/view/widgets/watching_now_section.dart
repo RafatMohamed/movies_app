@@ -10,7 +10,7 @@ import 'package:movies_app/l10n/generated/app_localizations.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 
 class WatchingNowSection extends StatelessWidget {
-  final List<FilmModel> movies = FilmModel.filmList;
+  final List<FilmModel> movies = [];
   final void Function(int index) onSeeMoreClicked;
 
   WatchingNowSection({required this.onSeeMoreClicked, super.key});
