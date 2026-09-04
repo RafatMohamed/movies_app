@@ -8,7 +8,7 @@ import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import '../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
-  
+
 class WatchingNowSection extends StatelessWidget {
   final List<FilmModel> movies = FilmModel.filmList;
   final void Function(int index) onSeeMoreClicked;
@@ -36,9 +36,9 @@ class WatchingNowSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-                                 Text(
-                      AppLocalizations.of(context)!.seeMore,
-                      style: textTheme.titleLarge?.copyWith(
+              Text(
+                AppLocalizations.of(context).seeMore,
+                style: textTheme.titleLarge?.copyWith(
                   color: AppColors.white,
                   fontFamily: 'Roboto',
                   fontWeight: FontWeight.w400,
@@ -50,15 +50,15 @@ class WatchingNowSection extends StatelessWidget {
                 },
                 child: Row(
                   children: [
-                                        Text(
-                      AppLocalizations.of(context)!.seeMore,
+                    Text(
+                      AppLocalizations.of(context).seeMore,
                       style: textTheme.titleLarge?.copyWith(
                         color: AppColors.gold,
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                                        const Gap(AppPadding.p4),
+                    const Gap(AppPadding.p4),
                     Icon(
                       AppLocaleController.instance.value.languageCode == 'ar'
                           ? Icons.arrow_back
