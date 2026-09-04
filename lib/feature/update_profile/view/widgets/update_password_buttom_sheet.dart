@@ -39,28 +39,28 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              AppLocalizations.of(context)!.resetPassword,
+              AppLocalizations.of(context).resetPassword,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
               controller: currentFailed,
               withValidator: true,
-              hintText: AppLocalizations.of(context)!.currentPasswordHint,
+              hintText: AppLocalizations.of(context).currentPasswordHint,
               isPassword: true,
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
               controller: newPasswordFailed,
               withValidator: true,
-              hintText: AppLocalizations.of(context)!.newPasswordHint,
+              hintText: AppLocalizations.of(context).newPasswordHint,
               isPassword: true,
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
               controller: confirmNewPasswordFailed,
               withValidator: true,
-              hintText: AppLocalizations.of(context)!.confirmNewPasswordHint,
+              hintText: AppLocalizations.of(context).confirmNewPasswordHint,
               isPassword: true,
             ),
             if(errorMessage!=null)
@@ -86,19 +86,19 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
                 final oldPassword ="12345678";
                 if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
                   setState(() {
-                    errorMessage= AppLocalizations.of(context)!.passwordsDoNotMatch;
+                    errorMessage= AppLocalizations.of(context).passwordsDoNotMatch;
                   });
                   return;
                 }
                 if (currentFailed.text != oldPassword) {
                   setState(() {
-                    errorMessage= AppLocalizations.of(context)!.oldPasswordIncorrect;
+                    errorMessage= AppLocalizations.of(context).oldPasswordIncorrect;
                   });
                   return;
                 }
                 if (currentFailed.text == newPasswordFailed.text) {
                   setState(() {
-                    errorMessage= AppLocalizations.of(context)!.newPasswordMustDiffer;
+                    errorMessage= AppLocalizations.of(context).newPasswordMustDiffer;
                   });
                   return;
                 }
@@ -113,7 +113,7 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
                 }
                 // Close the bottom sheet
               },
-              text: AppLocalizations.of(context)!.resetPassword,
+              text: AppLocalizations.of(context).resetPassword,
             ),
           ],
         ),

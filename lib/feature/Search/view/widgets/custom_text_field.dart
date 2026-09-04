@@ -45,7 +45,7 @@ class _CustomTextFieldSearchState extends State<CustomTextFieldSearch> {
       cursorColor: AppColors.gold,
       autocorrect: true,
       decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.search,
+        hintText: AppLocalizations.of(context).search,
         hintStyle: textTheme.titleMedium?.copyWith(color: AppColors.white),
         border: buildOutlineInputBorder(),
         focusedBorder: buildOutlineInputBorder(),

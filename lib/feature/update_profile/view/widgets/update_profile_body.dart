@@ -109,13 +109,13 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                       child: Column(
                         children: [
                           CustomTextFormField(
-                            hintText: AppLocalizations.of(context)!.enterYourName,
+                            hintText: AppLocalizations.of(context).enterYourName,
                             isName: true,
                             prefixIconPath: 'assets/icons/person.svg',
                           ),
                           const SizedBox(height: AppPadding.p16),
                           CustomTextFormField(
-                            hintText: AppLocalizations.of(context)!.enterYourPhoneNumber,
+                            hintText: AppLocalizations.of(context).enterYourPhoneNumber,
                             keyboardType: TextInputType.phone,
                             prefixIconPath: 'assets/icons/phone.svg',
                           ),
@@ -136,7 +136,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                           );
                         },
                         child: Text(
-                          AppLocalizations.of(context)!.resetPassword,
+                          AppLocalizations.of(context).resetPassword,
                           style: const TextStyle(
                             color: AppColors.white,
                             fontSize: 14,
@@ -153,13 +153,13 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                             color: AppColors.white,
                             fontWeight: .normal,
                           ),
-                      text: AppLocalizations.of(context)!.deleteAccount,
+                      text: AppLocalizations.of(context).deleteAccount,
                       background: AppColors.red,
                       onTap: () {},
                     ),
                     const SizedBox(height: AppPadding.p10),
                     CustomButtonApp(
-                      text: AppLocalizations.of(context)!.updateData,
+                      text: AppLocalizations.of(context).updateData,
                       background: AppColors.gold,
                       onTap: () {},
                     ),

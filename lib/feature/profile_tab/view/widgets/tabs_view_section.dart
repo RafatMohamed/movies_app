@@ -26,7 +26,7 @@ class _TabsViewSectionState extends State<TabsViewSection>
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context)!;
+    final AppLocalizations l10n = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsetsGeometry.only(top: 14),
       child: Column(
