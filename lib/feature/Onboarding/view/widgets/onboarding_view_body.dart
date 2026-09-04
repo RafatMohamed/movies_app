@@ -4,7 +4,9 @@ import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
-import 'package:movies_app/core/utilities/app_them.dart' show ScreenUtilsContext;
+import 'package:movies_app/core/utilities/app_text.dart';
+import 'package:movies_app/core/utilities/app_them.dart'
+    show ScreenUtilsContext;
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/feature/Onboarding/model/model_name/onboarding_model.dart';
 import 'package:movies_app/feature/Onboarding/view/widgets/custom_back_button.dart';
@@ -135,6 +137,10 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                             nextPage();
                             if (currentIndex == onboardingList.length - 1) {
                               IsFirstOpenApp.setIsFirstOpen(true);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                AppOnRouteText.loginName,
+                              );
                             }
                           },
                           text: currentIndex == onboardingList.length - 1

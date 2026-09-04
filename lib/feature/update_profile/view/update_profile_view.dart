@@ -19,7 +19,7 @@ class UpdateProfileView extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          AppLocalizations.of(context)!.pickAvatar,
+          AppLocalizations.of(context).pickAvatar,
           style: const TextStyle(
             color: AppColors.gold,
             fontSize: 16,
