@@ -1,15 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
+import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
+import 'package:movies_app/feature/MovieDetails/model/model_name/movie_details_model.dart';
 import 'package:svg_flutter/svg.dart';
 
-
 class CustomMovieDetailsImage extends StatelessWidget {
-  const CustomMovieDetailsImage({super.key, required this.imagePath});
-  final String imagePath;
+  const CustomMovieDetailsImage({super.key, required this.movie});
+  final MovieModel movie;
   @override
   Widget build(BuildContext context) {
     final width = context.width;
@@ -26,11 +28,16 @@ class CustomMovieDetailsImage extends StatelessWidget {
               bottomStart: Radius.circular(AppBorderRadius.r16),
               bottomEnd: Radius.circular(AppBorderRadius.r16),
             ),
-            child: Image.asset(
-              imagePath,
+            child: CachedNetworkImage(
+              imageUrl: movie.largeCoverImage,
               fit: .cover,
               width: width,
               height: height * 0.8,
+              placeholder: (_, _) {
+                return const MovieCardShimmer();
+              },
+              errorWidget: (context, url, error) =>
+                  const Icon(Icons.image_not_supported),
             ),
           ),
           Positioned(
@@ -70,12 +77,14 @@ class CustomMovieDetailsImage extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 Text(
-                  "Doctor Strange in the Multiverse of Madness",
+                  movie.titleEnglish,
                   style: textTheme.labelMedium,
                   textAlign: .center,
+                  maxLines: 2,
+                  overflow: .ellipsis,
                 ),
                 Text(
-                  "2020",
+                  movie.year.toString(),
                   style: textTheme.labelSmall?.copyWith(
                     fontWeight: .bold,
                     color: const Color(0xffADADAD),

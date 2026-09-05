@@ -5,15 +5,18 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:svg_flutter/svg.dart';
 
+import '../../model/model_name/movie_details_model.dart';
+
 class CustomMovieDetailsInfoPopular extends StatelessWidget {
-  const CustomMovieDetailsInfoPopular({super.key});
+  const CustomMovieDetailsInfoPopular({super.key, required this.movie});
+  final MovieModel movie;
 
   @override
   Widget build(BuildContext context) {
-    List<CategoryInfoModelPopular> itemList = [
-      const CategoryInfoModelPopular(pathIcon: AppAssets.favIcon, text: "24"),
-      const CategoryInfoModelPopular(pathIcon: AppAssets.watchIcon, text: "90"),
-      const CategoryInfoModelPopular(pathIcon: AppAssets.starIcon, text: "3"),
+   final List<CategoryInfoModelPopular> itemList = [
+       CategoryInfoModelPopular(pathIcon: AppAssets.favIcon, text: movie.likeCount.toString()),
+       CategoryInfoModelPopular(pathIcon: AppAssets.watchIcon, text: movie.runtime.toString()),
+       CategoryInfoModelPopular(pathIcon: AppAssets.starIcon, text: movie.rating.toString()),
     ];
     return Row(
       spacing: AppPadding.p10,
