@@ -41,7 +41,7 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(?AppAssets.availableNowImage, width: 200, height: 300),
+              Image.asset(AppAssets.availableNowImage, width: 200, height: 300),
             ],
           ),
         ),
