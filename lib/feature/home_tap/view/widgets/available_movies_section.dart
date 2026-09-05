@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 import '../../../../core/models/film_model.dart';
 
 // ignore: must_be_immutable
@@ -31,6 +32,7 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
   @override
   Widget build(BuildContext context) {
     final List<FilmModel> movies = FilmModel.filmList;
+    // bool isArabic= AppLocalizations.of(context).localeName=="ar";
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -39,7 +41,7 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(AppAssets.availableNowImage, width: 200, height: 300),
+              Image.asset(?AppAssets.availableNowImage, width: 200, height: 300),
             ],
           ),
         ),
