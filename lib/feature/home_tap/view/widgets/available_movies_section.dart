@@ -5,10 +5,9 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import '../../../../core/models/film_model.dart';
 
-// ignore: must_be_immutable
 class AvailableMoviesSection extends StatefulWidget {
-  void Function(int index) onPageChanged;
-  AvailableMoviesSection({required this.onPageChanged, super.key});
+ final void Function(int index) onPageChanged;
+ const AvailableMoviesSection({required this.onPageChanged, super.key});
 
   @override
   State<AvailableMoviesSection> createState() => _AvailableMoviesSectionState();
@@ -31,6 +30,7 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
   @override
   Widget build(BuildContext context) {
     final List<FilmModel> movies = FilmModel.filmList;
+    // bool isArabic= AppLocalizations.of(context).localeName=="ar";
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

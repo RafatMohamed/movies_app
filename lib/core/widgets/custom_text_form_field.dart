@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -50,7 +51,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: (value) {
         if (widget.withValidator!) {
           if (value == null || value.isEmpty) {
-            return "${widget.hintText} is Required";
+            return "${widget.hintText} ${AppLocalizations.of(context).search}";
           } else if (widget.isPassword == true) {
             if (value.length < 8) {
               return "Password must be at least 8 characters";

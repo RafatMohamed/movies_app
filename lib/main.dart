@@ -1,9 +1,12 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
+import 'package:movies_app/core/utilities/package_utilies/custom_bloc_observe.dart';
+import 'package:movies_app/core/utilities/package_utilies/get_it.dart';
 import 'package:movies_app/feature/MainHomeAppView/view/main_app_view.dart';
 import 'package:movies_app/feature/MovieDetails/view/movie_details_view.dart';
 import 'package:movies_app/feature/Onboarding/view/onboarding_view.dart';
@@ -18,8 +21,13 @@ import 'l10n/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await IsFirstOpenApp.initSharedStorge();
   await AppLocaleController.initialize();
+
+  Bloc.observer= CustomBlocObserver();
+  setupDI();
+
   runApp(
     DevicePreview(
       enabled: true,
