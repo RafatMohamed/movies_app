@@ -124,7 +124,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                     ),
                     const SizedBox(height: AppPadding.p16),
                     Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: AlignmentDirectional.centerStart,
                       child: GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
