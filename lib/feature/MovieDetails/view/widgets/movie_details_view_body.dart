@@ -9,7 +9,6 @@ import 'package:movies_app/feature/MovieDetails/model/model_name/parental_guide_
 import 'package:movies_app/feature/MovieDetails/view_model/movie_details_state.dart';
 import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import '../../model/model_name/movie_suggestion_model.dart';
 import 'movie_details__custom_cast.dart';
 import 'movie_details__custom_genres.dart';
@@ -37,8 +36,8 @@ class MovieDetailsViewBody extends StatelessWidget {
               height: height,
               movieDetails: MovieModel.empty(),
               textTheme: textTheme,
-              moviesSuggestion: [],
-              moviesGuide: [],
+              moviesSuggestion:const[],
+              moviesGuide: const [],
             ),
           );
         }
