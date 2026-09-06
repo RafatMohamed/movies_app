@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movies_app/core/services/api_helper.dart';
+import 'package:movies_app/core/services/auth_service.dart';
+import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
 import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_api_data_source.dart';
 import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_data_source.dart';
 import 'package:movies_app/feature/MovieDetails/model/repo/repo.dart';
@@ -20,6 +22,8 @@ void setupDI() {
     () => MovieDetailsApiDataSource(dio: getIt<Dio>()),
   );
 
+  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(AuthService()));
+
   getIt.registerLazySingleton<MovieDetailsRepo>(
     () => MovieDetailsRepo(
       movieDetailsDataSource: getIt<MovieDetailsDataSource>(),
@@ -28,17 +32,5 @@ void setupDI() {
 
   getIt.registerFactory<MovieDetailsCubit>(
     () => MovieDetailsCubit(movieDetailsRepo: getIt<MovieDetailsRepo>()),
-  );
-
-  getIt.registerLazySingleton<SearchDataSource>(
-    () => SearchDataSourceImp(dio: getIt<Dio>()),
-  );
-
-  getIt.registerLazySingleton<SearchMovieRepo>(
-    () => SearchMovieRepo(searchDataSource: getIt<SearchDataSource>()),
-  );
-
-  getIt.registerFactory<MovieSearchCubit>(
-    () => MovieSearchCubit(searchMovieRepo: getIt<SearchMovieRepo>()),
   );
 }

@@ -32,18 +32,25 @@ class CustomMovieCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-            child: CachedNetworkImage(
-             imageUrl: pathImage,
-              fit: .cover,
-              width: width,
-              height: .infinity,
-              progressIndicatorBuilder: (context, url, progress) {
-                return const CircularProgressIndicator.adaptive(
-                  backgroundColor: AppColors.gold,
-                );
-              },
-              errorWidget: (context, url, error) => const Placeholder(),
-            ),
+            child: pathImage.startsWith('http')
+                ? Image.network(
+                    pathImage,
+                    fit: .cover,
+                    width: width,
+                    height: .infinity,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      AppAssets.appLogo,
+                      fit: .cover,
+                      width: width,
+                      height: .infinity,
+                    ),
+                  )
+                : Image.asset(
+                    pathImage,
+                    fit: .cover,
+                    width: width,
+                    height: .infinity,
+                  ),
           ),
           Positioned.directional(
             textDirection: .ltr,
