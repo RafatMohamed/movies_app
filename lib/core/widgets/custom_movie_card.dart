@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,11 +32,17 @@ class CustomMovieCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-            child: Image.network(
-              pathImage,
+            child: CachedNetworkImage(
+             imageUrl: pathImage,
               fit: .cover,
               width: width,
               height: .infinity,
+              progressIndicatorBuilder: (context, url, progress) {
+                return const CircularProgressIndicator.adaptive(
+                  backgroundColor: AppColors.gold,
+                );
+              },
+              errorWidget: (context, url, error) => Placeholder(),
             ),
           ),
           Positioned.directional(
