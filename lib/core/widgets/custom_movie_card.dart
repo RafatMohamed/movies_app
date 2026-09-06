@@ -42,7 +42,7 @@ class CustomMovieCard extends StatelessWidget {
                   backgroundColor: AppColors.gold,
                 );
               },
-              errorWidget: (context, url, error) => Placeholder(),
+              errorWidget: (context, url, error) => const Placeholder(),
             ),
           ),
           Positioned.directional(
