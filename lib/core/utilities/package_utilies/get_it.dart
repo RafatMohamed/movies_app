@@ -7,6 +7,11 @@ import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_
 import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_data_source.dart';
 import 'package:movies_app/feature/MovieDetails/model/repo/repo.dart';
 import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
+import 'package:movies_app/feature/Search/model/data_source/search_data_source.dart';
+import 'package:movies_app/feature/Search/model/repo/repo.dart';
+import 'package:movies_app/feature/Search/view_model/state_mangment.dart';
+
+import '../../../feature/Search/model/data_source/search_data_source_imp.dart';
 
 final getIt = GetIt.instance;
 
