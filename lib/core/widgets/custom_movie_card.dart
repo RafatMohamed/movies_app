@@ -13,23 +13,25 @@ class CustomMovieCard extends StatelessWidget {
     super.key,
     required this.pathImage,
     required this.rate,
+    this.movieId=600,
   });
   final String pathImage;
   final String rate;
+  final int movieId;
   @override
   Widget build(BuildContext context) {
     final width = context.width;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, AppOnRouteText.detailsMoviesName,arguments: pathImage);
+        Navigator.pushNamed(context, AppOnRouteText.detailsMoviesName,arguments: movieId);
       },
       child: Stack(
         alignment: .topStart,
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-            child: Image.asset(
+            child: Image.network(
               pathImage,
               fit: .cover,
               width: width,

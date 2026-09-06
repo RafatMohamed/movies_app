@@ -4,19 +4,10 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class CustomMovieDetailsGenres extends StatelessWidget {
-  const CustomMovieDetailsGenres({super.key});
-
+  const CustomMovieDetailsGenres({super.key, required this.genres});
+  final List<String> genres;
   @override
   Widget build(BuildContext context) {
-    List<String> genresType =[
-      "Action",
-      "Horror",
-      "Adventure",
-      "Sci-Fi",
-      "Fantasy",
-      "Action",
-      "Horror",
-    ];
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Column(
       crossAxisAlignment: .start,
@@ -25,7 +16,7 @@ class CustomMovieDetailsGenres extends StatelessWidget {
         Text("Genres", style: textTheme.labelMedium),
         GridView.builder(
           padding: .zero,
-          itemCount: genresType.length,
+          itemCount: genres.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 2,
@@ -36,7 +27,7 @@ class CustomMovieDetailsGenres extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return DefaultBuildCardGenres(
-              typeGenres: genresType[index],
+              typeGenres: genres[index],
             );
           },
         ),

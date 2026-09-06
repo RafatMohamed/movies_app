@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 
+import '../../model/model_name/movie_suggestion_model.dart';
+
 class CustomMovieDetailsSimilar extends StatelessWidget {
-  const CustomMovieDetailsSimilar({super.key});
+  const CustomMovieDetailsSimilar({super.key, required this.moviesSuggestion});
+  final List<MovieSuggestionItem> moviesSuggestion;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +24,15 @@ class CustomMovieDetailsSimilar extends StatelessWidget {
             crossAxisSpacing: AppPadding.p20,
             mainAxisSpacing: AppPadding.p16,
           ),
-          itemCount: 4,
+          itemCount: moviesSuggestion.length,
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return const CustomMovieCard(
-              pathImage: "assets/images/png/onBoarding1.png",
-              rate: "5",
+            final MovieSuggestionItem movieItem= moviesSuggestion[index];
+            return  CustomMovieCard(
+              movieId: movieItem.id,
+              pathImage: movieItem.mediumCoverImage,
+              rate: movieItem.rating.toString(),
             );
           },
         ),

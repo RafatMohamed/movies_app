@@ -6,9 +6,11 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
 
-class CustomMovieDetailsCast extends StatelessWidget {
-  const CustomMovieDetailsCast({super.key});
+import '../../model/model_name/movie_details_model.dart';
 
+class CustomMovieDetailsCast extends StatelessWidget {
+  const CustomMovieDetailsCast({super.key, required this.cast});
+ final List<CastModel> cast;
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -17,11 +19,12 @@ class CustomMovieDetailsCast extends StatelessWidget {
       spacing: AppPadding.p10,
       children: [
         Text("Cast", style: textTheme.labelMedium),
-        ...List.generate(4, (index) {
-          return const DefaultBuildCardCast(
-            pathImageCast:"https://tse1.mm.bing.net/th/id/OIP.Xs5UDI5P5SteWK_qybY7vwHaFk?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
-            nameCast: " Hayley Atwell",
-            characterCast: "Wanda Maximoff / The Scarlet Witch",
+        ...List.generate(cast.length, (index) {
+          final itemCast= cast[index];
+          return  DefaultBuildCardCast(
+            pathImageCast:itemCast.urlSmallImage,
+            nameCast: itemCast.name,
+            characterCast: itemCast.characterName,
           );
         }),
       ],
