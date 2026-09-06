@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
+import 'package:movies_app/core/services/auth_service.dart';
+import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/feature/login/view/login_view.dart';
 import 'package:movies_app/feature/register/widgets/avatar_carousel.dart';
 import 'package:svg_flutter/svg.dart';
@@ -26,6 +28,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final TextEditingController confirmPasswordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -35,6 +39,40 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     confirmPasswordController.dispose();
     phoneController.dispose();
     super.dispose();
+  }
+
+  Future<void> _handleRegister(AppLocalizations l10n) async {
+    FocusScope.of(context).unfocus();
+    if (!formKey.currentState!.validate()) return;
+
+    if (passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.passwordsDoNotMatch)),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    try {
+      await _authService.register(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (!mounted) return;
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppOnRouteText.mainAppName,
+        (route) => false,
+      );
+    } on AuthException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message)),
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -100,14 +138,15 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 prefixIconPath: AppAssets.phone,
               ),
               const Gap(AppPadding.p24),
-              CustomButtonApp(
-                text: l10n.createAccount,
-                textStyle: textTheme.labelSmall?.copyWith(
-                  color: AppColors.deepBlack,
-                ),
-                onTap: () {
-                },
-              ),
+              _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : CustomButtonApp(
+                      text: l10n.createAccount,
+                      textStyle: textTheme.labelSmall?.copyWith(
+                        color: AppColors.deepBlack,
+                      ),
+                      onTap: () => _handleRegister(l10n),
+                    ),
               const Gap(AppPadding.p20),
               _buildLoginRow(context, textTheme, l10n),
               const Gap(AppPadding.p24),

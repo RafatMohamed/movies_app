@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:svg_flutter/svg.dart';
+import 'package:movies_app/core/services/auth_service.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
@@ -24,12 +25,41 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final AuthService _authService = AuthService();
+  bool _isLoading = false;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _handleLogin() async {
+    // Close the keyboard and run field validators first.
+    FocusScope.of(context).unfocus();
+    if (!formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+    try {
+      await _authService.login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (!mounted) return;
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppOnRouteText.mainAppName,
+        (route) => false,
+      );
+    } on AuthException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message)),
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -69,24 +99,21 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 alignment: AlignmentDirectional.centerEnd,
                 child: GestureDetector(
                   onTap: () {
-                    // TODO: navigate to forget password screen
                     Navigator.pushNamed(context, AppOnRouteText.forgetPasswordName);
                   },
                   child: Text(l10n.forgetPassword, style: textTheme.titleSmall),
                 ),
               ),
               const Gap(AppPadding.p24),
-              CustomButtonApp(
-                text: l10n.login,
-                textStyle: textTheme.labelSmall?.copyWith(
-                  color: AppColors.deepBlack,
-                ),
-                onTap: () {
-                  // TODO: handle login
-                  ///if login success
-                  Navigator.pushNamed(context, AppOnRouteText.mainAppName);
-                },
-              ),
+              _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : CustomButtonApp(
+                      text: l10n.login,
+                      textStyle: textTheme.labelSmall?.copyWith(
+                        color: AppColors.deepBlack,
+                      ),
+                      onTap: _handleLogin,
+                    ),
               const Gap(AppPadding.p20),
               _buildCreateAccountRow(context, textTheme, l10n),
               const Gap(AppPadding.p24),
@@ -158,7 +185,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   Widget _buildGoogleButton(TextTheme textTheme, AppLocalizations l10n) {
     return GestureDetector(
       onTap: () {
-        // TODO: handle Google sign in
+        // TODO: handle Google sign in (out of scope for email/password auth)
       },
       child: Container(
         alignment: Alignment.center,

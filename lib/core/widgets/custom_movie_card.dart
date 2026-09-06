@@ -31,12 +31,25 @@ class CustomMovieCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-            child: Image.network(
-              pathImage,
-              fit: .cover,
-              width: width,
-              height: .infinity,
-            ),
+            child: pathImage.startsWith('http')
+                ? Image.network(
+                    pathImage,
+                    fit: .cover,
+                    width: width,
+                    height: .infinity,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      AppAssets.appLogo,
+                      fit: .cover,
+                      width: width,
+                      height: .infinity,
+                    ),
+                  )
+                : Image.asset(
+                    pathImage,
+                    fit: .cover,
+                    width: width,
+                    height: .infinity,
+                  ),
           ),
           Positioned.directional(
             textDirection: .ltr,
