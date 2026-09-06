@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/feature/explore_tap/view/explore_tap.dart';
 import 'package:movies_app/feature/home_tap/view/home_tap.dart';
 import 'package:movies_app/feature/profile_tab/view/profile_tab.dart';
 
+import '../../../core/utilities/package_utilies/get_it.dart';
 import '../../../core/widgets/default_bottom_nav_bar.dart';
 import '../../Search/view/search_view.dart';
+import '../../Search/view_model/state_mangment.dart';
 
 class MainAppView extends StatefulWidget {
   const MainAppView({super.key});
@@ -19,7 +22,10 @@ class _MainAppViewState extends State<MainAppView> {
 
   late final List<Widget> _screens = [
     HomeTap(onSeeMoreClicked: updateCurrentIndex),
-    const SearchView(),
+    BlocProvider(
+      create: (context) => getIt<MovieSearchCubit>(),
+      child: const SearchView(),
+    ),
     const ExploreTap(),
     const ProfileTab(),
   ];

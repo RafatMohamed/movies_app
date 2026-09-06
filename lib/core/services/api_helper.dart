@@ -25,6 +25,12 @@ abstract class  ApiHelper {
             log('Data: ${options.data}');
             return handler.next(options);
           },
+          onResponse: (response, handler) {
+            log('StatusMessage: ${response.statusMessage}');
+            log('Headers: ${response.headers}');
+            log('Data: ${response.data}');
+            return handler.next(response);
+          },
         ),
       );
     return _dio;
