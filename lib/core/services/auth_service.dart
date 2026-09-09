@@ -1,5 +1,7 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:movies_app/core/models/user_model.dart';
+import 'package:movies_app/core/services/firestore_service.dart';
 
 /// Thrown by [AuthService] with a human-readable message, so UI code
 /// never needs to know about Firebase error codes directly.
@@ -13,9 +15,11 @@ class AuthException implements Exception {
 
 class AuthService {
   final FirebaseAuth _auth;
+  final FirestoreService _firestoreService;
 
-  AuthService({FirebaseAuth? firebaseAuth})
-    : _auth = firebaseAuth ?? FirebaseAuth.instance;
+  AuthService({FirebaseAuth? firebaseAuth, FirestoreService? firestoreService})
+    : _auth = firebaseAuth ?? FirebaseAuth.instance,
+      _firestoreService = firestoreService ?? FirestoreService();
 
   User? get currentUser => _auth.currentUser;
 
@@ -35,10 +39,15 @@ class AuthService {
     }
   }
 
+  /// Creates the Firebase Auth account and a matching `users/{uid}`
+  /// Firestore document holding the profile data collected on the
+  /// register screen.
   Future<UserCredential> register({
     required String name,
     required String email,
     required String password,
+    String phone = '',
+    int avatarIndex = 0,
   }) async {
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
@@ -48,6 +57,20 @@ class AuthService {
       // Store the display name on the Firebase user profile.
       await credential.user?.updateDisplayName(name.trim());
       await credential.user?.reload();
+
+      final uid = credential.user?.uid;
+      if (uid != null) {
+        await _firestoreService.upsertUser(
+          UserModel(
+            uid: uid,
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            avatarIndex: avatarIndex,
+          ),
+          isNew: true,
+        );
+      }
       return credential;
     } on FirebaseAuthException catch (e) {
       throw AuthException(_mapError(e.code));
@@ -83,7 +106,22 @@ class AuthService {
         idToken: googleAuth?.idToken,
       );
 
-      return await _auth.signInWithCredential(credential);
+      final userCredential = await _auth.signInWithCredential(credential);
+      final user = userCredential.user;
+      if (user != null) {
+        // isNewUser tells us whether to seed createdAt, but merge:true
+        // makes this safe to call on every Google sign-in either way.
+        final isNew = userCredential.additionalUserInfo?.isNewUser ?? false;
+        await _firestoreService.upsertUser(
+          UserModel(
+            uid: user.uid,
+            name: user.displayName ?? '',
+            email: user.email ?? '',
+          ),
+          isNew: isNew,
+        );
+      }
+      return userCredential;
     } on FirebaseAuthException catch (e) {
       throw AuthException(_mapError(e.code));
     } catch (e) {
@@ -92,7 +130,46 @@ class AuthService {
     }
   }
 
+  /// Fetches the signed-in user's Firestore profile document.
+  Future<UserModel?> getCurrentUserData() async {
+    final uid = currentUser?.uid;
+    if (uid == null) return null;
+    return _firestoreService.getUser(uid);
+  }
+
+  /// Live stream of the signed-in user's Firestore profile document.
+  Stream<UserModel?> watchCurrentUserData() {
+    final uid = currentUser?.uid;
+    if (uid == null) return const Stream.empty();
+    return _firestoreService.watchUser(uid);
+  }
+
+  /// Updates specific profile fields, e.g. `{'name': 'New Name'}`.
+  Future<void> updateUserData(Map<String, dynamic> data) async {
+    final uid = currentUser?.uid;
+    if (uid == null) {
+      throw AuthException('No signed-in user.');
+    }
+    await _firestoreService.updateUserFields(uid, data);
+  }
+
   Future<void> logout() => _auth.signOut();
+
+  /// Deletes both the Firestore profile document and the Firebase Auth
+  /// account. Firebase requires a recent sign-in for this to succeed;
+  /// callers should catch `requires-recent-login` and re-authenticate.
+  Future<void> deleteAccount() async {
+    final user = currentUser;
+    if (user == null) {
+      throw AuthException('No signed-in user.');
+    }
+    try {
+      await _firestoreService.deleteUser(user.uid);
+      await user.delete();
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_mapError(e.code));
+    }
+  }
 
   String _mapError(String code) {
     switch (code) {
@@ -115,6 +192,8 @@ class AuthService {
         return 'Too many attempts. Try again later.';
       case 'operation-not-allowed':
         return 'Email/password sign-in is not enabled for this project.';
+      case 'requires-recent-login':
+        return 'Please log in again before deleting your account.';
       default:
         return 'Something went wrong. Please try again.';
     }
