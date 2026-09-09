@@ -54,9 +54,30 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       );
     } on AuthException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message)),
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.message)));
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _handleGoogleLogin() async {
+    FocusScope.of(context).unfocus();
+    setState(() => _isLoading = true);
+    try {
+      await _authService.signInWithGoogle();
+      if (!mounted) return;
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        AppOnRouteText.mainAppName,
+        (route) => false,
       );
+    } on AuthException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.message)));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -99,7 +120,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 alignment: AlignmentDirectional.centerEnd,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, AppOnRouteText.forgetPasswordName);
+                    Navigator.pushNamed(
+                      context,
+                      AppOnRouteText.forgetPasswordName,
+                    );
                   },
                   child: Text(l10n.forgetPassword, style: textTheme.titleSmall),
                 ),
@@ -172,21 +196,28 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
+        const SizedBox(
+          width: 60,
+          child: Divider(color: AppColors.gold, thickness: 1),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-          child: Text(l10n.orDivider, style: const TextStyle(color: AppColors.gold, fontSize: 14)),
+          child: Text(
+            l10n.orDivider,
+            style: const TextStyle(color: AppColors.gold, fontSize: 14),
+          ),
         ),
-        const SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
+        const SizedBox(
+          width: 60,
+          child: Divider(color: AppColors.gold, thickness: 1),
+        ),
       ],
     );
   }
 
   Widget _buildGoogleButton(TextTheme textTheme, AppLocalizations l10n) {
     return GestureDetector(
-      onTap: () {
-        // TODO: handle Google sign in (out of scope for email/password auth)
-      },
+      onTap: _isLoading ? null : _handleGoogleLogin,
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsetsDirectional.all(AppPadding.p16),

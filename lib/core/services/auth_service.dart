@@ -1,3 +1,4 @@
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 /// Thrown by [AuthService] with a human-readable message, so UI code
@@ -14,11 +15,9 @@ class AuthService {
   final FirebaseAuth _auth;
 
   AuthService({FirebaseAuth? firebaseAuth})
-      : _auth = firebaseAuth ?? FirebaseAuth.instance;
-
+    : _auth = firebaseAuth ?? FirebaseAuth.instance;
 
   User? get currentUser => _auth.currentUser;
-
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
@@ -60,6 +59,36 @@ class AuthService {
       await _auth.sendPasswordResetEmail(email: email.trim());
     } on FirebaseAuthException catch (e) {
       throw AuthException(_mapError(e.code));
+    }
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser == null) {
+        throw AuthException('Google sign in was cancelled.');
+      }
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser.authentication;
+
+      if (googleAuth?.accessToken == null || googleAuth?.idToken == null) {
+        throw AuthException('Failed to get Google authentication tokens.');
+      }
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_mapError(e.code));
+    } catch (e) {
+      if (e is AuthException) rethrow;
+      throw AuthException('Failed to sign in with Google. Please try again.');
     }
   }
 
