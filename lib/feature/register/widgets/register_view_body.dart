@@ -31,6 +31,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final AuthService _authService = AuthService();
   bool _isLoading = false;
+  int _selectedAvatarIndex = 1;
 
   @override
   void dispose() {
@@ -59,6 +60,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
         name: nameController.text,
         email: emailController.text,
         password: passwordController.text,
+        phone: phoneController.text,
+        avatarIndex: _selectedAvatarIndex,
       );
       if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(
@@ -92,7 +95,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               const Gap(16),
               _buildAppBar(context, textTheme, l10n),
               const Gap(24),
-              const AvatarCarousel(),
+              AvatarCarousel(
+                onAvatarSelected: (index) =>
+                    setState(() => _selectedAvatarIndex = index),
+              ),
               const Gap(AppPadding.p8),
               Center(
                 child: Text(
