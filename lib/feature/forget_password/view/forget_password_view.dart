@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 
-class ForgetPasswordView extends StatelessWidget {
+class ForgetPasswordView extends StatefulWidget {
   const ForgetPasswordView({super.key});
+
+  @override
+  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
+}
+
+class _ForgetPasswordViewState extends State<ForgetPasswordView> {
+  final TextEditingController _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +80,8 @@ class ForgetPasswordView extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: const CustomTextFormField(
+                child: CustomTextFormField(
+                  controller: _emailController,
                   hintText: 'Email',
                   withValidator: false,
                   keyboardType: TextInputType.emailAddress,
@@ -83,7 +99,38 @@ class ForgetPasswordView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    final email = _emailController.text.trim();
+                    if (email.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter your email first'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    try {
+                      await context.read<AuthCubit>().resetPassword(email);
+
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Password reset email sent successfully! Check your inbox.',
+                            ),
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(e.toString())));
+                      }
+                    }
+                  },
                   child: const Text(
                     'Verify Email',
                     style: TextStyle(

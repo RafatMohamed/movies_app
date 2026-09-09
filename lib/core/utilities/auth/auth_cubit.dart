@@ -22,8 +22,24 @@ class AuthCubit extends Cubit<AuthState> {
     return state is Authenticated ? state.user : null;
   }
 
-  Future<void> logout() => _authService.logout();
+  Future<void> signInWithGoogle() async {
+    try {
+      await _authService.signInWithGoogle();
+    } catch (e) {
+      rethrow;
+    }
+  }
 
+  Future<void> logout() => _authService.logout();
+/// Sends a password reset email to the provided address.
+  Future<void> resetPassword(String email) async {
+    try {
+      await _authService.sendPasswordResetEmail(email);
+    } catch (e) {
+      // Rethrow or handle exception so UI can catch it and show a message
+      rethrow;
+    }
+  }
   @override
   Future<void> close() {
     _subscription.cancel();
