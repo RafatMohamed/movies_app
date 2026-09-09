@@ -25,9 +25,7 @@ import 'l10n/generated/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await IsFirstOpenApp.initSharedStorge();
   await AppLocaleController.initialize();
@@ -35,17 +33,17 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
   setupDI();
 
-runApp(
-  BlocProvider<AuthCubit>(
-    create: (_) => getIt<AuthCubit>(),
-    child: DevicePreview(
-      enabled: true,
-      builder: (context) {
-        return const MoviesApp();
-      },
+  runApp(
+    BlocProvider<AuthCubit>(
+      create: (_) => getIt<AuthCubit>(),
+      child: DevicePreview(
+        enabled: true,
+        builder: (context) {
+          return const MoviesApp();
+        },
+      ),
     ),
-  ),
-);
+  );
 }
 
 class MoviesApp extends StatelessWidget {
@@ -88,7 +86,7 @@ class MoviesApp extends StatelessWidget {
 
           routes: routeApp,
 
-          initialRoute: AppOnRouteText.splashName,
+          initialRoute: AppOnRouteText.mainAppName,
           //home: AppOnRouteText.mainAppName,
           //  home: ProfileTab(),
         );

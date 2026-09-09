@@ -58,9 +58,6 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
                     initialPage: 0,
                     scrollDirection: .horizontal,
                     onPageChanged: (index, reason) {
-                      if (index == state.movies.length - 3) {
-                        context.read<HomeTabCubit>().getMoviesOnPagination();
-                      }
                       widget.onPageChanged.call(index);
                     },
                     enableInfiniteScroll: false,
@@ -71,6 +68,7 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
                   carouselController: controller,
                   itemCount: state.movies.length,
                   itemBuilder: (_, index, _) => CustomMovieCard(
+                    movieId: state.movies[index].id ?? 0,
                     pathImage: state.movies[index].largeCoverImage ?? '',
                     rate: state.movies[index].rating.toString(),
                   ),
@@ -91,33 +89,10 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
                 itemBuilder: (_, index, _) => const MovieCardShimmer(),
               );
             }
-            if (state is HomeTabOnScrollLoading) {
-              return Directionality(
-                textDirection: Directionality.of(context),
-                child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                    reverse: false,
-                    initialPage: 0,
-                    scrollDirection: .horizontal,
-                    onPageChanged: (index, reason) {
-                      widget.onPageChanged.call(index);
-                    },
-                    enableInfiniteScroll: false,
-                    height: MediaQuery.of(context).size.height * .40,
-                    viewportFraction: 0.55,
-                    enlargeCenterPage: true,
-                  ),
-                  carouselController: controller,
-                  itemCount: state.movies.length,
-                  itemBuilder: (_, index, _) => CustomMovieCard(
-                    pathImage: state.movies[index].largeCoverImage ?? '',
-                    rate: state.movies[index].rating.toString(),
-                  ),
-                ),
-              );
-            }
+
             if (state is HomeTabEror) {
               return Container(
+                padding: const EdgeInsets.all(16),
                 width: .infinity,
                 height: MediaQuery.of(context).size.height * .40,
                 decoration: BoxDecoration(
@@ -131,37 +106,6 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
                     const Icon(Icons.error, color: AppColors.white),
                     Text(state.messege),
                   ],
-                ),
-              );
-            }
-            if (state is HomeTabOnPaginationEror) {
-              return Directionality(
-                textDirection: Directionality.of(context),
-                child: CarouselSlider.builder(
-                  options: CarouselOptions(
-                    reverse: false,
-                    initialPage: 0,
-                    scrollDirection: .horizontal,
-                    // onPageChanged: (index, reason) {
-                    //   widget.onPageChanged.call(index);
-                    // },
-                    enableInfiniteScroll: false,
-                    height: MediaQuery.of(context).size.height * .40,
-                    viewportFraction: 0.55,
-                    enlargeCenterPage: true,
-                  ),
-                  carouselController: controller,
-                  itemCount: state.homeTabMovies.length + 1,
-                  itemBuilder: (_, index, _) {
-                    if (index == state.homeTabMovies.length) {
-                      return MovieErrorCard(errorMessage: state.messege);
-                    }
-                    return CustomMovieCard(
-                      pathImage:
-                          state.homeTabMovies[index].largeCoverImage ?? '',
-                      rate: state.homeTabMovies[index].rating.toString(),
-                    );
-                  },
                 ),
               );
             }

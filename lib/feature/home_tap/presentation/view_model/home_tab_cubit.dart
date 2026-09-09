@@ -14,6 +14,8 @@ class HomeTabCubit extends Cubit<HomeTabState> {
   int page = 2;
   bool hasMore = true;
   bool isPaginationLoading = false;
+
+
   void getMoviesFirstPage() async {
     if (!hasMore) return;
     try {
@@ -31,47 +33,47 @@ class HomeTabCubit extends Cubit<HomeTabState> {
     }
   }
 
-  void getMoviesOnPagination() async {
-    if (!hasMore || isClosed || isPaginationLoading) return;
-    isPaginationLoading = true;
-    try {
-      if (isClosed) return;
-      emit(HomeTabOnScrollLoading(movies, filterMovieByGenre()));
+  // void getMoviesOnPagination() async {
+  //   if (!hasMore || isClosed || isPaginationLoading) return;
+  //   isPaginationLoading = true;
+  //   try {
+  //     if (isClosed) return;
+  //     emit(HomeTabOnScrollLoading(movies, filterMovieByGenre()));
 
-      final newMovies = await repo.getMoviesList(page: page.toString());
+  //     final newMovies = await repo.getMoviesList(page: page.toString());
 
-      if (isClosed) return;
+  //     if (isClosed) return;
 
-      if (newMovies.isEmpty) {
-        hasMore = false;
-        emit(
-          HomeTabLoaded(
-            movies: movies,
-            watchingNowMovies: filterMovieByGenre(),
-          ),
-        );
-        isPaginationLoading = false;
-        return;
-      }
-      movies.addAll(newMovies);
-      myGenereList = _filterGenersFromMovieList(movies);
-      page++;
-      emit(
-        HomeTabLoaded(movies: movies, watchingNowMovies: filterMovieByGenre()),
-      );
-      isPaginationLoading = false;
-    } catch (e) {
-      if (isClosed) return;
-      emit(
-        HomeTabOnPaginationEror(
-          messege: e.toString(),
-          homeTabMovies: movies,
-          watchNowMovies: movies,
-        ),
-      );
-      isPaginationLoading = false;
-    }
-  }
+  //     if (newMovies.isEmpty) {
+  //       hasMore = false;
+  //       emit(
+  //         HomeTabLoaded(
+  //           movies: movies,
+  //           watchingNowMovies: filterMovieByGenre(),
+  //         ),
+  //       );
+  //       isPaginationLoading = false;
+  //       return;
+  //     }
+  //     movies.addAll(newMovies);
+  //     myGenereList = _filterGenersFromMovieList(movies);
+  //     page++;
+  //     emit(
+  //       HomeTabLoaded(movies: movies, watchingNowMovies: filterMovieByGenre()),
+  //     );
+  //     isPaginationLoading = false;
+  //   } catch (e) {
+  //     if (isClosed) return;
+  //     emit(
+  //       HomeTabOnPaginationEror(
+  //         messege: e.toString(),
+  //         homeTabMovies: movies,
+  //         watchNowMovies: movies,
+  //       ),
+  //     );
+  //     isPaginationLoading = false;
+  //   }
+  // }
 
   List<String> _filterGenersFromMovieList(List<Movie> movies) {
     Set<String> generesSet = {};
