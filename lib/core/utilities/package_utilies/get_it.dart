@@ -10,11 +10,9 @@ import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
 import 'package:movies_app/feature/Search/model/data_source/search_data_source.dart';
 import 'package:movies_app/feature/Search/model/repo/repo.dart';
 import 'package:movies_app/feature/Search/view_model/state_mangment.dart';
-import 'package:movies_app/feature/home_tap/model/data_source/movies_data_source.dart';
 import 'package:movies_app/feature/home_tap/model/data_source/movies_data_source_api.dart';
 import 'package:movies_app/feature/home_tap/model/repo/repo.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
-
 import '../../../feature/Search/model/data_source/search_data_source_imp.dart';
 
 final getIt = GetIt.instance;
