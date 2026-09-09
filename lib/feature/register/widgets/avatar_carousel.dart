@@ -4,7 +4,12 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import '../../../core/models/img_profile_model.dart';
 
 class AvatarCarousel extends StatefulWidget {
-  const AvatarCarousel({super.key});
+  const AvatarCarousel({super.key, this.onAvatarSelected});
+
+  /// Called with the index into [ImgProfileModel.avatars] whenever the
+  /// centered avatar changes, so the caller can persist it (e.g. to
+  /// Firestore on register).
+  final ValueChanged<int>? onAvatarSelected;
 
   @override
   State<AvatarCarousel> createState() => _AvatarCarouselState();
@@ -16,6 +21,7 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
 
   late final PageController _controller;
   double _page = 1;
+  int _lastReportedIndex = 1;
 
   @override
   void initState() {
@@ -25,7 +31,18 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
       initialPage: 1,
     );
     _controller.addListener(() {
-      setState(() => _page = _controller.page ?? 1);
+      final page = _controller.page ?? 1;
+      setState(() => _page = page);
+
+      final roundedIndex = page.round();
+      if (roundedIndex != _lastReportedIndex) {
+        _lastReportedIndex = roundedIndex;
+        widget.onAvatarSelected?.call(roundedIndex);
+      }
+    });
+    // Report the initial selection once the first frame is ready.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onAvatarSelected?.call(_lastReportedIndex);
     });
   }
 
