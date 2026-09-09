@@ -150,6 +150,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                     return SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                       child: CustomMovieCard(
+                        movieId: state.watchingNowMovies[index].id ?? 0,
                         pathImage:
                             state.watchingNowMovies[index].largeCoverImage ??
                             '',
@@ -180,53 +181,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                 ),
               );
             }
-            if (state is HomeTabOnScrollLoading) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.25,
-                child: ListView.separated(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppPadding.p16,
-                  ),
-                  separatorBuilder: (context, index) => const Gap(16),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.watchingNowMovies.length,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      child: CustomMovieCard(
-                        pathImage:
-                            state.watchingNowMovies[index].largeCoverImage ??
-                            '',
-                        rate: state.watchingNowMovies[index].rating.toString(),
-                      ),
-                    );
-                  },
-                ),
-              );
-            }
-            if (state is HomeTabOnPaginationEror) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.25,
-                child: ListView.separated(
-                  padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: AppPadding.p16,
-                  ),
-                  separatorBuilder: (context, index) => const Gap(16),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      child: CustomMovieCard(
-                        pathImage:
-                            state.watchNowMovies[index].largeCoverImage ?? '',
-                        rate: state.watchNowMovies[index].rating.toString(),
-                      ),
-                    );
-                  },
-                ),
-              );
-            }
+
             return const SizedBox();
           },
         ),
