@@ -35,10 +35,8 @@ class ParentalGuidData {
       parentalGuideCount: json['parental_guide_count'] ?? 0,
       parentalGuides: (json['parental_guides'] as List? ?? [])
           .map(
-            (item) => ParentalGuideItem.fromJson(
-          item as Map<String, dynamic>,
-        ),
-      )
+            (item) => ParentalGuideItem.fromJson(item as Map<String, dynamic>),
+          )
           .toList(),
     );
   }
@@ -48,10 +46,7 @@ class ParentalGuideItem {
   final String type;
   final String parentalGuideText;
 
-  ParentalGuideItem({
-    required this.type,
-    required this.parentalGuideText,
-  });
+  ParentalGuideItem({required this.type, required this.parentalGuideText});
 
   factory ParentalGuideItem.fromJson(Map<String, dynamic> json) {
     return ParentalGuideItem(
@@ -65,10 +60,7 @@ class ParentalGuidMeta {
   final int apiVersion;
   final String executionTime;
 
-  ParentalGuidMeta({
-    required this.apiVersion,
-    required this.executionTime,
-  });
+  ParentalGuidMeta({required this.apiVersion, required this.executionTime});
 
   factory ParentalGuidMeta.fromJson(Map<String, dynamic> json) {
     return ParentalGuidMeta(

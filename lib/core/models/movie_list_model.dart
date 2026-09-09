@@ -97,8 +97,7 @@ class MovieListItemModel {
       language: json['language'] ?? '',
       mpaRating: json['mpa_rating'] ?? '',
       backgroundImage: json['background_image'] ?? '',
-      backgroundImageOriginal:
-      json['background_image_original'] ?? '',
+      backgroundImageOriginal: json['background_image_original'] ?? '',
       smallCoverImage: json['small_cover_image'] ?? '',
       mediumCoverImage: json['medium_cover_image'] ?? '',
       largeCoverImage: json['large_cover_image'] ?? '',
@@ -110,10 +109,7 @@ class MetaModel {
   final int apiVersion;
   final String executionTime;
 
-  MetaModel({
-    required this.apiVersion,
-    required this.executionTime,
-  });
+  MetaModel({required this.apiVersion, required this.executionTime});
 
   factory MetaModel.fromJson(Map<String, dynamic> json) {
     return MetaModel(

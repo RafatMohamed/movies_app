@@ -52,7 +52,7 @@ class ButtonSection extends StatelessWidget {
 
   void onExitButtonPressed(BuildContext context) {
     // Implement the logic for the exit button press here
-    Navigator.pushNamed(context, AppOnRouteText.loginName);
+    Navigator.pushReplacementNamed(context, AppOnRouteText.loginName);
   }
 
   void onEditProfileButtonPressed(BuildContext context) {

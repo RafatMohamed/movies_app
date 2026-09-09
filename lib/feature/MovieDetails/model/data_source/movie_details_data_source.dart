@@ -7,5 +7,7 @@ abstract class MovieDetailsDataSource {
 
   Future<MovieSuggestionModel> getSuggestionMovie({required int movieID});
 
-  Future<MovieParentalGuideModel> getParentalGuidesMovie({required int movieID});
+  Future<MovieParentalGuideModel> getParentalGuidesMovie({
+    required int movieID,
+  });
 }

@@ -16,7 +16,6 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-
   void onSubmittedSearch(String query) async {
     context.read<MovieSearchCubit>().getMovieDetails(query: query.trim());
   }
@@ -34,7 +33,7 @@ class _SearchViewState extends State<SearchView> {
             child: CustomTextFieldSearch(
               onSubmitted: onSubmittedSearch,
               onClear: (_) {
-               context.read<MovieSearchCubit>().onClear();
+                context.read<MovieSearchCubit>().onClear();
               },
             ),
           ),
@@ -44,12 +43,13 @@ class _SearchViewState extends State<SearchView> {
                 return Expanded(
                   child: GridView.builder(
                     padding: .zero,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: .7,
-                      crossAxisSpacing: AppPadding.p20,
-                      mainAxisSpacing: AppPadding.p16,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: .7,
+                          crossAxisSpacing: AppPadding.p20,
+                          mainAxisSpacing: AppPadding.p16,
+                        ),
                     itemCount: 8,
                     physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
@@ -72,7 +72,9 @@ class _SearchViewState extends State<SearchView> {
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(AppPadding.p16),
-                    child: state.movieList.data.movieCount== 0 || state.movieList.data.movies.isEmpty
+                    child:
+                        state.movieList.data.movieCount == 0 ||
+                            state.movieList.data.movies.isEmpty
                         ? Center(
                             child: Image.asset(
                               AppAssets.emptyMoviesImage,

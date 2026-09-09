@@ -13,10 +13,19 @@ class CustomMovieDetailsInfoPopular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final List<CategoryInfoModelPopular> itemList = [
-       CategoryInfoModelPopular(pathIcon: AppAssets.favIcon, text: movie.likeCount.toString()),
-       CategoryInfoModelPopular(pathIcon: AppAssets.watchIcon, text: movie.runtime.toString()),
-       CategoryInfoModelPopular(pathIcon: AppAssets.starIcon, text: movie.rating.toString()),
+    final List<CategoryInfoModelPopular> itemList = [
+      CategoryInfoModelPopular(
+        pathIcon: AppAssets.favIcon,
+        text: movie.likeCount.toString(),
+      ),
+      CategoryInfoModelPopular(
+        pathIcon: AppAssets.watchIcon,
+        text: movie.runtime.toString(),
+      ),
+      CategoryInfoModelPopular(
+        pathIcon: AppAssets.starIcon,
+        text: movie.rating.toString(),
+      ),
     ];
     return Row(
       spacing: AppPadding.p10,
@@ -35,9 +44,7 @@ class DefaultInfoDetails extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Expanded(
       child: Container(
-        padding: const EdgeInsetsDirectional.symmetric(
-          vertical: AppPadding.p8
-        ),
+        padding: const EdgeInsetsDirectional.symmetric(vertical: AppPadding.p8),
         decoration: BoxDecoration(
           color: AppColors.lightBlack,
           borderRadius: BorderRadius.circular(AppBorderRadius.r16),

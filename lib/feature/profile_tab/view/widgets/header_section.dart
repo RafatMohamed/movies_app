@@ -10,7 +10,7 @@ class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
   @override
   Widget build(BuildContext context) {
-    final String imageProfile =ImgProfileModel.avatars.first.imgPath;
+    final String imageProfile = ImgProfileModel.avatars.first.imgPath;
     final AppLocalizations l10n = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),

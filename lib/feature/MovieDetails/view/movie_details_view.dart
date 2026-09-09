@@ -8,13 +8,12 @@ class MovieDetailsView extends StatelessWidget {
   const MovieDetailsView({super.key});
   @override
   Widget build(BuildContext context) {
-    final int movieID =ModalRoute.of(context)?.settings.arguments as int;
-    return  Scaffold(
+    final int movieID = ModalRoute.of(context)?.settings.arguments as int;
+    return Scaffold(
       body: BlocProvider<MovieDetailsCubit>(
-        create:(context) => getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
-        child:const SingleChildScrollView(
-          child: MovieDetailsViewBody(),
-        ),
+        create: (context) =>
+            getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
+        child: const SingleChildScrollView(child: MovieDetailsViewBody()),
       ),
     );
   }

@@ -6,7 +6,7 @@ import '../../../../core/models/film_model.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class HistoryListSection extends StatelessWidget {
-  const HistoryListSection({super.key,});
+  const HistoryListSection({super.key});
   @override
   Widget build(BuildContext context) {
     final List<FilmModel> historyList = [];

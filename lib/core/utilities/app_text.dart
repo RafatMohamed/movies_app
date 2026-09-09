@@ -18,20 +18,19 @@ class AppText {
   static const String onboardingPageTitle5 = 'Start Watching Now';
 }
 
-class AppOnRouteText{
-
-  static const String splashName="/";
-  static const String startingViewAppName="/startingView";
-  static const String onBoardingName="/onBoarding";
-  static const String loginName="/login";
-  static const String registerName="/register";
-  static const String mainAppName="/MainApp";
-  static const String detailsMoviesName="/DetailsMovies";
-  static const String forgetPasswordName="/forgetPass";
-  static const String updateProfileName="/updateProfile";
-  static const String updatePasswordName="/updatePass";
+class AppOnRouteText {
+  static const String splashName = "/";
+  static const String startingViewAppName = "/startingView";
+  static const String onBoardingName = "/onBoarding";
+  static const String loginName = "/login";
+  static const String registerName = "/register";
+  static const String mainAppName = "/MainApp";
+  static const String detailsMoviesName = "/DetailsMovies";
+  static const String forgetPasswordName = "/forgetPass";
+  static const String updateProfileName = "/updateProfile";
+  static const String updatePasswordName = "/updatePass";
 }
 
-class AppTextTags{
- static const String movieImageTag="/imageMovie";
+class AppTextTags {
+  static const String movieImageTag = "/imageMovie";
 }

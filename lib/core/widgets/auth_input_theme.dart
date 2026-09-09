@@ -15,9 +15,18 @@ class AuthInputTheme extends StatelessWidget {
       data: Theme.of(context).copyWith(
         inputDecorationTheme: InputDecorationTheme(
           hintStyle: const TextStyle(color: AppColors.white),
-          border: OutlineInputBorder(borderRadius: radius, borderSide: BorderSide.none),
-          enabledBorder: OutlineInputBorder(borderRadius: radius, borderSide: BorderSide.none),
-          focusedBorder: OutlineInputBorder(borderRadius: radius, borderSide: BorderSide.none),
+          border: OutlineInputBorder(
+            borderRadius: radius,
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: radius,
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: radius,
+            borderSide: BorderSide.none,
+          ),
           errorBorder: OutlineInputBorder(
             borderRadius: radius,
             borderSide: const BorderSide(color: AppColors.red),

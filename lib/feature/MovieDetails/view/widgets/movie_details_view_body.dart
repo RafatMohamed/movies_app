@@ -36,7 +36,7 @@ class MovieDetailsViewBody extends StatelessWidget {
               height: height,
               movieDetails: MovieModel.empty(),
               textTheme: textTheme,
-              moviesSuggestion:const[],
+              moviesSuggestion: const [],
               moviesGuide: const [],
             ),
           );

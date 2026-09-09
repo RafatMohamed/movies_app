@@ -3,10 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import '../../../core/models/img_profile_model.dart';
 
-
 class AvatarCarousel extends StatefulWidget {
   const AvatarCarousel({super.key});
-
 
   @override
   State<AvatarCarousel> createState() => _AvatarCarouselState();
@@ -53,7 +51,8 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
             itemBuilder: (context, index) {
               final distance = (index - _page).abs().clamp(0.0, 1.0);
               final size =
-                  unselectedSize + (_selectedSize - unselectedSize) * (1 - distance);
+                  unselectedSize +
+                  (_selectedSize - unselectedSize) * (1 - distance);
               final side = index > _page ? -1.0 : (index < _page ? 1.0 : 0.0);
               final alignment = Alignment(side * distance, 0);
 
@@ -67,7 +66,10 @@ class _AvatarCarouselState extends State<AvatarCarousel> {
                     shape: BoxShape.circle,
                     color: AppColors.lightBlack,
                   ),
-                  child: SvgPicture.asset(avatars[index].imgPath, fit: BoxFit.cover),
+                  child: SvgPicture.asset(
+                    avatars[index].imgPath,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               );
             },

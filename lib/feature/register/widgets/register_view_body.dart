@@ -23,7 +23,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -56,7 +57,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               const AvatarCarousel(),
               const Gap(AppPadding.p8),
               Center(
-                child: Text(l10n.avatar, style: textTheme.labelSmall?.copyWith(fontSize: 16)),
+                child: Text(
+                  l10n.avatar,
+                  style: textTheme.labelSmall?.copyWith(fontSize: 16),
+                ),
               ),
               const Gap(AppPadding.p24),
               CustomTextFormField(
@@ -105,8 +109,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 textStyle: textTheme.labelSmall?.copyWith(
                   color: AppColors.deepBlack,
                 ),
-                onTap: () {
-                },
+                onTap: () {},
               ),
               const Gap(AppPadding.p20),
               _buildLoginRow(context, textTheme, l10n),
@@ -120,7 +123,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     );
   }
 
-  Widget _buildAppBar(BuildContext context, TextTheme textTheme, AppLocalizations l10n) {
+  Widget _buildAppBar(
+    BuildContext context,
+    TextTheme textTheme,
+    AppLocalizations l10n,
+  ) {
     return SizedBox(
       height: 32,
       child: Stack(
@@ -132,7 +139,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               onTap: () => Navigator.pop(context),
               child: SvgPicture.asset(
                 AppAssets.arrowBackDetails,
-                colorFilter: const ColorFilter.mode(AppColors.gold, BlendMode.srcIn),
+                colorFilter: const ColorFilter.mode(
+                  AppColors.gold,
+                  BlendMode.srcIn,
+                ),
                 width: 24,
                 height: 24,
               ),
@@ -151,7 +161,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     );
   }
 
-  Widget _buildLoginRow(BuildContext context, TextTheme textTheme, AppLocalizations l10n) {
+  Widget _buildLoginRow(
+    BuildContext context,
+    TextTheme textTheme,
+    AppLocalizations l10n,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

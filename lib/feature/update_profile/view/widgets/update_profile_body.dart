@@ -109,13 +109,17 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                       child: Column(
                         children: [
                           CustomTextFormField(
-                            hintText: AppLocalizations.of(context).enterYourName,
+                            hintText: AppLocalizations.of(
+                              context,
+                            ).enterYourName,
                             isName: true,
                             prefixIconPath: 'assets/icons/person.svg',
                           ),
                           const SizedBox(height: AppPadding.p16),
                           CustomTextFormField(
-                            hintText: AppLocalizations.of(context).enterYourPhoneNumber,
+                            hintText: AppLocalizations.of(
+                              context,
+                            ).enterYourPhoneNumber,
                             keyboardType: TextInputType.phone,
                             prefixIconPath: 'assets/icons/phone.svg',
                           ),

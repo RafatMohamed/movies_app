@@ -26,9 +26,7 @@ class CustomMovieDetailsGenres extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return DefaultBuildCardGenres(
-              typeGenres: genres[index],
-            );
+            return DefaultBuildCardGenres(typeGenres: genres[index]);
           },
         ),
       ],
@@ -37,9 +35,7 @@ class CustomMovieDetailsGenres extends StatelessWidget {
 }
 
 class DefaultBuildCardGenres extends StatelessWidget {
-  const DefaultBuildCardGenres({
-    super.key, required this.typeGenres,
-  });
+  const DefaultBuildCardGenres({super.key, required this.typeGenres});
   final String typeGenres;
   @override
   Widget build(BuildContext context) {
@@ -55,7 +51,7 @@ class DefaultBuildCardGenres extends StatelessWidget {
         typeGenres,
         style: textTheme.titleLarge?.copyWith(
           color: AppColors.white,
-          fontWeight: .w400
+          fontWeight: .w400,
         ),
         maxLines: 1,
         overflow: .ellipsis,

@@ -5,7 +5,6 @@ import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 
-
 class LanguageToggle extends StatelessWidget {
   const LanguageToggle({super.key});
 
@@ -27,14 +26,16 @@ class LanguageToggle extends StatelessWidget {
               _flagCircle(
                 AppAssets.englishIcon,
                 selected: !isArabic,
-                onTap: () =>
-                    AppLocaleController.instance.changeLocale(AppLocaleController.english),
+                onTap: () => AppLocaleController.instance.changeLocale(
+                  AppLocaleController.english,
+                ),
               ),
               _flagCircle(
                 AppAssets.arabicIcon,
                 selected: isArabic,
-                onTap: () =>
-                    AppLocaleController.instance.changeLocale(AppLocaleController.arabic),
+                onTap: () => AppLocaleController.instance.changeLocale(
+                  AppLocaleController.arabic,
+                ),
               ),
             ],
           ),
@@ -58,9 +59,7 @@ class LanguageToggle extends StatelessWidget {
           color: selected ? AppColors.gold : Colors.transparent,
         ),
         padding: EdgeInsets.all(selected ? 5 : 3),
-        child: ClipOval(
-          child: SvgPicture.asset(iconPath, fit: BoxFit.cover),
-        ),
+        child: ClipOval(child: SvgPicture.asset(iconPath, fit: BoxFit.cover)),
       ),
     );
   }

@@ -16,7 +16,8 @@ class FilmModel {
 
   static List<FilmModel> filmList = [
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '8.5',
       // title: 'Film 1',
       // description: 'Description of Film 1',
@@ -24,7 +25,8 @@ class FilmModel {
       // duration: '120 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '7.8',
       // title: 'Film 2',
       // description: 'Description of Film 2',
@@ -32,7 +34,8 @@ class FilmModel {
       // duration: '110 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '9.0',
       // title: 'Film 3',
       // description: 'Description of Film 3',
@@ -40,7 +43,8 @@ class FilmModel {
       // duration: '130 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '8.5',
       // title: 'Film 1',
       // description: 'Description of Film 1',
@@ -48,7 +52,8 @@ class FilmModel {
       // duration: '120 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '7.8',
       // title: 'Film 2',
       // description: 'Description of Film 2',
@@ -56,7 +61,8 @@ class FilmModel {
       // duration: '110 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '9.0',
       // title: 'Film 3',
       // description: 'Description of Film 3',
@@ -64,7 +70,8 @@ class FilmModel {
       // duration: '130 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '8.5',
       // title: 'Film 1',
       // description: 'Description of Film 1',
@@ -72,7 +79,8 @@ class FilmModel {
       // duration: '120 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '7.8',
       // title: 'Film 2',
       // description: 'Description of Film 2',
@@ -80,7 +88,8 @@ class FilmModel {
       // duration: '110 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '9.0',
       // title: 'Film 3',
       // description: 'Description of Film 3',
@@ -88,7 +97,8 @@ class FilmModel {
       // duration: '130 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '8.5',
       // title: 'Film 1',
       // description: 'Description of Film 1',
@@ -96,7 +106,8 @@ class FilmModel {
       // duration: '120 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '7.8',
       // title: 'Film 2',
       // description: 'Description of Film 2',
@@ -104,7 +115,8 @@ class FilmModel {
       // duration: '110 min',
     ),
     FilmModel(
-      image: "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
+      image:
+          "https://img.yts.gg/assets/images/movies/meiji_kyokyakuden_sandaime_shumei_1965/large-cover.jpg",
       rate: '9.0',
       // title: 'Film 3',
       // description: 'Description of Film 3',

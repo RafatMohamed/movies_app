@@ -19,7 +19,10 @@ class DefaultBottomNavigationBar extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context);
     List<BottomNavigationBarModel> itemsNav = [
       BottomNavigationBarModel(iconPath: AppAssets.homeIcon, label: l10n.home),
-      BottomNavigationBarModel(iconPath: AppAssets.searchIcon, label: l10n.search),
+      BottomNavigationBarModel(
+        iconPath: AppAssets.searchIcon,
+        label: l10n.search,
+      ),
       BottomNavigationBarModel(
         iconPath: AppAssets.exploreIcon,
         label: l10n.explore,

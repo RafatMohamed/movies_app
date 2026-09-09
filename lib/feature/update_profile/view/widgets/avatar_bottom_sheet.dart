@@ -18,7 +18,6 @@ class AvatarBottomSheet extends StatefulWidget {
 }
 
 class _AvatarBottomSheetState extends State<AvatarBottomSheet> {
-
   @override
   Widget build(BuildContext context) {
     final List<ImgProfileModel> avatars = ImgProfileModel.avatars;

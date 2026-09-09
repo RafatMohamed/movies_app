@@ -4,7 +4,7 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import '../../../../core/models/film_model.dart';
 
 class TabViewByGenre extends StatelessWidget {
- final String genere;
+  final String genere;
   const TabViewByGenre({super.key, required this.genere});
   @override
   Widget build(BuildContext context) {
