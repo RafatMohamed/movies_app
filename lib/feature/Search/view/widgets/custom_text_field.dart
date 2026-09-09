@@ -72,8 +72,6 @@ class _CustomTextFieldSearchState extends State<CustomTextFieldSearch> {
 
   OutlineInputBorder buildOutlineInputBorder() => OutlineInputBorder(
     borderRadius: BorderRadius.circular(AppBorderRadius.r16),
-    borderSide: const BorderSide(
-      color: AppColors.lightBlack,
-    ),
+    borderSide: const BorderSide(color: AppColors.lightBlack),
   );
 }

@@ -28,8 +28,8 @@ class CustomMovieDetailsSimilar extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            final MovieSuggestionItem movieItem= moviesSuggestion[index];
-            return  CustomMovieCard(
+            final MovieSuggestionItem movieItem = moviesSuggestion[index];
+            return CustomMovieCard(
               movieId: movieItem.id,
               pathImage: movieItem.mediumCoverImage,
               rate: movieItem.rating.toString(),

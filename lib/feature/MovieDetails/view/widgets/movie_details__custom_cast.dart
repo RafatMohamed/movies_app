@@ -10,7 +10,7 @@ import '../../model/model_name/movie_details_model.dart';
 
 class CustomMovieDetailsCast extends StatelessWidget {
   const CustomMovieDetailsCast({super.key, required this.cast});
- final List<CastModel> cast;
+  final List<CastModel> cast;
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -20,9 +20,9 @@ class CustomMovieDetailsCast extends StatelessWidget {
       children: [
         Text("Cast", style: textTheme.labelMedium),
         ...List.generate(cast.length, (index) {
-          final itemCast= cast[index];
-          return  DefaultBuildCardCast(
-            pathImageCast:itemCast.urlSmallImage,
+          final itemCast = cast[index];
+          return DefaultBuildCardCast(
+            pathImageCast: itemCast.urlSmallImage,
             nameCast: itemCast.name,
             characterCast: itemCast.characterName,
           );

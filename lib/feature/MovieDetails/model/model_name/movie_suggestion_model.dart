@@ -25,20 +25,16 @@ class MovieSuggestionData {
   final int movieCount;
   final List<MovieSuggestionItem> movies;
 
-  MovieSuggestionData({
-    required this.movieCount,
-    required this.movies,
-  });
+  MovieSuggestionData({required this.movieCount, required this.movies});
 
   factory MovieSuggestionData.fromJson(Map<String, dynamic> json) {
     return MovieSuggestionData(
       movieCount: json['movie_count'] ?? 0,
       movies: (json['movies'] as List? ?? [])
           .map(
-            (movie) => MovieSuggestionItem.fromJson(
-          movie as Map<String, dynamic>,
-        ),
-      )
+            (movie) =>
+                MovieSuggestionItem.fromJson(movie as Map<String, dynamic>),
+          )
           .toList(),
     );
   }
@@ -123,17 +119,16 @@ class MovieSuggestionItem {
       language: json['language'] ?? '',
       mpaRating: json['mpa_rating'] ?? '',
       backgroundImage: json['background_image'] ?? '',
-      backgroundImageOriginal:
-      json['background_image_original'] ?? '',
+      backgroundImageOriginal: json['background_image_original'] ?? '',
       smallCoverImage: json['small_cover_image'] ?? '',
       mediumCoverImage: json['medium_cover_image'] ?? '',
       state: json['state'] ?? '',
       torrents: (json['torrents'] as List? ?? [])
           .map(
             (torrent) => MovieSuggestionTorrent.fromJson(
-          torrent as Map<String, dynamic>,
-        ),
-      )
+              torrent as Map<String, dynamic>,
+            ),
+          )
           .toList(),
       dateUploaded: json['date_uploaded'] ?? '',
       dateUploadedUnix: json['date_uploaded_unix'] ?? 0,
@@ -172,9 +167,7 @@ class MovieSuggestionTorrent {
     required this.dateUploadedUnix,
   });
 
-  factory MovieSuggestionTorrent.fromJson(
-      Map<String, dynamic> json,
-      ) {
+  factory MovieSuggestionTorrent.fromJson(Map<String, dynamic> json) {
     return MovieSuggestionTorrent(
       url: json['url'] ?? '',
       hash: json['hash'] ?? '',
@@ -197,10 +190,7 @@ class MovieSuggestionMeta {
   final int apiVersion;
   final String executionTime;
 
-  MovieSuggestionMeta({
-    required this.apiVersion,
-    required this.executionTime,
-  });
+  MovieSuggestionMeta({required this.apiVersion, required this.executionTime});
 
   factory MovieSuggestionMeta.fromJson(Map<String, dynamic> json) {
     return MovieSuggestionMeta(

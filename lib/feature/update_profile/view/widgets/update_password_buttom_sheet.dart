@@ -19,7 +19,8 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
 
   final TextEditingController newPasswordFailed = TextEditingController();
 
-  final TextEditingController confirmNewPasswordFailed = TextEditingController();
+  final TextEditingController confirmNewPasswordFailed =
+      TextEditingController();
 
   String? errorMessage;
   @override
@@ -63,42 +64,48 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
               hintText: AppLocalizations.of(context).confirmNewPasswordHint,
               isPassword: true,
             ),
-            if(errorMessage!=null)
-            Visibility(
-              visible:errorMessage!=null,
-              child: PasswordDidNotMatch(
-                onDismissed: () {
-                  setState(() {
-                    errorMessage=null;
-                  });
-                },
-                isVisible: errorMessage!=null,
-                child:  Text(
-                  errorMessage!,
-                  style: const TextStyle(color: Colors.red, fontSize: 14),
+            if (errorMessage != null)
+              Visibility(
+                visible: errorMessage != null,
+                child: PasswordDidNotMatch(
+                  onDismissed: () {
+                    setState(() {
+                      errorMessage = null;
+                    });
+                  },
+                  isVisible: errorMessage != null,
+                  child: Text(
+                    errorMessage!,
+                    style: const TextStyle(color: Colors.red, fontSize: 14),
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: 16),
 
             CustomButtonApp(
               onTap: () {
-                final oldPassword ="12345678";
+                final oldPassword = "12345678";
                 if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
                   setState(() {
-                    errorMessage= AppLocalizations.of(context).passwordsDoNotMatch;
+                    errorMessage = AppLocalizations.of(
+                      context,
+                    ).passwordsDoNotMatch;
                   });
                   return;
                 }
                 if (currentFailed.text != oldPassword) {
                   setState(() {
-                    errorMessage= AppLocalizations.of(context).oldPasswordIncorrect;
+                    errorMessage = AppLocalizations.of(
+                      context,
+                    ).oldPasswordIncorrect;
                   });
                   return;
                 }
                 if (currentFailed.text == newPasswordFailed.text) {
                   setState(() {
-                    errorMessage= AppLocalizations.of(context).newPasswordMustDiffer;
+                    errorMessage = AppLocalizations.of(
+                      context,
+                    ).newPasswordMustDiffer;
                   });
                   return;
                 }

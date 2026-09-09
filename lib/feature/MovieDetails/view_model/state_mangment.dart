@@ -3,7 +3,6 @@ import 'package:movies_app/feature/MovieDetails/view_model/movie_details_state.d
 import '../model/repo/repo.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
-
   final MovieDetailsRepo _movieDetailsRepo;
 
   MovieDetailsCubit({required this._movieDetailsRepo})
@@ -23,13 +22,16 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
       final movieParentalGuide = await _movieDetailsRepo.getParentalGuidesMovie(
         movieID: movieID,
       );
-
-      emit(MovieDetailsSuccessState(
+      if (isClosed) return;
+      emit(
+        MovieDetailsSuccessState(
           movieDetails: movieDetails,
-        movieSuggestion: movieSuggestion,
-        movieParentalGuide: movieParentalGuide
-      ));
+          movieSuggestion: movieSuggestion,
+          movieParentalGuide: movieParentalGuide,
+        ),
+      );
     } catch (error) {
+      if (isClosed) return;
       emit(MovieDetailsFailerState(messageError: error.toString()));
     }
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class AppLocaleController extends ValueNotifier<Locale> {
   AppLocaleController._(super.initialLocale);
 
@@ -11,7 +10,6 @@ class AppLocaleController extends ValueNotifier<Locale> {
   static const Locale arabic = Locale('ar');
   static const List<Locale> supportedLocales = [english, arabic];
 
-
   static late final AppLocaleController instance;
 
   static Future<void> initialize() async {
@@ -19,7 +17,6 @@ class AppLocaleController extends ValueNotifier<Locale> {
     final savedCode = prefs.getString(_prefsKey);
     instance = AppLocaleController._(savedCode == 'ar' ? arabic : english);
   }
-
 
   Future<void> changeLocale(Locale locale) async {
     if (value.languageCode == locale.languageCode) return;

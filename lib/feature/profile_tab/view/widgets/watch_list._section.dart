@@ -6,7 +6,7 @@ import '../../../../core/models/film_model.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 
 class WatchListSection extends StatelessWidget {
- const WatchListSection({super.key});
+  const WatchListSection({super.key});
   @override
   Widget build(BuildContext context) {
     List<FilmModel> watchedList = FilmModel.filmList;

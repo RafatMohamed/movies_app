@@ -24,14 +24,10 @@ class MovieDetailsModel {
 class MovieDataModel {
   final MovieModel movie;
 
-  MovieDataModel({
-    required this.movie,
-  });
+  MovieDataModel({required this.movie});
 
   factory MovieDataModel.fromJson(Map<String, dynamic> json) {
-    return MovieDataModel(
-      movie: MovieModel.fromJson(json['movie'] ?? {}),
-    );
+    return MovieDataModel(movie: MovieModel.fromJson(json['movie'] ?? {}));
   }
 }
 
@@ -132,25 +128,18 @@ class MovieModel {
       mpaRating: json['mpa_rating'] ?? '',
 
       backgroundImage: json['background_image'] ?? '',
-      backgroundImageOriginal:
-      json['background_image_original'] ?? '',
+      backgroundImageOriginal: json['background_image_original'] ?? '',
       smallCoverImage: json['small_cover_image'] ?? '',
       mediumCoverImage: json['medium_cover_image'] ?? '',
       largeCoverImage: json['large_cover_image'] ?? '',
 
-      mediumScreenshotImage1:
-      json['medium_screenshot_image1'] ?? '',
-      mediumScreenshotImage2:
-      json['medium_screenshot_image2'] ?? '',
-      mediumScreenshotImage3:
-      json['medium_screenshot_image3'] ?? '',
+      mediumScreenshotImage1: json['medium_screenshot_image1'] ?? '',
+      mediumScreenshotImage2: json['medium_screenshot_image2'] ?? '',
+      mediumScreenshotImage3: json['medium_screenshot_image3'] ?? '',
 
-      largeScreenshotImage1:
-      json['large_screenshot_image1'] ?? '',
-      largeScreenshotImage2:
-      json['large_screenshot_image2'] ?? '',
-      largeScreenshotImage3:
-      json['large_screenshot_image3'] ?? '',
+      largeScreenshotImage1: json['large_screenshot_image1'] ?? '',
+      largeScreenshotImage2: json['large_screenshot_image2'] ?? '',
+      largeScreenshotImage3: json['large_screenshot_image3'] ?? '',
 
       cast: (json['cast'] as List? ?? [])
           .map((e) => CastModel.fromJson(e))
@@ -166,43 +155,39 @@ class MovieModel {
   }
 
   MovieModel.empty()
-      : id = 0,
-        url = '',
-        imdbCode = '',
-        title = 'Movie Title',
-        titleEnglish = 'Movie Title',
-        titleLong = 'Movie Title',
-        slug = '',
-        year = 2026,
-        rating = 8.0,
-        runtime = 120,
-        genres = [
-          'Action',
-          'Drama',
-          'Thriller',
-        ],
-        likeCount = 100,
-        descriptionIntro = 'Movie description',
-        descriptionFull =
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        ytTrailerCode = '',
-        language = 'English',
-        mpaRating = 'PG-13',
-        backgroundImage = '',
-        backgroundImageOriginal = '',
-        smallCoverImage = '',
-        mediumCoverImage = '',
-        largeCoverImage = '',
-        mediumScreenshotImage1 = '',
-        mediumScreenshotImage2 = '',
-        mediumScreenshotImage3 = '',
-        largeScreenshotImage1 = '',
-        largeScreenshotImage2 = '',
-        largeScreenshotImage3 = '',
-        cast = [],
-        torrents = [],
-        dateUploaded = '',
-        dateUploadedUnix = 0;
+    : id = 0,
+      url = '',
+      imdbCode = '',
+      title = 'Movie Title',
+      titleEnglish = 'Movie Title',
+      titleLong = 'Movie Title',
+      slug = '',
+      year = 2026,
+      rating = 8.0,
+      runtime = 120,
+      genres = ['Action', 'Drama', 'Thriller'],
+      likeCount = 100,
+      descriptionIntro = 'Movie description',
+      descriptionFull =
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      ytTrailerCode = '',
+      language = 'English',
+      mpaRating = 'PG-13',
+      backgroundImage = '',
+      backgroundImageOriginal = '',
+      smallCoverImage = '',
+      mediumCoverImage = '',
+      largeCoverImage = '',
+      mediumScreenshotImage1 = '',
+      mediumScreenshotImage2 = '',
+      mediumScreenshotImage3 = '',
+      largeScreenshotImage1 = '',
+      largeScreenshotImage2 = '',
+      largeScreenshotImage3 = '',
+      cast = [],
+      torrents = [],
+      dateUploaded = '',
+      dateUploadedUnix = 0;
 }
 
 class CastModel {
@@ -285,10 +270,7 @@ class MetaModel {
   final int apiVersion;
   final String executionTime;
 
-  MetaModel({
-    required this.apiVersion,
-    required this.executionTime,
-  });
+  MetaModel({required this.apiVersion, required this.executionTime});
 
   factory MetaModel.fromJson(Map<String, dynamic> json) {
     return MetaModel(

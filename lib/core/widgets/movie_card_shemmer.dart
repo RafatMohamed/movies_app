@@ -27,10 +27,7 @@ class MovieCardShimmer extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Container(
             margin: const EdgeInsets.all(8),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 8,
-              vertical: 4,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -38,16 +35,9 @@ class MovieCardShimmer extends StatelessWidget {
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.star,
-                  size: 14,
-                  color: Colors.white,
-                ),
+                Icon(Icons.star, size: 14, color: Colors.white),
                 SizedBox(width: 4),
-                SizedBox(
-                  width: 20,
-                  height: 10,
-                ),
+                SizedBox(width: 20, height: 10),
               ],
             ),
           ),

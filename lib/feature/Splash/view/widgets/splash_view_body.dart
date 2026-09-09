@@ -33,12 +33,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   Future<void> startAnimation() async {
-
     await moveController.forward();
     await Future.delayed(const Duration(seconds: 1));
     await fadeController.forward();
-    final completed =  IsFirstOpenApp.getIsFirstOpen();
-    if(!mounted) return;
+    final completed = IsFirstOpenApp.getIsFirstOpen();
+    if (!mounted) return;
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(

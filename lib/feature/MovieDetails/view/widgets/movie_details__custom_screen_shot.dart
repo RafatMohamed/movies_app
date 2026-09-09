@@ -7,7 +7,7 @@ import 'package:movies_app/core/utilities/app_them.dart';
 import '../../model/model_name/movie_details_model.dart';
 
 class CustomMovieDetailsScreenShot extends StatelessWidget {
-  const CustomMovieDetailsScreenShot({super.key,required this.movie});
+  const CustomMovieDetailsScreenShot({super.key, required this.movie});
   final MovieModel movie;
 
   @override
@@ -17,27 +17,26 @@ class CustomMovieDetailsScreenShot extends StatelessWidget {
       movie.largeScreenshotImage2,
       movie.largeScreenshotImage3,
     ];
-   bool getPathIsEmpty(){
-     for(int i=0;i<screenShotImages.length;i++){
-       if(screenShotImages[i].isEmpty){
-         return false;
-       }
-     }
-     return true;
+    bool getPathIsEmpty() {
+      for (int i = 0; i < screenShotImages.length; i++) {
+        if (screenShotImages[i].isEmpty) {
+          return false;
+        }
+      }
+      return true;
     }
+
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return  Visibility(
+    return Visibility(
       visible: getPathIsEmpty(),
       child: Column(
         crossAxisAlignment: .start,
         spacing: AppPadding.p10,
         children: [
-          Text("Screen Shots",style: textTheme.labelMedium,),
+          Text("Screen Shots", style: textTheme.labelMedium),
           ...List.generate(screenShotImages.length, (index) {
-            return  DefaultScreenShotImage(
-              pathImage: screenShotImages[index],
-            );
-          })
+            return DefaultScreenShotImage(pathImage: screenShotImages[index]);
+          }),
         ],
       ),
     );
@@ -45,7 +44,7 @@ class CustomMovieDetailsScreenShot extends StatelessWidget {
 }
 
 class DefaultScreenShotImage extends StatelessWidget {
-  const DefaultScreenShotImage({super.key, required this.pathImage,});
+  const DefaultScreenShotImage({super.key, required this.pathImage});
   final String pathImage;
   @override
   Widget build(BuildContext context) {
@@ -53,14 +52,11 @@ class DefaultScreenShotImage extends StatelessWidget {
     final height = context.height;
     return Container(
       width: width,
-      height: height*0.2,
+      height: height * 0.2,
       decoration: BoxDecoration(
         color: AppColors.lightBlack,
         borderRadius: BorderRadius.circular(AppBorderRadius.r16),
-        image:  DecorationImage(
-          image: NetworkImage(pathImage),
-          fit: .fill,
-        ),
+        image: DecorationImage(image: NetworkImage(pathImage), fit: .fill),
       ),
     );
   }

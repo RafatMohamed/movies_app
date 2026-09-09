@@ -4,6 +4,7 @@ import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
+import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import '../utilities/app_assets.dart';
 import '../utilities/app_border_radius.dart';
 import '../utilities/app_padding.dart';
@@ -14,7 +15,7 @@ class CustomMovieCard extends StatelessWidget {
     super.key,
     required this.pathImage,
     required this.rate,
-    this.movieId=600,
+    this.movieId = 600,
   });
   final String pathImage;
   final String rate;
@@ -25,35 +26,30 @@ class CustomMovieCard extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, AppOnRouteText.detailsMoviesName,arguments: movieId);
+        Navigator.pushNamed(
+          context,
+          AppOnRouteText.detailsMoviesName,
+          arguments: movieId,
+        );
       },
       child: Stack(
         alignment: .topStart,
         children: [
           ClipRRect(
             borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16),
-            child: pathImage.startsWith('http')
-                ? Image.network(
-                    pathImage,
-                    fit: .cover,
-                    width: width,
-                    height: .infinity,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      AppAssets.appLogo,
-                      fit: .cover,
-                      width: width,
-                      height: .infinity,
-                    ),
-                  )
-                : Image.asset(
-                    pathImage,
-                    fit: .cover,
-                    width: width,
-                    height: .infinity,
-                  ),
+            child: CachedNetworkImage(
+              imageUrl: pathImage,
+              fit: .cover,
+              width: width,
+              height: .infinity,
+              progressIndicatorBuilder: (context, url, progress) {
+                return const MovieCardShimmer();
+              },
+              errorWidget: (context, url, error) => const Placeholder(),
+            ),
           ),
           Positioned.directional(
-            textDirection: .ltr,
+            textDirection: Directionality.of(context),
             start: AppPadding.p8,
             top: AppPadding.p8,
             child: Container(

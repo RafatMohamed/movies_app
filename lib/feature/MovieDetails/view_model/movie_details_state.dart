@@ -5,18 +5,22 @@ import '../model/model_name/movie_details_model.dart';
 
 class MovieDetailsState {}
 
-class MovieDetailsInitState extends MovieDetailsState{}
+class MovieDetailsInitState extends MovieDetailsState {}
 
-class MovieDetailsLoadingState extends MovieDetailsState{}
+class MovieDetailsLoadingState extends MovieDetailsState {}
 
-class MovieDetailsSuccessState extends MovieDetailsState{
+class MovieDetailsSuccessState extends MovieDetailsState {
   final MovieDetailsModel movieDetails;
   final MovieSuggestionModel movieSuggestion;
   final MovieParentalGuideModel movieParentalGuide;
-  MovieDetailsSuccessState({required this.movieDetails,required this.movieSuggestion,required this.movieParentalGuide});
+  MovieDetailsSuccessState({
+    required this.movieDetails,
+    required this.movieSuggestion,
+    required this.movieParentalGuide,
+  });
 }
 
-class MovieDetailsFailerState extends MovieDetailsState{
+class MovieDetailsFailerState extends MovieDetailsState {
   final String messageError;
   MovieDetailsFailerState({required this.messageError});
 }

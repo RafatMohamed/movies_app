@@ -172,12 +172,21 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
+        const SizedBox(
+          width: 60,
+          child: Divider(color: AppColors.gold, thickness: 1),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-          child: Text(l10n.orDivider, style: const TextStyle(color: AppColors.gold, fontSize: 14)),
+          child: Text(
+            l10n.orDivider,
+            style: const TextStyle(color: AppColors.gold, fontSize: 14),
+          ),
         ),
-        const SizedBox(width: 60, child: Divider(color: AppColors.gold, thickness: 1)),
+        const SizedBox(
+          width: 60,
+          child: Divider(color: AppColors.gold, thickness: 1),
+        ),
       ],
     );
   }

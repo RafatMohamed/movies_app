@@ -32,7 +32,7 @@ void main() async {
   await IsFirstOpenApp.initSharedStorge();
   await AppLocaleController.initialize();
 
-  Bloc.observer= CustomBlocObserver();
+  Bloc.observer = CustomBlocObserver();
   setupDI();
 
 runApp(
@@ -88,7 +88,7 @@ class MoviesApp extends StatelessWidget {
 
           routes: routeApp,
 
-          initialRoute:AppOnRouteText.splashName,
+          initialRoute: AppOnRouteText.splashName,
           //home: AppOnRouteText.mainAppName,
           //  home: ProfileTab(),
         );
