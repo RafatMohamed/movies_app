@@ -10,12 +10,11 @@ import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cub
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 import '../../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
-import 'package:movies_app/core/utilities/app_locale_controller.dart';
 
 class WatchingNowSection extends StatefulWidget {
   final void Function(int index) onSeeMoreClicked;
 
-  WatchingNowSection({required this.onSeeMoreClicked, super.key});
+  const WatchingNowSection({required this.onSeeMoreClicked, super.key});
 
   @override
   State<WatchingNowSection> createState() => _WatchingNowSectionState();
