@@ -8,7 +8,7 @@ class CustomErrorBuilder extends StatelessWidget {
   const CustomErrorBuilder({
     super.key,
     required this.errorMsg,
-    required this.onTapAgain
+    required this.onTapAgain,
   });
 
   final String errorMsg;
@@ -21,33 +21,34 @@ class CustomErrorBuilder extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
       child: Column(
         mainAxisAlignment: .center,
+        mainAxisSize: .min,
         crossAxisAlignment: .stretch,
         children: [
-          Row(
-            children: [
-              const Icon(Icons.error, color: AppColors.white),
-              const Gap(8),
-              Text(
-                errorMsg,
-                style: textTheme.labelSmall,
-                textAlign: .center,
-              ),
-            ],
+          const Icon(Icons.error, color: AppColors.white),
+          const Gap(8),
+          SizedBox(
+            width: MediaQuery.sizeOf(context).width * .70,
+            child: Text(
+              errorMsg,
+              //   overflow: .ellipsis,
+              style: textTheme.labelSmall,
+              textAlign: .center,
+            ),
           ),
           const Gap(20),
           ElevatedButton(
-            onPressed:onTapAgain,
+            onPressed: onTapAgain,
             style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadiusGeometry.circular(AppBorderRadius.r16)
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(
+                  AppBorderRadius.r16,
                 ),
-                backgroundColor: AppColors.gold
+              ),
+              backgroundColor: AppColors.gold,
             ),
             child: Text(
               "try again",
-              style: textTheme.labelSmall?.copyWith(
-                  color: AppColors.caviar
-              ),
+              style: textTheme.labelSmall?.copyWith(color: AppColors.caviar),
               textAlign: .center,
             ),
           ),
