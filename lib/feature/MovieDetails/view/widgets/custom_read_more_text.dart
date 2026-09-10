@@ -77,7 +77,7 @@ class CustomReamMoreText extends StatelessWidget {
       minLines: 3,
       readMoreIconVisible: false,
       readMoreText:l10n.read_more,
-      readLessText: l10n.read_more,
+      readLessText: l10n.read_less,
       iconSize: 16,
       readMoreStyle: textTheme.titleLarge?.copyWith(
         color: AppColors.white.withValues(alpha: 0.8),

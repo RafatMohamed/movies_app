@@ -356,6 +356,12 @@ abstract class AppLocalizations {
   /// **'Genres'**
   String get genres;
 
+  /// No description provided for @character.
+  ///
+  /// In en, this message translates to:
+  /// **'Character'**
+  String get character;
+
   /// No description provided for @required.
   ///
   /// In en, this message translates to:

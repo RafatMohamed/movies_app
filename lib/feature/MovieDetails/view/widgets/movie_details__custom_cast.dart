@@ -81,17 +81,19 @@ class DefaultBuildCardCast extends StatelessWidget {
               crossAxisAlignment: .start,
               children: [
                 Text(
-                  "Name : $nameCast",
+                  "${AppLocalizations.of(context).nameHint} : $nameCast",
                   style: textTheme.labelSmall,
                   maxLines: 1,
                   overflow: .ellipsis,
+                  textAlign: .start,
                 ),
                 const Gap(AppPadding.p8),
                 Text(
-                  "Character : $characterCast",
+                  "${AppLocalizations.of(context).character} : $characterCast",
                   style: textTheme.labelSmall,
                   maxLines: 2,
                   overflow: .ellipsis,
+                  textAlign: .start,
                 ),
               ],
             ),
