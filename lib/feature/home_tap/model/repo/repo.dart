@@ -10,13 +10,13 @@ class HomeTapRepo {
       try {
         return await moviesApiDataSource.getMovieFirstList();
       } catch (e) {
-        throw Exception(e.toString());
+        rethrow;
       }
     } else {
       try {
         return await moviesApiDataSource.getOnPaginationMovieList(page);
       } catch (e) {
-        throw Exception(e.toString());
+        rethrow;
       }
     }
   }

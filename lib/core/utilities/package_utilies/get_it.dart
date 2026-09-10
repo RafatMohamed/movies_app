@@ -56,5 +56,5 @@ void setupDI() {
     () => HomeTapRepo(moviesApiDataSource: getIt<MoviesDataSourceApi>()),
   );
 
-  getIt.registerLazySingleton<HomeTabCubit>(() => HomeTabCubit(getIt<HomeTapRepo>()));
+  getIt.registerFactory<HomeTabCubit>(() => HomeTabCubit(getIt<HomeTapRepo>()));
 }

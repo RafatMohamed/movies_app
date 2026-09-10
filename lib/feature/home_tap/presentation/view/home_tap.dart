@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/helper/custom_error_msg.dart';
+import 'package:movies_app/core/utilities/package_utilies/get_it.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/home_tap/presentation/view/widgets/available_movies_section.dart';
 import 'package:movies_app/feature/home_tap/presentation/view/widgets/watching_now_section.dart';

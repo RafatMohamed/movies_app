@@ -5,6 +5,7 @@ import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/core/utilities/helper/custom_error_msg.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
@@ -76,27 +77,8 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                       ),
                     );
                   }
-                  if (state is HomeTabOnScrollLoading) {
-                    return Text(
-                      myCubit.myGenereList[myCubit.currentGenereIndex],
-                      style: textTheme.titleLarge?.copyWith(
-                        color: AppColors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
-                  }
+
                   if (state is HomeTabEror) {
-                    return Text(
-                      'genre',
-                      style: textTheme.titleLarge?.copyWith(
-                        color: AppColors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
-                  }
-                  if (state is HomeTabOnPaginationEror) {
                     return Text(
                       'genre',
                       style: textTheme.titleLarge?.copyWith(
@@ -124,10 +106,8 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                       ),
                     ),
                     const Gap(AppPadding.p4),
-                    Icon(
-                      AppLocaleController.instance.value.languageCode == "en"
-                          ? Icons.arrow_back
-                          : Icons.arrow_forward,
+                    const Icon(
+                      Icons.arrow_forward,
                       size: 16,
                       color: AppColors.gold,
                     ),
@@ -165,6 +145,26 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
               );
             }
             if (state is HomeTabLoading) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: ListView.separated(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppPadding.p16,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => const Gap(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: const MovieCardShimmer(),
+                    );
+                  },
+                ),
+              );
+            }
+            if (state is HomeTabEror) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: ListView.separated(
