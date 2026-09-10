@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../model/model_name/movie_suggestion_model.dart';
 
 class CustomMovieDetailsSimilar extends StatelessWidget {
@@ -15,7 +16,7 @@ class CustomMovieDetailsSimilar extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: AppPadding.p10,
       children: [
-        Text("Similar", style: textTheme.labelMedium),
+        Text(AppLocalizations.of(context).similar, style: textTheme.labelMedium),
         GridView.builder(
           padding: .zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

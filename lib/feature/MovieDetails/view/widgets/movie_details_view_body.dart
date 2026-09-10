@@ -9,6 +9,7 @@ import 'package:movies_app/feature/MovieDetails/model/model_name/parental_guide_
 import 'package:movies_app/feature/MovieDetails/view_model/movie_details_state.dart';
 import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../model/model_name/movie_suggestion_model.dart';
 import 'movie_details__custom_cast.dart';
 import 'movie_details__custom_genres.dart';
@@ -18,6 +19,7 @@ import 'movie_details__custom_screen_shot.dart';
 import 'movie_details__custom_similar.dart';
 import 'movie_details__custom_summary.dart';
 import 'movie_details__parental_guide.dart';
+
 
 class MovieDetailsViewBody extends StatelessWidget {
   const MovieDetailsViewBody({super.key});
@@ -84,6 +86,7 @@ class CustomBodyDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AppLocalizations translate = AppLocalizations.of(context);
     return Column(
       spacing: height * (AppPadding.p16 / height),
       children: [
@@ -97,7 +100,7 @@ class CustomBodyDetails extends StatelessWidget {
             children: [
               CustomButtonApp(
                 onTap: () {},
-                text: "watch",
+                text: translate.watch,
                 background: AppColors.red,
                 textStyle: textTheme.labelSmall,
               ),

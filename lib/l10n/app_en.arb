@@ -95,5 +95,15 @@
   "confirmNewPasswordHint": "Confirm New password",
   "passwordsDoNotMatch": "Passwords do not match",
   "oldPasswordIncorrect": "old password is Incorrect",
-  "newPasswordMustDiffer": "New password must be another for current"
+  "newPasswordMustDiffer": "New password must be another for current",
+  "watch": "Watch",
+  "screen_shots": "Screen Shots",
+  "similar": "Similar",
+  "summary": "Summary",
+  "parental_guide": "Parental Guide",
+  "cast": "Cast",
+  "genres": "Genres",
+  "required": "Required",
+  "read_more": "Read more",
+  "read_less": "Read less"
 }

@@ -6,6 +6,7 @@ import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../model/model_name/movie_details_model.dart';
 
 class CustomMovieDetailsCast extends StatelessWidget {
@@ -18,7 +19,7 @@ class CustomMovieDetailsCast extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: AppPadding.p10,
       children: [
-        Text("Cast", style: textTheme.labelMedium),
+        Text(AppLocalizations.of(context).cast, style: textTheme.labelMedium),
         ...List.generate(cast.length, (index) {
           final itemCast = cast[index];
           return DefaultBuildCardCast(

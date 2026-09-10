@@ -36,5 +36,15 @@
   "confirmNewPasswordHint": "تأكيد كلمة المرور الجديدة",
   "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
   "oldPasswordIncorrect": "كلمة المرور القديمة غير صحيحة",
-  "newPasswordMustDiffer": "يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية"
+  "newPasswordMustDiffer": "يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية",
+  "watch": "مشاهدة",
+  "screen_shots": "لقطات الشاشة",
+  "similar": "أفلام مشابهة",
+  "summary": "الملخص",
+  "parental_guide": "دليل الوالدين",
+  "cast": "طاقم التمثيل",
+  "genres": "الأنواع",
+  "required": "مطلوب",
+  "read_more": "اقرأ المزيد",
+  "read_less": "اقرأ أقل"
 }

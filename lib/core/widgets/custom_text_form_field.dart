@@ -51,7 +51,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: (value) {
         if (widget.withValidator!) {
           if (value == null || value.isEmpty) {
-            return "${widget.hintText} ${AppLocalizations.of(context).search}";
+            return "${widget.hintText} ${AppLocalizations.of(context).required}";
           } else if (widget.isPassword == true) {
             if (value.length < 8) {
               return "Password must be at least 8 characters";

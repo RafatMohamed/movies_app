@@ -3,6 +3,7 @@ import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 import '../../model/model_name/movie_details_model.dart';
 
@@ -33,7 +34,7 @@ class CustomMovieDetailsScreenShot extends StatelessWidget {
         crossAxisAlignment: .start,
         spacing: AppPadding.p10,
         children: [
-          Text("Screen Shots", style: textTheme.labelMedium),
+          Text(AppLocalizations.of(context).screen_shots, style: textTheme.labelMedium),
           ...List.generate(screenShotImages.length, (index) {
             return DefaultScreenShotImage(pathImage: screenShotImages[index]);
           }),

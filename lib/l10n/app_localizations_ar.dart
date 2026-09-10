@@ -114,8 +114,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get oldPasswordIncorrect => 'كلمة المرور القديمة غير صحيحة';
 
   @override
-  String get newPasswordMustDiffer =>
-      'يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية';
+  String get newPasswordMustDiffer => 'يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية';
 
   @override
   String get watch => 'مشاهدة';

@@ -114,8 +114,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get oldPasswordIncorrect => 'old password is Incorrect';
 
   @override
-  String get newPasswordMustDiffer =>
-      'New password must be another for current';
+  String get newPasswordMustDiffer => 'New password must be another for current';
 
   @override
   String get watch => 'Watch';

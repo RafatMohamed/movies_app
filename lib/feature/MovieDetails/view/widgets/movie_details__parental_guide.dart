@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/feature/MovieDetails/view/widgets/custom_read_more_text.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../model/model_name/parental_guide_model.dart';
 
 class CustomMovieParentalGuide extends StatelessWidget {
@@ -14,7 +16,7 @@ class CustomMovieParentalGuide extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: AppPadding.p10,
       children: [
-        Text("Parental Guide", style: textTheme.labelMedium),
+        Text(AppLocalizations.of(context).parental_guide, style: textTheme.labelMedium),
         ...List.generate(parentalGuides.length, (index) {
           return ListTile(
             titleTextStyle: textTheme.titleLarge?.copyWith(
@@ -25,8 +27,7 @@ class CustomMovieParentalGuide extends StatelessWidget {
               color: AppColors.white.withValues(alpha: 0.6),
               fontWeight: .w400,
             ),
-            title: Text(parentalGuides[index].type),
-            subtitle: Text(parentalGuides[index].parentalGuideText),
+            title: CustomReadMoreTextTranslate(text: parentalGuides[index].parentalGuideText),
           );
         }),
       ],
