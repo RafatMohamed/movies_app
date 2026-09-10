@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
-
-import '../../../feature/MovieDetails/model/model_name/movie_suggestion_model.dart';
-import '../../../feature/MovieDetails/model/model_name/parental_guide_model.dart';
 import '../app_border_radius.dart';
 import '../app_colors.dart';
 import '../app_padding.dart';

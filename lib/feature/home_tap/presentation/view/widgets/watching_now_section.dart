@@ -96,16 +96,6 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                       ),
                     );
                   }
-                  if (state is HomeTabOnPaginationEror) {
-                    return Text(
-                      'genre',
-                      style: textTheme.titleLarge?.copyWith(
-                        color: AppColors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
-                  }
                   return const SizedBox();
                 },
               ),
@@ -124,10 +114,8 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                       ),
                     ),
                     const Gap(AppPadding.p4),
-                    Icon(
-                      AppLocaleController.instance.value.languageCode == "en"
-                          ? Icons.arrow_back
-                          : Icons.arrow_forward,
+                    const Icon(
+                      Icons.arrow_forward,
                       size: 16,
                       color: AppColors.gold,
                     ),

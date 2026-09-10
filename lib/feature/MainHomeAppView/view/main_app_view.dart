@@ -48,8 +48,7 @@ class _MainAppViewState extends State<MainAppView> {
                   child: DefaultBottomNavigationBar(
                     currentIndex: _currentIndex,
                     onCurrentIndexChange: (index) {
-                      if (context.read<HomeTabCubit>().state
-                          is! HomeTabOnPaginationEror) {
+                      if (context.read<HomeTabCubit>().state is! HomeTabEror) {
                         context
                             .read<HomeTabCubit>()
                             .increaseCurrentIndexOFGenere();
