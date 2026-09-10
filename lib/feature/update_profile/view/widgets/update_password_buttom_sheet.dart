@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/services/auth_service.dart';
+import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/feature/update_profile/view/widgets/password_did_not_match.dart';
@@ -23,6 +26,45 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
       TextEditingController();
 
   String? errorMessage;
+  bool _isLoading = false;
+
+  Future<void> _handleResetPassword(BuildContext context) async {
+    if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
+      setState(() {
+        errorMessage = AppLocalizations.of(context).passwordsDoNotMatch;
+      });
+      return;
+    }
+    if (currentFailed.text == newPasswordFailed.text) {
+      setState(() {
+        errorMessage = AppLocalizations.of(context).newPasswordMustDiffer;
+      });
+      return;
+    }
+    if (!formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+    try {
+      await context.read<AuthCubit>().updatePassword(
+        currentPassword: currentFailed.text,
+        newPassword: newPasswordFailed.text,
+      );
+      if (mounted) Navigator.pop(context);
+    } on AuthException catch (e) {
+      setState(() => errorMessage = e.message);
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  void dispose() {
+    currentFailed.dispose();
+    newPasswordFailed.dispose();
+    confirmNewPasswordFailed.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,41 +126,9 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
 
             CustomButtonApp(
               onTap: () {
-                final oldPassword = "12345678";
-                if (confirmNewPasswordFailed.text != newPasswordFailed.text) {
-                  setState(() {
-                    errorMessage = AppLocalizations.of(
-                      context,
-                    ).passwordsDoNotMatch;
-                  });
-                  return;
+                if (!_isLoading) {
+                  _handleResetPassword(context);
                 }
-                if (currentFailed.text != oldPassword) {
-                  setState(() {
-                    errorMessage = AppLocalizations.of(
-                      context,
-                    ).oldPasswordIncorrect;
-                  });
-                  return;
-                }
-                if (currentFailed.text == newPasswordFailed.text) {
-                  setState(() {
-                    errorMessage = AppLocalizations.of(
-                      context,
-                    ).newPasswordMustDiffer;
-                  });
-                  return;
-                }
-                if (formKey.currentState!.validate() &&
-                    currentFailed.text.isNotEmpty &&
-                    newPasswordFailed.text.isNotEmpty &&
-                    confirmNewPasswordFailed.text.isNotEmpty &&
-                    confirmNewPasswordFailed.text == newPasswordFailed.text) {
-                  // Implement your password reset logic here
-
-                  Navigator.pop(context);
-                }
-                // Close the bottom sheet
               },
               text: AppLocalizations.of(context).resetPassword,
             ),

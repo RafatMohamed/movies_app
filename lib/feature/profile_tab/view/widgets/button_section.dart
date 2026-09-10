@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
+import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 
@@ -50,9 +52,10 @@ class ButtonSection extends StatelessWidget {
     );
   }
 
-  void onExitButtonPressed(BuildContext context) {
+  void onExitButtonPressed(BuildContext context) async {
     // Implement the logic for the exit button press here
     Navigator.pushReplacementNamed(context, AppOnRouteText.loginName);
+    await context.read<AuthCubit>().logout();
   }
 
   void onEditProfileButtonPressed(BuildContext context) {

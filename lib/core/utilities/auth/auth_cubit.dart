@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/models/user_model.dart';
 import 'package:movies_app/core/services/auth_service.dart';
 import 'auth_state.dart';
 
@@ -31,7 +32,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logout() => _authService.logout();
-/// Sends a password reset email to the provided address.
+
+  /// Sends a password reset email to the provided address.
   Future<void> resetPassword(String email) async {
     try {
       await _authService.sendPasswordResetEmail(email);
@@ -40,6 +42,45 @@ class AuthCubit extends Cubit<AuthState> {
       rethrow;
     }
   }
+
+  Future<UserModel?> getCurrentUserData() {
+    return _authService.getCurrentUserData();
+  }
+
+  Stream<UserModel?> watchCurrentUserData() {
+    return _authService.watchCurrentUserData();
+  }
+
+  Future<void> updateUserData(Map<String, dynamic> data) async {
+    try {
+      await _authService.updateUserData(data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await _authService.updatePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      await _authService.deleteAccount();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   Future<void> close() {
     _subscription.cancel();

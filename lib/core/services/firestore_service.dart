@@ -16,10 +16,9 @@ class FirestoreService {
   /// Creates (or merges into) the user's document. Safe to call on both
   /// email/password register and first-time Google sign-in.
   Future<void> upsertUser(UserModel user, {bool isNew = false}) async {
-    await _usersRef.doc(user.uid).set(
-      user.toMap(isNew: isNew),
-      SetOptions(merge: true),
-    );
+    await _usersRef
+        .doc(user.uid)
+        .set(user.toMap(isNew: isNew), SetOptions(merge: true));
   }
 
   Future<UserModel?> getUser(String uid) async {
