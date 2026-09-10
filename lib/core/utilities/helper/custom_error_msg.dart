@@ -26,10 +26,16 @@ class CustomErrorBuilder extends StatelessWidget {
         mainAxisAlignment: .center,
         crossAxisAlignment: .stretch,
         children: [
-          Text(
-            errorMsg,
-            style: textTheme.labelSmall,
-            textAlign: .center,
+          Row(
+            children: [
+              const Icon(Icons.error, color: AppColors.white),
+              const Gap(8),
+              Text(
+                errorMsg,
+                style: textTheme.labelSmall,
+                textAlign: .center,
+              ),
+            ],
           ),
           const Gap(20),
           ElevatedButton(
