@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/services/auth_service.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
+import 'package:movies_app/core/utilities/helper/custom_indecator.dart';
 import 'package:movies_app/feature/login/view/login_view.dart';
 import 'package:movies_app/feature/register/widgets/avatar_carousel.dart';
 import 'package:svg_flutter/svg.dart';
@@ -149,7 +150,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               ),
               const Gap(AppPadding.p24),
               _isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(child: CustomIndicator())
                   : CustomButtonApp(
                       text: l10n.createAccount,
                       textStyle: textTheme.labelSmall?.copyWith(

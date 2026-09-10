@@ -13,11 +13,11 @@ class MovieDetailsRepo {
       final MovieDetailsModel? result = await _movieDetailsDataSource
           .getMovieDetails(movieID: movieID);
       if (result == null) {
-        throw Exception("Movies isn't Available now");
+        throw "Movies isn't Available now";
       }
       return result;
     } catch (error) {
-      throw Exception(error);
+      throw error.toString();
     }
   }
 
@@ -30,7 +30,7 @@ class MovieDetailsRepo {
       );
       return result;
     } catch (error) {
-      throw Exception(error);
+      throw error.toString();
     }
   }
 
@@ -43,7 +43,7 @@ class MovieDetailsRepo {
       );
       return result;
     } catch (error) {
-      throw Exception(error);
+      throw error.toString();
     }
   }
 }

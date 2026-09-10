@@ -3,6 +3,7 @@ import 'package:movies_app/core/const.dart';
 import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_data_source.dart';
 import 'package:movies_app/feature/MovieDetails/model/model_name/movie_suggestion_model.dart';
 
+import '../../../home_tap/model/data_source/movies_data_source_api.dart';
 import '../model_name/movie_details_model.dart';
 import '../model_name/parental_guide_model.dart';
 
@@ -26,11 +27,11 @@ class MovieDetailsApiDataSource implements MovieDetailsDataSource {
         movieResponse.data,
       );
       if (movieDetails.status != "ok") {
-        throw Exception("something Went Wrong");
+        throw "something Went Wrong";
       }
       return movieDetails;
-    } on DioException catch (_) {
-      rethrow;
+    } on DioException catch (e) {
+      throw handleDioException(e);
     }
   }
 
@@ -46,11 +47,11 @@ class MovieDetailsApiDataSource implements MovieDetailsDataSource {
       final MovieSuggestionModel movieSuggestion =
           MovieSuggestionModel.fromJson(movieResponse.data);
       if (movieSuggestion.status != "ok") {
-        throw Exception("something Went Wrong");
+        throw "something Went Wrong";
       }
       return movieSuggestion;
-    } on DioException catch (_) {
-      rethrow;
+    } on DioException catch (e) {
+      throw handleDioException(e);
     }
   }
 
@@ -66,11 +67,11 @@ class MovieDetailsApiDataSource implements MovieDetailsDataSource {
       final MovieParentalGuideModel movieParentalGuid =
           MovieParentalGuideModel.fromJson(movieResponse.data);
       if (movieParentalGuid.status != "ok") {
-        throw Exception("something Went Wrong");
+        throw "something Went Wrong";
       }
       return movieParentalGuid;
-    } on DioException catch (_) {
-      rethrow;
+    } on DioException catch (e) {
+      throw handleDioException(e);
     }
   }
 }

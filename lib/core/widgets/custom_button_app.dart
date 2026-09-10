@@ -4,6 +4,7 @@ import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:svg_flutter/svg.dart';
 import '../utilities/app_border_radius.dart';
+import '../utilities/app_locale_controller.dart';
 import '../utilities/app_padding.dart';
 
 class CustomButtonApp extends StatelessWidget {
@@ -25,6 +26,7 @@ class CustomButtonApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData them = Theme.of(context);
+    final bool isAr = AppLocaleController.instance.value.languageCode == "ar";
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -47,7 +49,7 @@ class CustomButtonApp extends StatelessWidget {
                   ),
             ),
             const Gap(5),
-            if (withIcon) SvgPicture.asset(AppAssets.exitIconSvg),
+            if (withIcon) SvgPicture.asset(isAr?AppAssets.exiteAr:AppAssets.exitIconSvg),
           ],
         ),
       ),

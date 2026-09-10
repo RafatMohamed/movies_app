@@ -67,4 +67,7 @@ class AppAssets {
   static const String name = "assets/icons/person.svg";
   static const String phone = "assets/icons/phone.svg";
   static const String arrowBackAr = "assets/icons/arrowBackAr.svg";
+
+  static const String arrowGenereAr = "assets/icons/arrowBackAr.svg";
+  static const String exiteAr = "assets/icons/exite_ar.svg";
 }

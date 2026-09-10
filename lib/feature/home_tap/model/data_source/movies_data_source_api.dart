@@ -72,3 +72,4 @@ String _handleDioException(DioException e) {
       return 'Something went wrong';
   }
 }
+String  handleDioException(DioException e)=>_handleDioException(e);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
@@ -10,6 +11,8 @@ import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cub
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 import '../../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
+
+import '../../../../../core/utilities/app_locale_controller.dart';
 
 class WatchingNowSection extends StatefulWidget {
   final void Function(int index) onSeeMoreClicked;
@@ -122,7 +125,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                     ),
                     const Gap(AppPadding.p4),
                     Icon(
-                      Directionality.of(context) == .rtl
+                      AppLocaleController.instance.value.languageCode == "en"
                           ? Icons.arrow_back
                           : Icons.arrow_forward,
                       size: 16,

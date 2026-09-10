@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
+import 'package:movies_app/core/utilities/helper/custom_indecator.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/core/services/auth_service.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
@@ -130,7 +131,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ),
               const Gap(AppPadding.p24),
               _isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(child: CustomIndicator())
                   : CustomButtonApp(
                       text: l10n.login,
                       textStyle: textTheme.labelSmall?.copyWith(

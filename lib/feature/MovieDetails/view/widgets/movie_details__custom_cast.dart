@@ -5,6 +5,7 @@ import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
+import 'package:movies_app/core/utilities/helper/custom_indecator.dart';
 
 import '../../../../l10n/generated/app_localizations.dart';
 import '../../model/model_name/movie_details_model.dart';
@@ -71,7 +72,7 @@ class DefaultBuildCardCast extends StatelessWidget {
                 return const Placeholder();
               },
               progressIndicatorBuilder: (_, _, _) {
-                return const CircularProgressIndicator();
+                return const CustomIndicator();
               },
             ),
           ),

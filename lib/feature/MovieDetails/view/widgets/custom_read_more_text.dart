@@ -7,6 +7,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:translator/translator.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 
+import '../../../../core/utilities/app_locale_controller.dart';
+
 class CustomReadMoreTextTranslate extends StatelessWidget {
   const CustomReadMoreTextTranslate({super.key, required this.text});
   final String text;
@@ -22,8 +24,9 @@ class CustomReadMoreTextTranslate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isAr = AppLocaleController.instance.value.languageCode == "ar";
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return getTextTr(text).toString().isEmpty
+    return !isAr || getTextTr(text).toString().isEmpty
         ? CustomReamMoreText(text: text, textTheme: textTheme)
         : FutureBuilder(
             future: getTextTr(text),
