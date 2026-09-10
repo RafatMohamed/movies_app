@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/feature/MovieDetails/view_model/movie_details_state.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../model/repo/repo.dart';
 
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   final MovieDetailsRepo _movieDetailsRepo;
-
   MovieDetailsCubit({required this._movieDetailsRepo})
     : super(MovieDetailsInitState());
 
@@ -33,6 +33,23 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
     } catch (error) {
       if (isClosed) return;
       emit(MovieDetailsFailerState(messageError: error.toString()));
+    }
+  }
+
+  Future<void> launchMovie({
+    required String url,
+  }) async {
+    if (url.isEmpty) {
+      throw "Trailer Not Available Now";
+    }
+    final uri = Uri.parse('https://www.youtube.com/watch?v=$url');
+    try {
+      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (!launched) {
+        throw "Could not open movie link";
+      }
+    } catch (e) {
+      throw "something went wrong";
     }
   }
 }

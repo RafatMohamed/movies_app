@@ -66,4 +66,5 @@ class AppAssets {
   static const String person9 = "assets/icons/person9.svg";
   static const String name = "assets/icons/person.svg";
   static const String phone = "assets/icons/phone.svg";
+  static const String arrowBackAr = "assets/icons/arrowBackAr.svg";
 }

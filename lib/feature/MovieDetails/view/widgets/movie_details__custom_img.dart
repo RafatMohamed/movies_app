@@ -1,22 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_locale_controller.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/MovieDetails/model/model_name/movie_details_model.dart';
+import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CustomMovieDetailsImage extends StatelessWidget {
   const CustomMovieDetailsImage({super.key, required this.movie});
   final MovieModel movie;
+
   @override
   Widget build(BuildContext context) {
     final width = context.width;
     final height = context.height;
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final bool isAr = AppLocaleController.instance.value.languageCode == "ar";
     return SizedBox(
       width: width,
       height: height * 0.8,
@@ -55,8 +60,11 @@ class CustomMovieDetailsImage extends StatelessWidget {
                     height: 24,
                     width: 24,
                     color: Colors.transparent,
-                    child: const DefaultIconDetails(
-                      pathIcon: AppAssets.arrowBackDetails,
+                    alignment: .centerStart,
+                    child: DefaultIconDetails(
+                      pathIcon: !isAr
+                          ? AppAssets.arrowBackDetails
+                          : AppAssets.arrowBackAr,
                     ),
                   ),
                 ),
@@ -64,10 +72,43 @@ class CustomMovieDetailsImage extends StatelessWidget {
               ],
             ),
           ),
-          Image.asset(
-            AppAssets.watchPlaying,
-            width: width * 0.25,
-            fit: .scaleDown,
+          GestureDetector(
+            onTap: () async{
+              try {
+                await BlocProvider.of<MovieDetailsCubit>(
+                  context,
+                  listen: false,
+                ).launchMovie(
+                  url: movie.ytTrailerCode,
+                );
+              } catch (error) {
+                if(!context.mounted)return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    duration: const Duration(seconds:2),
+                    dismissDirection: .horizontal,
+                    behavior: .floating,
+                    width: double.infinity,
+                    padding: const EdgeInsetsDirectional.only(
+                      bottom: AppPadding.p20,
+                    ),
+                    content: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        textAlign: .center,
+                        error.toString(),
+                        style: textTheme.labelMedium,
+                      ),
+                    ),
+                  ),
+                );
+              }
+            },
+            child: Image.asset(
+              AppAssets.watchPlaying,
+              width: width * 0.25,
+              fit: .scaleDown,
+            ),
           ),
           Positioned(
             left: AppPadding.p16,

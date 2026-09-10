@@ -5,7 +5,6 @@ import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
-import 'package:movies_app/core/widgets/movie_error_card.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 

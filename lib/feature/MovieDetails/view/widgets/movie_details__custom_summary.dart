@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/feature/MovieDetails/view/widgets/custom_read_more_text.dart';
-import 'package:readmore_flutter/src/readmore.dart';
-import 'package:translator/translator.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 
 class CustomMovieDetailsSummary extends StatelessWidget {

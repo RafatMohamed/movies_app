@@ -20,10 +20,8 @@ import 'movie_details__custom_similar.dart';
 import 'movie_details__custom_summary.dart';
 import 'movie_details__parental_guide.dart';
 
-
 class MovieDetailsViewBody extends StatelessWidget {
-  const MovieDetailsViewBody({super.key});
-
+  const MovieDetailsViewBody({super.key,});
   @override
   Widget build(BuildContext context) {
     final height = context.height;
@@ -62,7 +60,7 @@ class MovieDetailsViewBody extends StatelessWidget {
             moviesGuide: moviesGuide,
           );
         }
-        return const SizedBox();
+        return Container(color: AppColors.gold, height: 100, width: 100);
       },
     );
   }
@@ -99,7 +97,37 @@ class CustomBodyDetails extends StatelessWidget {
             spacing: height * (AppPadding.p16 / height),
             children: [
               CustomButtonApp(
-                onTap: () {},
+                onTap: () async{
+                  try {
+                  await BlocProvider.of<MovieDetailsCubit>(
+                      context,
+                      listen: false,
+                    ).launchMovie(
+                      url: movieDetails.ytTrailerCode,
+                    );
+                  } catch (error) {
+                    if(!context.mounted)return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration:const Duration(seconds:2),
+                        dismissDirection: .horizontal,
+                        behavior: .floating,
+                        width: double.infinity,
+                        padding: const EdgeInsetsDirectional.only(
+                          bottom: AppPadding.p20,
+                        ),
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            textAlign: .center,
+                            error.toString(),
+                            style: textTheme.labelMedium,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                },
                 text: translate.watch,
                 background: AppColors.red,
                 textStyle: textTheme.labelSmall,
