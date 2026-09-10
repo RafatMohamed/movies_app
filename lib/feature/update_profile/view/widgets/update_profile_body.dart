@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/models/img_profile_model.dart';
+import 'package:movies_app/core/models/user_model.dart';
+import 'package:movies_app/core/services/auth_service.dart';
+import 'package:movies_app/core/utilities/app_text.dart';
+import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
 import 'package:movies_app/feature/update_profile/view/widgets/update_password_buttom_sheet.dart';
 import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_colors.dart';
@@ -18,6 +23,131 @@ class UpdateProfileBody extends StatefulWidget {
 
 class _UpdateProfileBodyState extends State<UpdateProfileBody> {
   String selectedAvatar = ImgProfileModel.avatars.first.imgPath;
+  final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  bool _isLoading = false;
+  bool _isDeleting = false;
+  int _avatarIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final UserModel? data = await context
+        .read<AuthCubit>()
+        .getCurrentUserData();
+    if (data != null && mounted) {
+      setState(() {
+        nameController.text = data.name;
+        phoneController.text = data.phone;
+        _avatarIndex = data.avatarIndex;
+        selectedAvatar = ImgProfileModel.avatars[_avatarIndex].imgPath;
+      });
+    }
+  }
+
+  Future<void> _handleAvatarSelected(String newAvatar) async {
+    final newIndex = ImgProfileModel.avatars.indexWhere(
+      (a) => a.imgPath == newAvatar,
+    );
+
+    setState(() {
+      selectedAvatar = newAvatar;
+      _avatarIndex = newIndex;
+    });
+
+    try {
+      await context.read<AuthCubit>().updateUserData({'avatarIndex': newIndex});
+    } on AuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    }
+  }
+
+  Future<void> _handleUpdate() async {
+    if (!formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+    try {
+      await context.read<AuthCubit>().updateUserData({
+        'name': nameController.text.trim(),
+        'phone': phoneController.text.trim(),
+        'avatarIndex': _avatarIndex,
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully')),
+        );
+      }
+    } on AuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _handleDeleteAccount() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: AppColors.caviar,
+        title: Text(
+          AppLocalizations.of(context).deleteAccount,
+          style: const TextStyle(color: AppColors.white),
+        ),
+        content: const Text(
+          'Are you sure you want to delete your account? This action cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: AppColors.white, fontSize: 20),
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: const Text(
+              'Delete',
+              style: TextStyle(color: AppColors.red, fontSize: 20),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    setState(() => _isDeleting = true);
+    try {
+      await context.read<AuthCubit>().deleteAccount();
+
+      if (mounted) {
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil(AppOnRouteText.loginName, (route) => false);
+      }
+    } on AuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+    } finally {
+      if (mounted) setState(() => _isDeleting = false);
+    }
+  }
 
   void _showAvatarBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -29,12 +159,19 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
           selectedAvatar: selectedAvatar,
           onAvatarSelected: (newAvatar) {
             setState(() {
-              selectedAvatar = newAvatar;
+              _handleAvatarSelected(newAvatar);
             });
           },
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    super.dispose();
   }
 
   @override
@@ -79,51 +216,64 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                       ),
                     ),
                     const SizedBox(height: AppPadding.p24),
-                    Theme(
-                      data: Theme.of(context).copyWith(
-                        primaryColor: AppColors.white,
-                        hintColor: Colors.white60,
-                        inputDecorationTheme: const InputDecorationTheme(
-                          hintStyle: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 16,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            borderSide: BorderSide.none,
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            borderSide: BorderSide.none,
+                    Form(
+                      key: formKey,
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          primaryColor: AppColors.white,
+                          hintColor: Colors.white60,
+                          inputDecorationTheme: const InputDecorationTheme(
+                            hintStyle: TextStyle(
+                              color: Colors.white60,
+                              fontSize: 16,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
                           ),
                         ),
-                      ),
-                      child: Column(
-                        children: [
-                          CustomTextFormField(
-                            hintText: AppLocalizations.of(
-                              context,
-                            ).enterYourName,
-                            isName: true,
-                            prefixIconPath: 'assets/icons/person.svg',
-                          ),
-                          const SizedBox(height: AppPadding.p16),
-                          CustomTextFormField(
-                            hintText: AppLocalizations.of(
-                              context,
-                            ).enterYourPhoneNumber,
-                            keyboardType: TextInputType.phone,
-                            prefixIconPath: 'assets/icons/phone.svg',
-                          ),
-                        ],
+                        child: Column(
+                          children: [
+                            CustomTextFormField(
+                              controller: nameController,
+                              hintText: AppLocalizations.of(
+                                context,
+                              ).enterYourName,
+                              isName: true,
+                              prefixIconPath: 'assets/icons/person.svg',
+                            ),
+                            const SizedBox(height: AppPadding.p16),
+                            CustomTextFormField(
+                              controller: phoneController,
+                              hintText: AppLocalizations.of(
+                                context,
+                              ).enterYourPhoneNumber,
+                              keyboardType: TextInputType.phone,
+                              prefixIconPath: 'assets/icons/phone.svg',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: AppPadding.p16),
@@ -159,13 +309,21 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
                           ),
                       text: AppLocalizations.of(context).deleteAccount,
                       background: AppColors.red,
-                      onTap: () {},
+                      onTap: () {
+                        if (!_isDeleting) {
+                          _handleDeleteAccount();
+                        }
+                      },
                     ),
                     const SizedBox(height: AppPadding.p10),
                     CustomButtonApp(
                       text: AppLocalizations.of(context).updateData,
                       background: AppColors.gold,
-                      onTap: () {},
+                      onTap: () {
+                        if (!_isLoading) {
+                          _handleUpdate();
+                        }
+                      },
                     ),
                   ],
                 ),

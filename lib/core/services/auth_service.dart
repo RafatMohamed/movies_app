@@ -153,6 +153,28 @@ class AuthService {
     await _firestoreService.updateUserFields(uid, data);
   }
 
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final user = currentUser;
+    if (user == null || user.email == null) {
+      throw AuthException('No signed-in user.');
+    }
+
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: currentPassword,
+    );
+
+    try {
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(_mapError(e.code));
+    }
+  }
+
   Future<void> logout() => _auth.signOut();
 
   /// Deletes both the Firestore profile document and the Firebase Auth
