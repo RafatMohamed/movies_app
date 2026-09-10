@@ -154,6 +154,44 @@ class MovieModel {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'url': url,
+      'imdb_code': imdbCode,
+      'title': title,
+      'title_english': titleEnglish,
+      'title_long': titleLong,
+      'slug': slug,
+      'year': year,
+      'rating': rating,
+      'runtime': runtime,
+      'genres': genres,
+      'like_count': likeCount,
+      'description_intro': descriptionIntro,
+      'description_full': descriptionFull,
+      'yt_trailer_code': ytTrailerCode,
+      'language': language,
+      'mpa_rating': mpaRating,
+
+      'background_image': backgroundImage,
+      'background_image_original': backgroundImageOriginal,
+      'small_cover_image': smallCoverImage,
+      'medium_cover_image': mediumCoverImage,
+      'large_cover_image': largeCoverImage,
+
+      'medium_screenshot_image1': mediumScreenshotImage1,
+      'medium_screenshot_image2': mediumScreenshotImage2,
+      'medium_screenshot_image3': mediumScreenshotImage3,
+
+      'large_screenshot_image1': largeScreenshotImage1,
+      'large_screenshot_image2': largeScreenshotImage2,
+      'large_screenshot_image3': largeScreenshotImage3,
+
+      'date_uploaded': dateUploaded,
+      'date_uploaded_unix': dateUploadedUnix,
+    };
+  }
   MovieModel.empty()
     : id = 0,
       url = '',
