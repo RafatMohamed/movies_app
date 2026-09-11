@@ -55,13 +55,9 @@ class ButtonSection extends StatelessWidget {
 
   void onExitButtonPressed(BuildContext context) async {
     // Implement the logic for the exit button press here
-    await BlocProvider.of<WatchListCubit>(
-      context,
-      listen: false,
-    ).stopWatchListStream();
+    await context.read<WatchListCubit>().stopWatchListStream();
     await context.read<AuthCubit>().logout();
     Navigator.pushReplacementNamed(context, AppOnRouteText.loginName);
-    
   }
 
   void onEditProfileButtonPressed(BuildContext context) {

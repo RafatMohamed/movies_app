@@ -37,11 +37,9 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider<AuthCubit>(
-          create: (_) => getIt<AuthCubit>(),
-        ),
+        BlocProvider<AuthCubit>(create: (_) => getIt<AuthCubit>()),
         BlocProvider<WatchListCubit>(
-          create: (context) => getIt<WatchListCubit>()..getMovieWatchList(),
+          create: (context) => getIt<WatchListCubit>(),
         ),
         BlocProvider<WatchMovieToggleCubit>(
           create: (context) => getIt<WatchMovieToggleCubit>(),
@@ -69,7 +67,7 @@ class MoviesApp extends StatelessWidget {
       AppOnRouteText.loginName: (context) => const LoginView(),
       AppOnRouteText.registerName: (context) => const RegisterView(),
       AppOnRouteText.forgetPasswordName: (context) =>
-      const ForgetPasswordView(),
+          const ForgetPasswordView(),
       AppOnRouteText.updateProfileName: (context) => const UpdateProfileView(),
       AppOnRouteText.mainAppName: (context) => const MainAppView(),
       AppOnRouteText.detailsMoviesName: (context) => const MovieDetailsView(),
