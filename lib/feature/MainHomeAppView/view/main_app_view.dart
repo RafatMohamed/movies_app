@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/feature/explore_tap/view/explore_tap.dart';
 import 'package:movies_app/feature/home_tap/presentation/view/home_tap.dart';
@@ -30,6 +31,12 @@ class _MainAppViewState extends State<MainAppView> {
     const ExploreTap(),
     const ProfileTab(),
   ];
+
+  @override
+  void initState() {
+    context.read<WatchListCubit>().getMovieWatchList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
