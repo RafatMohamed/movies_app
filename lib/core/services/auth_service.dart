@@ -117,6 +117,7 @@ class AuthService {
             uid: user.uid,
             name: user.displayName ?? '',
             email: user.email ?? '',
+            moviesID: [],
           ),
           isNew: isNew,
         );

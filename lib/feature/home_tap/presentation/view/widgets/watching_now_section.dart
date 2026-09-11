@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
-import 'package:movies_app/core/utilities/helper/custom_error_msg.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 import '../../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
-
-import '../../../../../core/utilities/app_locale_controller.dart';
-
 class WatchingNowSection extends StatefulWidget {
   final void Function(int index) onSeeMoreClicked;
 

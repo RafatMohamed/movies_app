@@ -10,11 +10,13 @@ class UserModel {
   final int avatarIndex;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final List<int>? moviesID;
 
   UserModel({
     required this.uid,
     required this.name,
     required this.email,
+    this.moviesID = const [],
     this.phone = '',
     this.avatarIndex = 0,
     this.createdAt,
@@ -30,6 +32,7 @@ class UserModel {
       'avatarIndex': avatarIndex,
       if (isNew) 'createdAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
+      'moviesIDList' : moviesID
     };
   }
 
@@ -42,6 +45,7 @@ class UserModel {
       avatarIndex: (map['avatarIndex'] ?? 0) as int,
       createdAt: (map['createdAt'] as Timestamp?)?.toDate(),
       updatedAt: (map['updatedAt'] as Timestamp?)?.toDate(),
+      moviesID: List<int>.from(map['moviesIDList'])
     );
   }
 
@@ -59,6 +63,7 @@ class UserModel {
       avatarIndex: avatarIndex ?? this.avatarIndex,
       createdAt: createdAt,
       updatedAt: updatedAt,
+      moviesID: moviesID
     );
   }
 }
