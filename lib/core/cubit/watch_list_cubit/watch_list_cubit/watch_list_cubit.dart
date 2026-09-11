@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:movies_app/core/services/watch_list_data_source/watch_list_data_source.dart';
 import 'package:movies_app/feature/MovieDetails/model/model_name/movie_details_model.dart';
@@ -7,31 +9,45 @@ part 'watch_list_state.dart';
 
 class WatchListCubit extends Cubit<WatchListState> {
   final WatchListDataSource watchListDataSource;
-  WatchListCubit({required this.watchListDataSource}) : super(WatchListInitial()) ;
+  StreamSubscription<List<MovieModel>>? _watchListSubscription;
+  WatchListCubit({required this.watchListDataSource})
+    : super(WatchListInitial());
+
+  Future<void> stopWatchListStream() async {
+    await _watchListSubscription?.cancel();
+    _watchListSubscription = null;
+  }
+
+  @override
+  Future<void> close() {
+    _watchListSubscription?.cancel();
+    return super.close();
+  }
+
   Future<void> getMovieWatchList() async {
     emit(WatchListLoading());
     try {
-      final streamMovies =  watchListDataSource.getMovieData();
-      streamMovies.listen((movies) {
+      await _watchListSubscription?.cancel();
+      final streamMovies = watchListDataSource.getMovieData();
+      _watchListSubscription = streamMovies.listen((movies) {
         if (movies.isEmpty) {
           emit(WatchListSuccess(movies: const []));
           return;
         }
         emit(WatchListSuccess(movies: movies));
-      },);
+      });
     } catch (error) {
       emit(WatchListFailed(errorMessage: "Something went wrong"));
     }
   }
-
 }
 
 class WatchMovieToggleCubit extends Cubit<WatchMovieToggleState> {
   final WatchListDataSource watchListDataSource;
-  WatchMovieToggleCubit({required this.watchListDataSource}) : super(WatchMovieToggleState()) ;
+  WatchMovieToggleCubit({required this.watchListDataSource})
+    : super(WatchMovieToggleState());
 
   bool isInWatched = false;
-
 
   Future<void> getIsWatched({required String movieID}) async {
     try {
@@ -48,7 +64,7 @@ class WatchMovieToggleCubit extends Cubit<WatchMovieToggleState> {
         await watchListDataSource.deleteMovieData(movieID: movie.id.toString());
         isInWatched = false;
       } else {
-       await watchListDataSource.setMovieData(movie: movie);
+        await watchListDataSource.setMovieData(movie: movie);
         isInWatched = true;
       }
       emit(WatchListStatusChanged(isInWatched: isInWatched));
@@ -56,5 +72,4 @@ class WatchMovieToggleCubit extends Cubit<WatchMovieToggleState> {
       emit(MovieToggleFailed(errorMessage: "Something went wrong"));
     }
   }
-
 }
