@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
@@ -34,8 +35,18 @@ void main() async {
   setupDI();
 
   runApp(
-    BlocProvider<AuthCubit>(
-      create: (_) => getIt<AuthCubit>(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (_) => getIt<AuthCubit>(),
+        ),
+        BlocProvider<WatchListCubit>(
+          create: (context) => getIt<WatchListCubit>()..getMovieWatchList(),
+        ),
+        BlocProvider<WatchMovieToggleCubit>(
+          create: (context) => getIt<WatchMovieToggleCubit>(),
+        ),
+      ],
       child: DevicePreview(
         enabled: true,
         builder: (context) {
@@ -48,6 +59,7 @@ void main() async {
 
 class MoviesApp extends StatelessWidget {
   const MoviesApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> routeApp = {
@@ -57,7 +69,7 @@ class MoviesApp extends StatelessWidget {
       AppOnRouteText.loginName: (context) => const LoginView(),
       AppOnRouteText.registerName: (context) => const RegisterView(),
       AppOnRouteText.forgetPasswordName: (context) =>
-          const ForgetPasswordView(),
+      const ForgetPasswordView(),
       AppOnRouteText.updateProfileName: (context) => const UpdateProfileView(),
       AppOnRouteText.mainAppName: (context) => const MainAppView(),
       AppOnRouteText.detailsMoviesName: (context) => const MovieDetailsView(),
@@ -86,7 +98,7 @@ class MoviesApp extends StatelessWidget {
 
           routes: routeApp,
 
-          initialRoute: AppOnRouteText.startingViewAppName,
+          initialRoute: AppOnRouteText.splashName,
           //home: AppOnRouteText.mainAppName,
           //  home: ProfileTab(),
         );

@@ -14,12 +14,16 @@ final class WatchListFailed extends WatchListState {
   WatchListFailed({required this.errorMessage});
 }
 
-final class MovieToggleFailed extends WatchListState {
+
+
+class  WatchMovieToggleState{}
+
+final class MovieToggleFailed extends WatchMovieToggleState {
   final String errorMessage;
   MovieToggleFailed({required this.errorMessage});
 }
 
-class WatchListStatusChanged extends WatchListState {
+class WatchListStatusChanged extends WatchMovieToggleState{
   final bool isInWatched;
 
   WatchListStatusChanged({

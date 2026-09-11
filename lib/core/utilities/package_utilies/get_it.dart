@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/services/api_helper.dart';
 import 'package:movies_app/core/services/auth_service.dart';
+import 'package:movies_app/core/services/firestore_service.dart';
+import 'package:movies_app/core/services/watch_list_data_source/watch_list_data_source.dart';
+import 'package:movies_app/core/services/watch_list_data_source/watch_list_remote_data_source_impl.dart';
 import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
 import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_api_data_source.dart';
 import 'package:movies_app/feature/MovieDetails/model/data_source/movie_details_data_source.dart';
@@ -23,9 +27,6 @@ void setupDI() {
   getIt.registerLazySingleton<MovieDetailsDataSource>(
     () => MovieDetailsApiDataSource(dio: getIt<Dio>()),
   );
-
-  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(AuthService()));
-
   getIt.registerLazySingleton<MovieDetailsRepo>(
     () => MovieDetailsRepo(
       movieDetailsDataSource: getIt<MovieDetailsDataSource>(),
@@ -55,6 +56,24 @@ void setupDI() {
   getIt.registerLazySingleton<HomeTapRepo>(
     () => HomeTapRepo(moviesApiDataSource: getIt<MoviesDataSourceApi>()),
   );
+  getIt.registerLazySingleton<AuthService>(() => AuthService());
+
+  getIt.registerLazySingleton<FirestoreService>(() => FirestoreService());
+
+  getIt.registerLazySingleton<AuthCubit>(() => AuthCubit(getIt<AuthService>()));
+
+  getIt.registerLazySingleton<WatchListDataSource>(
+    () => WatchListRemoteDataSourceImpl(
+      authService: getIt<AuthService>(),
+      firestoreService: getIt<FirestoreService>(),
+    ),
+  );
 
   getIt.registerFactory<HomeTabCubit>(() => HomeTabCubit(getIt<HomeTapRepo>()));
+  getIt.registerLazySingleton<WatchListCubit>(
+    () => WatchListCubit(watchListDataSource: getIt<WatchListDataSource>()),
+  );
+  getIt.registerLazySingleton<WatchMovieToggleCubit>(
+    () => WatchMovieToggleCubit(watchListDataSource: getIt<WatchListDataSource>()),
+  );
 }
