@@ -10,39 +10,39 @@ class FirestoreService {
   FirestoreService({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;
 
-  CollectionReference<Map<String, dynamic>> get _usersRef =>
+  CollectionReference<Map<String, dynamic>> get usersRef =>
       _firestore.collection(AppConstFirestore.usersCollection);
 
   /// Creates (or merges into) the user's document. Safe to call on both
   /// email/password register and first-time Google sign-in.
   Future<void> upsertUser(UserModel user, {bool isNew = false}) async {
-    await _usersRef
+    await usersRef
         .doc(user.uid)
         .set(user.toMap(isNew: isNew), SetOptions(merge: true));
   }
 
   Future<UserModel?> getUser(String uid) async {
-    final snapshot = await _usersRef.doc(uid).get();
+    final snapshot = await usersRef.doc(uid).get();
     if (!snapshot.exists || snapshot.data() == null) return null;
     return UserModel.fromMap(snapshot.data()!, snapshot.id);
   }
 
   /// Live-updates whenever the user's document changes.
   Stream<UserModel?> watchUser(String uid) {
-    return _usersRef.doc(uid).snapshots().map((snapshot) {
+    return usersRef.doc(uid).snapshots().map((snapshot) {
       if (!snapshot.exists || snapshot.data() == null) return null;
       return UserModel.fromMap(snapshot.data()!, snapshot.id);
     });
   }
 
   Future<void> updateUserFields(String uid, Map<String, dynamic> data) async {
-    await _usersRef.doc(uid).update({
+    await usersRef.doc(uid).update({
       ...data,
       'updatedAt': FieldValue.serverTimestamp(),
     });
   }
 
   Future<void> deleteUser(String uid) async {
-    await _usersRef.doc(uid).delete();
+    await usersRef.doc(uid).delete();
   }
 }

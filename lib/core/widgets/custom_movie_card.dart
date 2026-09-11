@@ -16,21 +16,26 @@ class CustomMovieCard extends StatelessWidget {
     required this.pathImage,
     required this.rate,
     this.movieId = 600,
+    this.refresh
   });
   final String pathImage;
   final String rate;
   final int movieId;
+  final Function()? refresh;
   @override
   Widget build(BuildContext context) {
     final width = context.width;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(
+      onTap: () async{
+       final result = await Navigator.pushNamed(
           context,
           AppOnRouteText.detailsMoviesName,
           arguments: movieId,
         );
+       if(result ==true && context.mounted){
+         return refresh?.call();
+       }
       },
       child: Stack(
         alignment: .topStart,

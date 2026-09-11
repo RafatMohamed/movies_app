@@ -16,20 +16,23 @@ class CustomMovieDetailsCast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return Column(
-      crossAxisAlignment: .start,
-      spacing: AppPadding.p10,
-      children: [
-        Text(AppLocalizations.of(context).cast, style: textTheme.labelMedium),
-        ...List.generate(cast.length, (index) {
-          final itemCast = cast[index];
-          return DefaultBuildCardCast(
-            pathImageCast: itemCast.urlSmallImage,
-            nameCast: itemCast.name,
-            characterCast: itemCast.characterName,
-          );
-        }),
-      ],
+    return Visibility(
+      visible: cast.isNotEmpty,
+      child: Column(
+        crossAxisAlignment: .start,
+        spacing: AppPadding.p10,
+        children: [
+          Text(AppLocalizations.of(context).cast, style: textTheme.labelMedium),
+          ...List.generate(cast.length, (index) {
+            final itemCast = cast[index];
+            return DefaultBuildCardCast(
+              pathImageCast: itemCast.urlSmallImage,
+              nameCast: itemCast.name,
+              characterCast: itemCast.characterName,
+            );
+          }),
+        ],
+      ),
     );
   }
 }
