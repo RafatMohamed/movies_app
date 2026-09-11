@@ -42,7 +42,7 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
     if (url.isEmpty) {
       throw "Trailer Not Available Now";
     }
-    final uri = Uri.parse('https://www.youtube.com/watch?v=$url');
+    final uri = Uri.parse(url);
     try {
       final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
       if (!launched) {

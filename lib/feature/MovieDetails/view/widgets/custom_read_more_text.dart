@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
-import 'package:readmore_flutter/src/readmore.dart';
+import 'package:readmore_flutter/readmore_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:translator/translator.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
@@ -46,7 +46,7 @@ class CustomReadMoreTextTranslate extends StatelessWidget {
                 );
               }
               if (!snapshot.hasData) {
-                return const SizedBox();
+                return  const SizedBox();
               }
               return CustomReamMoreText(
                 text: snapshot.data ?? text,

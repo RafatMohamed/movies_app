@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gap/flutter_gap.dart';
-import 'package:movies_app/core/utilities/app_border_radius.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
@@ -23,8 +22,19 @@ import 'movie_details__custom_similar.dart';
 import 'movie_details__custom_summary.dart';
 import 'movie_details__parental_guide.dart';
 
-class MovieDetailsViewBody extends StatelessWidget {
-  const MovieDetailsViewBody({super.key});
+class MovieDetailsViewBody extends StatefulWidget {
+  const MovieDetailsViewBody({super.key,required this.movieID});
+  final int movieID;
+  @override
+  State<MovieDetailsViewBody> createState() => _MovieDetailsViewBodyState();
+}
+
+class _MovieDetailsViewBodyState extends State<MovieDetailsViewBody> {
+  @override
+  void initState() {
+    context.read<WatchMovieToggleCubit>().getIsWatched(movieID: widget.movieID.toString());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final int movieId =ModalRoute.of(context)?.settings.arguments as int;
@@ -116,7 +126,7 @@ class CustomBodyDetails extends StatelessWidget {
                     await BlocProvider.of<MovieDetailsCubit>(
                       context,
                       listen: false,
-                    ).launchMovie(url: movieDetails.ytTrailerCode);
+                    ).launchMovie(url: movieDetails.url);
                   } catch (error) {
                     if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(
