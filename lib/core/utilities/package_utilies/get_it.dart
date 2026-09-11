@@ -70,10 +70,12 @@ void setupDI() {
   );
 
   getIt.registerFactory<HomeTabCubit>(() => HomeTabCubit(getIt<HomeTapRepo>()));
-  getIt.registerLazySingleton<WatchListCubit>(
+  getIt.registerFactory<WatchListCubit>(
     () => WatchListCubit(watchListDataSource: getIt<WatchListDataSource>()),
   );
-  getIt.registerLazySingleton<WatchMovieToggleCubit>(
-    () => WatchMovieToggleCubit(watchListDataSource: getIt<WatchListDataSource>()),
+  getIt.registerFactory<WatchMovieToggleCubit>(
+    () => WatchMovieToggleCubit(
+      watchListDataSource: getIt<WatchListDataSource>(),
+    ),
   );
 }
