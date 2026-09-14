@@ -12,6 +12,7 @@ class ExploreCubit extends Cubit<ExploreCubitState> {
   bool pageniationLoading = false;
   bool hasMore = true;
   void getFirstListMovies(String genere) async {
+    page = 1;
     try {
       emit(LoadingExploreState());
       final movies = await _repo.getMovies(genere: genere, page: page);
@@ -43,7 +44,7 @@ class ExploreCubit extends Cubit<ExploreCubitState> {
           pageniationLoading = false;
           return;
         }
-        emit(ErrorExploreState("No data to dislay"));
+        emit(ErrorOnPaginationExploreState("No data to dislay", moviesList));
         pageniationLoading = false;
         return;
       }
