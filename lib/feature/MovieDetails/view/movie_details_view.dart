@@ -11,12 +11,12 @@ class MovieDetailsView extends StatelessWidget {
     final int movieID = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       body: BlocProvider<MovieDetailsCubit>(
-        create: (context) => getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
-        child:  SingleChildScrollView(
+        create: (context) =>
+            getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
+        child: SingleChildScrollView(
           physics: const ScrollPhysics(),
-            child: MovieDetailsViewBody(
-          movieID: movieID,
-        )),
+          child: MovieDetailsViewBody(movieID: movieID),
+        ),
       ),
     );
   }

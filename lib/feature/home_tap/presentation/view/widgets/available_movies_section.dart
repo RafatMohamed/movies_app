@@ -48,6 +48,7 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
           ),
         ),
         BlocConsumer<HomeTabCubit, HomeTabState>(
+          buildWhen: (previous, current) => current is! SeeMorePressed,
           listener: (context, state) {
             if (state is HomeTabEror) {
               showDialog(

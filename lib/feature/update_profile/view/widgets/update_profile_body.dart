@@ -131,7 +131,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
 
     setState(() => _isDeleting = true);
     try {
-      if(!mounted) return;
+      if (!mounted) return;
       await context.read<AuthCubit>().deleteAccount();
 
       if (mounted) {

@@ -53,10 +53,7 @@ class _TabsViewSectionState extends State<TabsViewSection>
               color: AppColors.lightBlack,
               child: TabBarView(
                 controller: tabController,
-                children: const [
-                  WatchListSection(),
-                  HistoryListSection()
-                ],
+                children: const [WatchListSection(), HistoryListSection()],
               ),
             ),
           ),

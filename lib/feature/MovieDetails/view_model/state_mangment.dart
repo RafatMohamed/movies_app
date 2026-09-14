@@ -36,15 +36,16 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
     }
   }
 
-  Future<void> launchMovie({
-    required String url,
-  }) async {
+  Future<void> launchMovie({required String url}) async {
     if (url.isEmpty) {
       throw "Trailer Not Available Now";
     }
     final uri = Uri.parse(url);
     try {
-      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
       if (!launched) {
         throw "Could not open movie link";
       }

@@ -55,7 +55,7 @@ class CustomMovieDetailsImage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context,true);
+                    Navigator.pop(context, true);
                   },
                   child: DefaultIconDetails(
                     pathIcon: !isAr
@@ -94,7 +94,8 @@ class CustomMovieDetailsImage extends StatelessWidget {
                       );
                     },
                     child: DefaultIconDetails(
-                      pathIcon: context.watch<WatchMovieToggleCubit>().isInWatched
+                      pathIcon:
+                          context.watch<WatchMovieToggleCubit>().isInWatched
                           ? AppAssets.archiveSvg
                           : AppAssets.watchListIConSvg,
                     ),
@@ -182,7 +183,7 @@ class DefaultIconDetails extends StatelessWidget {
       width: 50,
       child: SvgPicture.asset(
         pathIcon,
-        colorFilter:const ColorFilter.mode(AppColors.white, .srcIn),
+        colorFilter: const ColorFilter.mode(AppColors.white, .srcIn),
         fit: .scaleDown,
         width: 24,
         height: 24,

@@ -16,7 +16,7 @@ class CustomMovieCard extends StatelessWidget {
     required this.pathImage,
     required this.rate,
     this.movieId = 600,
-    this.refresh
+    this.refresh,
   });
   final String pathImage;
   final String rate;
@@ -27,15 +27,15 @@ class CustomMovieCard extends StatelessWidget {
     final width = context.width;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
-      onTap: () async{
-       final result = await Navigator.pushNamed(
+      onTap: () async {
+        final result = await Navigator.pushNamed(
           context,
           AppOnRouteText.detailsMoviesName,
           arguments: movieId,
         );
-       if(result ==true && context.mounted){
-         return refresh?.call();
-       }
+        if (result == true && context.mounted) {
+          return refresh?.call();
+        }
       },
       child: Stack(
         alignment: .topStart,

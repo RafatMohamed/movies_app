@@ -149,4 +149,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get read_less => 'Read less';
+
+  @override
+  String get action => 'Action';
+
+  @override
+  String get adventure => 'Adventure';
+
+  @override
+  String get animation => 'Animation';
+
+  @override
+  String get biography => 'Biography';
+
+  @override
+  String get comedy => 'Comedy';
+
+  @override
+  String get crime => 'Crime';
+
+  @override
+  String get documentary => 'Documentary';
+
+  @override
+  String get drama => 'Drama';
+
+  @override
+  String get family => 'Family';
+
+  @override
+  String get fantasy => 'Fantasy';
+
+  @override
+  String get horror => 'Horror';
+
+  @override
+  String get music => 'Music';
+
+  @override
+  String get musical => 'Musical';
+
+  @override
+  String get mystery => 'Mystery';
+
+  @override
+  String get romance => 'Romance';
+
+  @override
+  String get sciFi => 'Sci-Fi';
+
+  @override
+  String get sport => 'Sport';
+
+  @override
+  String get thriller => 'Thriller';
+
+  @override
+  String get war => 'War';
 }

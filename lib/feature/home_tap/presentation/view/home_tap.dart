@@ -32,6 +32,7 @@ class _HomeTapState extends State<HomeTap> {
       child: Stack(
         children: [
           BlocBuilder<HomeTabCubit, HomeTabState>(
+            buildWhen: (previous, current) => current is! SeeMorePressed,
             builder: (context, state) {
               if (state is HomeTabLoading) {
                 return const MovieCardShimmer(height: .infinity);

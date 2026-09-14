@@ -23,13 +23,13 @@ class WatchListRemoteDataSourceImpl implements WatchListDataSource {
         .doc(user.uid)
         .collection('watchList')
         .withConverter<MovieModel>(
-      fromFirestore: (snapshot, options) {
-        return MovieModel.fromJson(snapshot.data()!);
-      },
-      toFirestore: (movie, options) {
-        return movie.toJson();
-      },
-    );
+          fromFirestore: (snapshot, options) {
+            return MovieModel.fromJson(snapshot.data()!);
+          },
+          toFirestore: (movie, options) {
+            return movie.toJson();
+          },
+        );
   }
 
   @override

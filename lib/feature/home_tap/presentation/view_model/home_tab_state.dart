@@ -49,3 +49,8 @@ class HomeTabOnPaginationEror extends HomeTabState {
     required this.watchNowMovies,
   });
 }
+
+class SeeMorePressed extends HomeTabState {
+  String currentGenere;
+  SeeMorePressed(this.currentGenere);
+}
