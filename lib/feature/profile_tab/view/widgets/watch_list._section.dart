@@ -18,12 +18,13 @@ class WatchListSection extends StatelessWidget {
       child: BlocBuilder<WatchListCubit, WatchListState>(
         builder: (context, state) {
           if (state is WatchListLoading) {
-            return const  CustomIndicator();
+            return const CustomIndicator();
           }
           if (state is WatchListFailed) {
             return CustomErrorBuilder(
               errorMsg: state.errorMessage,
-              onTapAgain: () => context.read<WatchListCubit>().getMovieWatchList(),
+              onTapAgain: () =>
+                  context.read<WatchListCubit>().getMovieWatchList(),
             );
           }
           if (state is WatchListSuccess) {

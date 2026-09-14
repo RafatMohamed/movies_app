@@ -37,7 +37,7 @@ class CustomReadMoreTextTranslate extends StatelessWidget {
                   highlightColor: Colors.grey.shade700,
                   child: Container(
                     width: double.infinity,
-                    height: context.height*0.1,
+                    height: context.height * 0.1,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(AppBorderRadius.r8),
@@ -46,7 +46,7 @@ class CustomReadMoreTextTranslate extends StatelessWidget {
                 );
               }
               if (!snapshot.hasData) {
-                return  const SizedBox();
+                return const SizedBox();
               }
               return CustomReamMoreText(
                 text: snapshot.data ?? text,
@@ -79,7 +79,7 @@ class CustomReamMoreText extends StatelessWidget {
       textAlign: .start,
       minLines: 3,
       readMoreIconVisible: false,
-      readMoreText:l10n.read_more,
+      readMoreText: l10n.read_more,
       readLessText: l10n.read_less,
       iconSize: 16,
       readMoreStyle: textTheme.titleLarge?.copyWith(

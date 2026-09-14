@@ -34,7 +34,10 @@ class CustomMovieDetailsScreenShot extends StatelessWidget {
         crossAxisAlignment: .start,
         spacing: AppPadding.p10,
         children: [
-          Text(AppLocalizations.of(context).screen_shots, style: textTheme.labelMedium),
+          Text(
+            AppLocalizations.of(context).screen_shots,
+            style: textTheme.labelMedium,
+          ),
           ...List.generate(screenShotImages.length, (index) {
             return DefaultScreenShotImage(pathImage: screenShotImages[index]);
           }),

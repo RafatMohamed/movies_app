@@ -16,7 +16,10 @@ class CustomMovieDetailsSimilar extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: AppPadding.p10,
       children: [
-        Text(AppLocalizations.of(context).similar, style: textTheme.labelMedium),
+        Text(
+          AppLocalizations.of(context).similar,
+          style: textTheme.labelMedium,
+        ),
         GridView.builder(
           padding: .zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

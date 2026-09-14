@@ -14,6 +14,10 @@ import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
 import 'package:movies_app/feature/Search/model/data_source/search_data_source.dart';
 import 'package:movies_app/feature/Search/model/repo/repo.dart';
 import 'package:movies_app/feature/Search/view_model/state_mangment.dart';
+import 'package:movies_app/feature/explore_tap/model/data_source/explore_data_source.dart';
+import 'package:movies_app/feature/explore_tap/model/data_source/explore_data_source_Api.dart';
+import 'package:movies_app/feature/explore_tap/model/repo/explore_repo.dart';
+import 'package:movies_app/feature/explore_tap/presentation/view_model/explore_cubit.dart';
 import 'package:movies_app/feature/home_tap/model/data_source/movies_data_source_api.dart';
 import 'package:movies_app/feature/home_tap/model/repo/repo.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
@@ -78,4 +82,13 @@ void setupDI() {
       watchListDataSource: getIt<WatchListDataSource>(),
     ),
   );
+  getIt.registerLazySingleton<ExploreDataSourceApi>(
+    () => ExploreDataSourceApi(getIt<Dio>()),
+  );
+
+  getIt.registerLazySingleton<ExploreRepo>(
+    () => ExploreRepo(getIt<ExploreDataSourceApi>()),
+  );
+
+  getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt<ExploreRepo>()));
 }

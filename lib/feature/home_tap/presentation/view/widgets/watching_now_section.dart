@@ -11,7 +11,6 @@ import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_sta
 import '../../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 
-
 class WatchingNowSection extends StatefulWidget {
   final void Function(int index) onSeeMoreClicked;
 
@@ -53,6 +52,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocBuilder<HomeTabCubit, HomeTabState>(
+                buildWhen: (previous, current) => current is! SeeMorePressed,
                 builder: (_, state) {
                   if (state is HomeTabLoading) {
                     return Text(
@@ -90,6 +90,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
               ),
               InkWell(
                 onTap: () {
+                  context.read<HomeTabCubit>().seeMoreClicked();
                   widget.onSeeMoreClicked(2);
                 },
                 child: Row(

@@ -23,7 +23,7 @@ import 'movie_details__custom_summary.dart';
 import 'movie_details__parental_guide.dart';
 
 class MovieDetailsViewBody extends StatefulWidget {
-  const MovieDetailsViewBody({super.key,required this.movieID});
+  const MovieDetailsViewBody({super.key, required this.movieID});
   final int movieID;
   @override
   State<MovieDetailsViewBody> createState() => _MovieDetailsViewBodyState();
@@ -32,12 +32,15 @@ class MovieDetailsViewBody extends StatefulWidget {
 class _MovieDetailsViewBodyState extends State<MovieDetailsViewBody> {
   @override
   void initState() {
-    context.read<WatchMovieToggleCubit>().getIsWatched(movieID: widget.movieID.toString());
+    context.read<WatchMovieToggleCubit>().getIsWatched(
+      movieID: widget.movieID.toString(),
+    );
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    final int movieId =ModalRoute.of(context)?.settings.arguments as int;
+    final int movieId = ModalRoute.of(context)?.settings.arguments as int;
     final height = context.height;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(

@@ -48,7 +48,9 @@ class _SplashViewBodyState extends State<SplashViewBody>
         transitionDuration: const Duration(milliseconds: 100),
         pageBuilder: (context, animation, secondaryAnimation) {
           return completed
-              ? isLogin == null ? const LoginView() : const MainAppView()
+              ? isLogin == null
+                    ? const LoginView()
+                    : const MainAppView()
               : const StartingView();
         },
         transitionsBuilder: (context, animation, secondaryAnimation, child) {

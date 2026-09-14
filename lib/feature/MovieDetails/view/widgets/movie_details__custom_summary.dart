@@ -7,7 +7,6 @@ class CustomMovieDetailsSummary extends StatelessWidget {
   const CustomMovieDetailsSummary({super.key, required this.summary});
   final String summary;
 
-
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;

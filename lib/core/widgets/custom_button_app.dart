@@ -49,7 +49,10 @@ class CustomButtonApp extends StatelessWidget {
                   ),
             ),
             const Gap(5),
-            if (withIcon) SvgPicture.asset(isAr?AppAssets.exiteAr:AppAssets.exitIconSvg),
+            if (withIcon)
+              SvgPicture.asset(
+                isAr ? AppAssets.exiteAr : AppAssets.exitIconSvg,
+              ),
           ],
         ),
       ),

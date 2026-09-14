@@ -192,6 +192,7 @@ class MovieModel {
       'date_uploaded_unix': dateUploadedUnix,
     };
   }
+
   MovieModel.empty()
     : id = 0,
       url = '',
