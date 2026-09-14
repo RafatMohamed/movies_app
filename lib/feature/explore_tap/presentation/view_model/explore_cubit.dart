@@ -44,7 +44,7 @@ class ExploreCubit extends Cubit<ExploreCubitState> {
           pageniationLoading = false;
           return;
         }
-        emit(ErrorOnPaginationExploreState("No data to dislay", moviesList));
+        emit(ErrorOnPaginationExploreState("No More data to dislay", moviesList));
         pageniationLoading = false;
         return;
       }
