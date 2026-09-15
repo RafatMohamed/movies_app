@@ -13,7 +13,11 @@ class SearchDataSourceImp implements SearchDataSource {
     try {
       final movieFilteredResponse = await _dio.get(
         AppConstApi.endPointListMovies,
-        queryParameters: {"query_term": query},
+        queryParameters: {
+          "query_term": query,
+          "limit":50,
+          "page":1
+        },
       );
       final MovieListModel movieList = MovieListModel.fromJson(
         movieFilteredResponse.data,
