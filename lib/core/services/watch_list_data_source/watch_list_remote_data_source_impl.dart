@@ -33,13 +33,23 @@ class WatchListRemoteDataSourceImpl implements WatchListDataSource {
   }
 
   @override
-  Future<void> setMovieData({required MovieModel movie}) async {
-    await movieCollectionRef.doc(movie.id.toString()).set(movie);
+  Future<void> setMovieData({
+    required MovieModel movie,
+  }) async {
+    await movieCollectionRef
+        .doc(movie.id.toString())
+        .set(movie);
+
+    await movieCollectionRef
+        .doc(movie.id.toString())
+        .update({
+      'addedAt': FieldValue.serverTimestamp(),
+    });
   }
 
   @override
   Stream<List<MovieModel>> getMovieData() {
-    return movieCollectionRef.snapshots().map((movieSnap) {
+    return movieCollectionRef.orderBy("addedAt",descending: true).snapshots().map((movieSnap) {
       return movieSnap.docs.map((movie) {
         return movie.data();
       }).toList();
