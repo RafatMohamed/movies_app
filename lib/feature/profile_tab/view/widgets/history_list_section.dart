@@ -41,9 +41,6 @@ class HistoryListSection extends StatelessWidget {
                     itemBuilder: (_, index) {
                       final item = state.movies[index];
                       return CustomMovieCard(
-                        refresh: () {
-                          context.read<HistoryCubit>().getHistory();
-                        },
                         pathImage: item.image,
                         rate: item.rating.toString(),
                         movieId: item.id,
