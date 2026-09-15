@@ -13,8 +13,6 @@ import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 import '../../../../core/cubit/history_list_cubit/history_list_state.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../core/utilities/auth/auth_state.dart';
-import '../../../../core/utilities/package_utilies/get_it.dart';
 
 class HeaderSection extends StatefulWidget {
   const HeaderSection({super.key});
@@ -46,10 +44,10 @@ class _HeaderSectionState extends State<HeaderSection> {
               future: _currentUserData,
               builder: (context, snap) {
                 if (snap.connectionState == .waiting) {
-                  return CustomIndicator();
+                  return const CustomIndicator();
                 }
                 if (snap.data ==null) {
-                  return CharacterImagePlaceholder();
+                  return const CharacterImagePlaceholder();
                 }
                 final UserModel item = snap.data!;
                 return Column(
