@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
-
 import '../../../../l10n/generated/app_localizations.dart';
 import '../../model/model_name/movie_suggestion_model.dart';
 

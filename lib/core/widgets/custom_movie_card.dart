@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
+import '../cubit/history_list_cubit/history_list_cubit.dart';
 import '../utilities/app_assets.dart';
 import '../utilities/app_border_radius.dart';
 import '../utilities/app_padding.dart';
@@ -34,6 +36,7 @@ class CustomMovieCard extends StatelessWidget {
           arguments: movieId,
         );
         if (result == true && context.mounted) {
+          context.read<HistoryCubit>().getHistory();
           return refresh?.call();
         }
       },
