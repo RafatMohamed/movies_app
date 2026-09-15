@@ -6,6 +6,7 @@ import 'package:movies_app/core/models/movie_history_cach_model.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
+import 'package:movies_app/core/utilities/package_utilies/get_it.dart';
 import 'package:movies_app/core/widgets/custom_button_app.dart';
 import 'package:movies_app/feature/MovieDetails/model/model_name/movie_details_model.dart';
 import 'package:movies_app/feature/MovieDetails/model/model_name/parental_guide_model.dart';
@@ -45,62 +46,67 @@ class _MovieDetailsViewBodyState extends State<MovieDetailsViewBody> {
     final int movieId = ModalRoute.of(context)?.settings.arguments as int;
     final height = context.height;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return BlocConsumer<MovieDetailsCubit, MovieDetailsState>(
-      listener: (context, state) {
-        if (state is MovieDetailsSuccessState) {
-          final movie = state.movieDetails.data.movie;
-          final movieCached = MovieCacheModel(
-            id: movie.id,
-            rating: movie.rating,
-            image: movie.largeCoverImage,
-            openAt: DateTime.now(),
-          );
-          context.read<HistoryCubit>().cacheMovie(movieCached);
-        }
-      },
-      builder: (context, state) {
-        if (state is MovieDetailsLoadingState) {
-          return IgnorePointer(
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey.shade800,
-              highlightColor: AppColors.caviar,
-              child: CustomBodyDetails(
-                height: height,
-                movieDetails: MovieModel.empty(),
-                textTheme: textTheme,
-                moviesSuggestion: const [],
-                moviesGuide: const [],
+    return BlocProvider.value(
+      value: getIt<HistoryCubit>(),
+      child: BlocConsumer<MovieDetailsCubit, MovieDetailsState>(
+        listener: (cont, state) {
+          if (state is MovieDetailsSuccessState) {
+            final movie = state.movieDetails.data.movie;
+            final movieCached = MovieCacheModel(
+              id: movie.id,
+              rating: movie.rating,
+              image: movie.largeCoverImage,
+              openAt: DateTime.now(),
+            );
+            cont.read<HistoryCubit>().cacheMovie(movieCached);
+          }
+        },
+        builder: (cont, state) {
+          if (state is MovieDetailsLoadingState) {
+            return IgnorePointer(
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey.shade800,
+                highlightColor: AppColors.caviar,
+                child: CustomBodyDetails(
+                  height: height,
+                  movieDetails: MovieModel.empty(),
+                  textTheme: textTheme,
+                  moviesSuggestion: const [],
+                  moviesGuide: const [],
+                ),
               ),
-            ),
-          );
-        }
-        if (state is MovieDetailsFailerState) {
-          return SizedBox(
-            height: context.height,
-            child: CustomErrorBuilder(
-              errorMsg: state.messageError,
-              onTapAgain: () {
-                context.read<MovieDetailsCubit>().getMovieDetails(
-                  movieID: movieId,
-                );
-              },
-            ),
-          );
-        }
-        if (state is MovieDetailsSuccessState) {
-          final MovieModel movieDetails = state.movieDetails.data.movie;
-          final List<MovieSuggestionItem> moviesSuggestion = state.movieSuggestion.data.movies;
-          final List<ParentalGuideItem> moviesGuide = state.movieParentalGuide.data.parentalGuides;
-          return CustomBodyDetails(
-            height: height,
-            movieDetails: movieDetails,
-            textTheme: textTheme,
-            moviesSuggestion: moviesSuggestion,
-            moviesGuide: moviesGuide,
-          );
-        }
-        return Container(color: AppColors.gold, height: 100, width: 100);
-      },
+            );
+          }
+          if (state is MovieDetailsFailerState) {
+            return SizedBox(
+              height: context.height,
+              child: CustomErrorBuilder(
+                errorMsg: state.messageError,
+                onTapAgain: () {
+                  context.read<MovieDetailsCubit>().getMovieDetails(
+                    movieID: movieId,
+                  );
+                },
+              ),
+            );
+          }
+          if (state is MovieDetailsSuccessState) {
+            final MovieModel movieDetails = state.movieDetails.data.movie;
+            final List<MovieSuggestionItem> moviesSuggestion =
+                state.movieSuggestion.data.movies;
+            final List<ParentalGuideItem> moviesGuide =
+                state.movieParentalGuide.data.parentalGuides;
+            return CustomBodyDetails(
+              height: height,
+              movieDetails: movieDetails,
+              textTheme: textTheme,
+              moviesSuggestion: moviesSuggestion,
+              moviesGuide: moviesGuide,
+            );
+          }
+          return const SizedBox();
+        },
+      ),
     );
   }
 }
@@ -126,6 +132,7 @@ class CustomBodyDetails extends StatelessWidget {
     final AppLocalizations translate = AppLocalizations.of(context);
     return Column(
       spacing: height * (AppPadding.p16 / height),
+      crossAxisAlignment: .start,
       children: [
         CustomMovieDetailsImage(movie: movieDetails),
         Padding(
@@ -133,6 +140,7 @@ class CustomBodyDetails extends StatelessWidget {
             horizontal: AppPadding.p16,
           ),
           child: Column(
+            crossAxisAlignment: .start,
             spacing: height * (AppPadding.p16 / height),
             children: [
               CustomButtonApp(

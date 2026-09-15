@@ -19,6 +19,7 @@ class CustomMovieParentalGuide extends StatelessWidget {
         Text(
           AppLocalizations.of(context).parental_guide,
           style: textTheme.labelMedium,
+          textAlign: .start,
         ),
         ...List.generate(parentalGuides.length, (index) {
           return ListTile(
