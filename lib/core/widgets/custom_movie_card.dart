@@ -30,14 +30,14 @@ class CustomMovieCard extends StatelessWidget {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: () async {
-        final result = await Navigator.pushNamed(
+        await Navigator.pushNamed(
           context,
           AppOnRouteText.detailsMoviesName,
           arguments: movieId,
         );
-        if (result == true && context.mounted) {
+        if (context.mounted) {
           context.read<HistoryCubit>().getHistory();
-          return refresh?.call();
+          refresh?.call();
         }
       },
       child: Stack(

@@ -9,15 +9,12 @@ class MovieDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int movieID = ModalRoute.of(context)?.settings.arguments as int;
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        body: BlocProvider<MovieDetailsCubit>(
-          create: (context) => getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
-          child: SingleChildScrollView(
-            physics: const ScrollPhysics(),
-            child: MovieDetailsViewBody(movieID: movieID),
-          ),
+    return Scaffold(
+      body: BlocProvider<MovieDetailsCubit>(
+        create: (context) => getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
+        child: SingleChildScrollView(
+          physics: const ScrollPhysics(),
+          child: MovieDetailsViewBody(movieID: movieID),
         ),
       ),
     );
