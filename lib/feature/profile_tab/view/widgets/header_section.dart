@@ -12,7 +12,7 @@ import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 import '../../../../core/cubit/history_list_cubit/history_list_state.dart';
 
-class HeaderSection extends StatefulWidget {
+class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
 
   @override
@@ -30,6 +30,21 @@ class _HeaderSectionState extends State<HeaderSection> {
       builder: (context, snapshot) {
         final UserModel? user = snapshot.data;
 
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p16,
+      ),
+      child: Row(
+        children: [
+
+          Expanded(
+            flex: 8,
+            child: StreamBuilder<UserModel?>(
+              stream: context.read<AuthCubit>().watchCurrentUserData(),
+              builder: (context, snap) {
+                if (snap.connectionState == .waiting) {
+                  return const CustomIndicator();
+                }
         final avatars = ImgProfileModel.avatars;
 
         final int avatarIndex = (user?.avatarIndex ?? 0).clamp(
@@ -80,6 +95,29 @@ class _HeaderSectionState extends State<HeaderSection> {
                 ),
               ),
 
+          Expanded(
+            flex: 14,
+            child: Padding(
+              padding: const EdgeInsets.all(26),
+              child: Row(
+                children: [
+
+                  Expanded(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: .center,
+                      children: [
+                        Expanded(
+                          flex: 16,
+                          child: FittedBox(
+                            child: BlocBuilder<
+                                WatchListCubit,
+                                WatchListState>(
+                              builder: (context, state) {
+                                final count =
+                                    state is WatchListSuccess
+                                        ? state.movies.length
+                                        : 0;
               // WatchList & History
               Expanded(
                 flex: 14,
@@ -131,6 +169,21 @@ class _HeaderSectionState extends State<HeaderSection> {
                         ),
                       ),
 
+
+                  Expanded(
+                    flex: 5,
+                    child: Column(
+                      crossAxisAlignment: .center,
+                      children: [
+                        Expanded(
+                          flex: 16,
+                          child: FittedBox(
+                            child: BlocBuilder<
+                                HistoryCubit,
+                                HistoryState>(
+                              builder: (context, state) {
+                                final count =
+                                    state is HistorySuccess
                       // History
                       Expanded(
                         flex: 5,
