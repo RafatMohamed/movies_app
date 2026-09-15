@@ -1,9 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:movies_app/core/const.dart';
+import 'package:movies_app/core/cubit/history_list_cubit/history_list_cubit.dart';
 import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
+import 'package:movies_app/core/models/movie_history_cach_model.dart';
 import 'package:movies_app/core/services/api_helper.dart';
 import 'package:movies_app/core/services/auth_service.dart';
 import 'package:movies_app/core/services/firestore_service.dart';
+import 'package:movies_app/core/services/history_list_data_source/history_list_data_source.dart';
+import 'package:movies_app/core/services/history_list_data_source/history_list_remote_data_source_impl.dart';
 import 'package:movies_app/core/services/watch_list_data_source/watch_list_data_source.dart';
 import 'package:movies_app/core/services/watch_list_data_source/watch_list_remote_data_source_impl.dart';
 import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
@@ -14,8 +20,7 @@ import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
 import 'package:movies_app/feature/Search/model/data_source/search_data_source.dart';
 import 'package:movies_app/feature/Search/model/repo/repo.dart';
 import 'package:movies_app/feature/Search/view_model/state_mangment.dart';
-import 'package:movies_app/feature/explore_tap/model/data_source/explore_data_source.dart';
-import 'package:movies_app/feature/explore_tap/model/data_source/explore_data_source_Api.dart';
+import 'package:movies_app/feature/explore_tap/model/data_source/explore_data_source_api.dart';
 import 'package:movies_app/feature/explore_tap/model/repo/explore_repo.dart';
 import 'package:movies_app/feature/explore_tap/presentation/view_model/explore_cubit.dart';
 import 'package:movies_app/feature/home_tap/model/data_source/movies_data_source_api.dart';
@@ -91,4 +96,18 @@ void setupDI() {
   );
 
   getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt<ExploreRepo>()));
+
+  getIt.registerLazySingleton<Box<MovieCacheModel>>(
+    () => Hive.box<MovieCacheModel>(AppConstChach.historyBox),
+  );
+
+  getIt.registerLazySingleton<HistoryListDataSource>(
+    () => HistoryListRemoteDataSourceImpl(
+      historyBox: getIt<Box<MovieCacheModel>>(),
+    ),
+  );
+
+  getIt.registerFactory<HistoryCubit>(
+    () => HistoryCubit(historyListDataSource: getIt<HistoryListDataSource>()),
+  );
 }
