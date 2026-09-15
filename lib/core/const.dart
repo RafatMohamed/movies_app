@@ -10,7 +10,7 @@ class AppConstChach {
   static const String isFirstOpenApp = "onboardingCompleted";
   static const String token = "token";
 
-  static const String historyBox = "history";
+  // static const String historyBox = "history";
 }
 
 class AppConstFirestore {

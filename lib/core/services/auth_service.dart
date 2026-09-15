@@ -94,16 +94,16 @@ class AuthService {
         throw AuthException('Google sign in was cancelled.');
       }
 
-      final GoogleSignInAuthentication? googleAuth =
+      final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
-      if (googleAuth?.accessToken == null || googleAuth?.idToken == null) {
+      if (googleAuth.accessToken == null || googleAuth.idToken == null) {
         throw AuthException('Failed to get Google authentication tokens.');
       }
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
       final userCredential = await _auth.signInWithCredential(credential);
