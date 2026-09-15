@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
-import 'package:movies_app/core/cubit/history_list_cubit/history_list_cubit.dart';
 import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
@@ -46,9 +45,6 @@ void main() async {
         ),
         BlocProvider<WatchMovieToggleCubit>(
           create: (context) => getIt<WatchMovieToggleCubit>(),
-        ),
-        BlocProvider<HistoryCubit>(
-          create: (context) => getIt<HistoryCubit>()..getHistory(),
         ),
       ],
       child: DevicePreview(

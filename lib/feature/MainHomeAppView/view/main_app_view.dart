@@ -7,6 +7,7 @@ import 'package:movies_app/feature/home_tap/presentation/view/home_tap.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 import 'package:movies_app/feature/profile_tab/view/profile_tab.dart';
+import '../../../core/cubit/history_list_cubit/history_list_cubit.dart';
 import '../../../core/utilities/package_utilies/get_it.dart';
 import '../../../core/widgets/default_bottom_nav_bar.dart';
 import '../../Search/view/search_view.dart';
@@ -40,8 +41,15 @@ class _MainAppViewState extends State<MainAppView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<HomeTabCubit>(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<HistoryCubit>(
+            create: (context) => getIt<HistoryCubit>()..getHistory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<HomeTabCubit>(),
+          ),
+        ],
         child: Builder(
           builder: (context) {
             return Stack(
