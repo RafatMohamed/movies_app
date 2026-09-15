@@ -14,22 +14,8 @@ import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 import '../../../../core/cubit/history_list_cubit/history_list_state.dart';
 
-class HeaderSection extends StatefulWidget {
+class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
-
-  @override
-  State<HeaderSection> createState() => _HeaderSectionState();
-}
-
-class _HeaderSectionState extends State<HeaderSection> {
-  late Future<UserModel?> _currentUserData;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentUserData =
-        context.read<AuthCubit>().getCurrentUserData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +31,7 @@ class _HeaderSectionState extends State<HeaderSection> {
       ),
       child: Row(
         children: [
-      
+
           Expanded(
             flex: 8,
             child: StreamBuilder<UserModel?>(
@@ -102,7 +88,7 @@ class _HeaderSectionState extends State<HeaderSection> {
               padding: const EdgeInsets.all(26),
               child: Row(
                 children: [
-               
+
                   Expanded(
                     flex: 5,
                     child: Column(
@@ -148,7 +134,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                     ),
                   ),
 
-                 
+
                   Expanded(
                     flex: 5,
                     child: Column(
