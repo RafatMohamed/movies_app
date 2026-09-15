@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies_app/core/models/user_model.dart';
 import 'package:movies_app/core/services/auth_service.dart';
 import 'auth_state.dart';
@@ -31,7 +32,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> logout() => _authService.logout();
+  Future<void> logout()async {
+    await _authService.logout();
+    await GoogleSignIn().signOut();
+  }
 
   /// Sends a password reset email to the provided address.
   Future<void> resetPassword(String email) async {

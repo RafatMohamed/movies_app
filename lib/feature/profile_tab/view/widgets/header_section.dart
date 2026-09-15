@@ -48,8 +48,8 @@ class _HeaderSectionState extends State<HeaderSection> {
       
           Expanded(
             flex: 8,
-            child: FutureBuilder<UserModel?>(
-              future: _currentUserData,
+            child: StreamBuilder<UserModel?>(
+              stream: context.read<AuthCubit>().watchCurrentUserData(),
               builder: (context, snap) {
                 if (snap.connectionState == .waiting) {
                   return const CustomIndicator();
