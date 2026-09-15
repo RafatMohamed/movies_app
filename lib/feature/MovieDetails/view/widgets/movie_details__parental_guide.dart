@@ -16,7 +16,11 @@ class CustomMovieParentalGuide extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: AppPadding.p10,
       children: [
-        Text(AppLocalizations.of(context).parental_guide, style: textTheme.labelMedium),
+        Text(
+          AppLocalizations.of(context).parental_guide,
+          style: textTheme.labelMedium,
+          textAlign: .start,
+        ),
         ...List.generate(parentalGuides.length, (index) {
           return ListTile(
             titleTextStyle: textTheme.titleLarge?.copyWith(
@@ -27,7 +31,9 @@ class CustomMovieParentalGuide extends StatelessWidget {
               color: AppColors.white.withValues(alpha: 0.6),
               fontWeight: .w400,
             ),
-            title: CustomReadMoreTextTranslate(text: parentalGuides[index].parentalGuideText),
+            title: CustomReadMoreTextTranslate(
+              text: parentalGuides[index].parentalGuideText,
+            ),
           );
         }),
       ],

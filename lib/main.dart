@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies_app/core/ChachRemote/is_first_open_app.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_locale_controller.dart';
 import 'package:movies_app/core/utilities/app_text.dart';
 import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
@@ -16,6 +17,7 @@ import 'package:movies_app/feature/Splash/view/splash_view.dart';
 import 'package:movies_app/feature/forget_password/view/forget_password_view.dart';
 import 'package:movies_app/feature/login/view/login_view.dart';
 import 'package:movies_app/feature/register/view/register_view.dart';
+import 'core/services/history_list_data_source/history_list_remote_data_source_impl.dart';
 import 'core/utilities/app_them.dart';
 import 'feature/Onboarding/view/starting_view.dart';
 import 'feature/update_profile/view/update_profile_view.dart';
@@ -30,12 +32,21 @@ void main() async {
   await IsFirstOpenApp.initSharedStorge();
   await AppLocaleController.initialize();
 
+  HistoryListRemoteDataSourceImpl.initHive();
   Bloc.observer = CustomBlocObserver();
   setupDI();
 
   runApp(
-    BlocProvider<AuthCubit>(
-      create: (_) => getIt<AuthCubit>(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(create: (_) => getIt<AuthCubit>()),
+        BlocProvider<WatchListCubit>(
+          create: (context) => getIt<WatchListCubit>(),
+        ),
+        BlocProvider<WatchMovieToggleCubit>(
+          create: (context) => getIt<WatchMovieToggleCubit>(),
+        ),
+      ],
       child: DevicePreview(
         enabled: true,
         builder: (context) {
@@ -48,6 +59,7 @@ void main() async {
 
 class MoviesApp extends StatelessWidget {
   const MoviesApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     Map<String, WidgetBuilder> routeApp = {
@@ -86,7 +98,7 @@ class MoviesApp extends StatelessWidget {
 
           routes: routeApp,
 
-          initialRoute: AppOnRouteText.startingViewAppName,
+          initialRoute: AppOnRouteText.splashName,
           //home: AppOnRouteText.mainAppName,
           //  home: ProfileTab(),
         );

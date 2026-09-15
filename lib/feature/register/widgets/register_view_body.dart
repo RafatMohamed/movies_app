@@ -49,9 +49,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     if (!formKey.currentState!.validate()) return;
 
     if (passwordController.text != confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.passwordsDoNotMatch)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.passwordsDoNotMatch)));
       return;
     }
 
@@ -72,9 +72,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
       );
     } on AuthException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.message)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.message)));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }

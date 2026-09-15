@@ -12,7 +12,10 @@ class MovieDetailsView extends StatelessWidget {
     return Scaffold(
       body: BlocProvider<MovieDetailsCubit>(
         create: (context) => getIt<MovieDetailsCubit>()..getMovieDetails(movieID: movieID),
-        child: const SingleChildScrollView(child: MovieDetailsViewBody()),
+        child: SingleChildScrollView(
+          physics: const ScrollPhysics(),
+          child: MovieDetailsViewBody(movieID: movieID),
+        ),
       ),
     );
   }

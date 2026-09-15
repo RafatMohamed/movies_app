@@ -15,7 +15,6 @@ class HomeTabCubit extends Cubit<HomeTabState> {
   bool hasMore = true;
   bool isPaginationLoading = false;
 
-
   void getMoviesFirstPage() async {
     if (!hasMore) return;
     try {
@@ -127,5 +126,9 @@ class HomeTabCubit extends Cubit<HomeTabState> {
     } else {
       currentGenereIndex++;
     }
+  }
+
+  void seeMoreClicked() {
+    emit(SeeMorePressed(myGenereList[currentGenereIndex]));
   }
 }

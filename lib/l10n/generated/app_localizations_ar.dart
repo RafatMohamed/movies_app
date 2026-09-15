@@ -149,4 +149,61 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get read_less => 'اقرأ أقل';
+
+  @override
+  String get action => 'أكشن';
+
+  @override
+  String get adventure => 'مغامرة';
+
+  @override
+  String get animation => 'رسوم متحركة';
+
+  @override
+  String get biography => 'سيرة ذاتية';
+
+  @override
+  String get comedy => 'كوميديا';
+
+  @override
+  String get crime => 'جريمة';
+
+  @override
+  String get documentary => 'وثائقي';
+
+  @override
+  String get drama => 'دراما';
+
+  @override
+  String get family => 'عائلي';
+
+  @override
+  String get fantasy => 'فانتازيا';
+
+  @override
+  String get horror => 'رعب';
+
+  @override
+  String get music => 'موسيقى';
+
+  @override
+  String get musical => 'موسيقي';
+
+  @override
+  String get mystery => 'غموض';
+
+  @override
+  String get romance => 'رومانسي';
+
+  @override
+  String get sciFi => 'خيال علمي';
+
+  @override
+  String get sport => 'رياضي';
+
+  @override
+  String get thriller => 'إثارة';
+
+  @override
+  String get war => 'حرب';
 }

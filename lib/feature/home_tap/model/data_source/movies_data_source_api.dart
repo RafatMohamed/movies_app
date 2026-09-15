@@ -23,7 +23,7 @@ class MoviesDataSourceApi extends MoviesDataSource {
       }
       return movieRespone.data?.movies ?? [];
     } on DioException catch (e) {
-      throw Exception(_handleDioException(e));
+      throw _handleDioException(e);
     }
   }
 
@@ -43,7 +43,7 @@ class MoviesDataSourceApi extends MoviesDataSource {
       }
       return movieRespone.data?.movies ?? [];
     } on DioException catch (e) {
-      throw Exception(_handleDioException(e));
+      throw handleDioException(e);
     }
   }
 }
@@ -72,4 +72,5 @@ String _handleDioException(DioException e) {
       return 'Something went wrong';
   }
 }
-String  handleDioException(DioException e)=>_handleDioException(e);
+
+String handleDioException(DioException e) => _handleDioException(e);

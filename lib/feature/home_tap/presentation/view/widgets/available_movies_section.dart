@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/helper/custom_error_msg.dart';
 import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
@@ -46,7 +47,26 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
             ],
           ),
         ),
-        BlocBuilder<HomeTabCubit, HomeTabState>(
+        BlocConsumer<HomeTabCubit, HomeTabState>(
+          buildWhen: (previous, current) => current is! SeeMorePressed,
+          listener: (context, state) {
+            if (state is HomeTabEror) {
+              showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (_) => AlertDialog(
+                  backgroundColor: AppColors.caviar,
+                  content: CustomErrorBuilder(
+                    errorMsg: state.messege,
+                    onTapAgain: () {
+                      Navigator.pop(context);
+                      context.read<HomeTabCubit>().getMoviesFirstPage();
+                    },
+                  ),
+                ),
+              );
+            }
+          },
           builder: (context, state) {
             if (state is HomeTabLoaded) {
               return Directionality(
@@ -90,22 +110,17 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
             }
 
             if (state is HomeTabEror) {
-              return Container(
-                padding: const EdgeInsets.all(16),
-                width: .infinity,
-                height: MediaQuery.of(context).size.height * .40,
-                decoration: BoxDecoration(
-                  color: AppColors.burgundy,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.maroon),
+              return CarouselSlider.builder(
+                options: CarouselOptions(
+                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                  enableInfiniteScroll: true,
+                  height: MediaQuery.of(context).size.height * .40,
+                  viewportFraction: 0.55,
+                  enlargeCenterPage: true,
                 ),
-                child: Column(
-                  mainAxisAlignment: .center,
-                  children: [
-                    const Icon(Icons.error, color: AppColors.white),
-                    Text(state.messege),
-                  ],
-                ),
+                carouselController: controller,
+                itemCount: 3,
+                itemBuilder: (_, index, _) => const MovieCardShimmer(),
               );
             }
             return const SizedBox();

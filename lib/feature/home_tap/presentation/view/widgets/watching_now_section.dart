@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
@@ -11,8 +10,6 @@ import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cub
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 import '../../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
-
-import '../../../../../core/utilities/app_locale_controller.dart';
 
 class WatchingNowSection extends StatefulWidget {
   final void Function(int index) onSeeMoreClicked;
@@ -55,6 +52,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocBuilder<HomeTabCubit, HomeTabState>(
+                buildWhen: (previous, current) => current is! SeeMorePressed,
                 builder: (_, state) {
                   if (state is HomeTabLoading) {
                     return Text(
@@ -76,27 +74,8 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                       ),
                     );
                   }
-                  if (state is HomeTabOnScrollLoading) {
-                    return Text(
-                      myCubit.myGenereList[myCubit.currentGenereIndex],
-                      style: textTheme.titleLarge?.copyWith(
-                        color: AppColors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
-                  }
+
                   if (state is HomeTabEror) {
-                    return Text(
-                      'genre',
-                      style: textTheme.titleLarge?.copyWith(
-                        color: AppColors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
-                  }
-                  if (state is HomeTabOnPaginationEror) {
                     return Text(
                       'genre',
                       style: textTheme.titleLarge?.copyWith(
@@ -111,6 +90,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
               ),
               InkWell(
                 onTap: () {
+                  context.read<HomeTabCubit>().seeMoreClicked();
                   widget.onSeeMoreClicked(2);
                 },
                 child: Row(
@@ -124,10 +104,8 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                       ),
                     ),
                     const Gap(AppPadding.p4),
-                    Icon(
-                      AppLocaleController.instance.value.languageCode == "en"
-                          ? Icons.arrow_back
-                          : Icons.arrow_forward,
+                    const Icon(
+                      Icons.arrow_forward,
                       size: 16,
                       color: AppColors.gold,
                     ),
@@ -165,6 +143,26 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
               );
             }
             if (state is HomeTabLoading) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: ListView.separated(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppPadding.p16,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => const Gap(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: const MovieCardShimmer(),
+                    );
+                  },
+                ),
+              );
+            }
+            if (state is HomeTabEror) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: ListView.separated(

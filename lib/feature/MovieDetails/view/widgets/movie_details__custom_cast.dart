@@ -16,20 +16,23 @@ class CustomMovieDetailsCast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return Column(
-      crossAxisAlignment: .start,
-      spacing: AppPadding.p10,
-      children: [
-        Text(AppLocalizations.of(context).cast, style: textTheme.labelMedium),
-        ...List.generate(cast.length, (index) {
-          final itemCast = cast[index];
-          return DefaultBuildCardCast(
-            pathImageCast: itemCast.urlSmallImage,
-            nameCast: itemCast.name,
-            characterCast: itemCast.characterName,
-          );
-        }),
-      ],
+    return Visibility(
+      visible: cast.isNotEmpty,
+      child: Column(
+        crossAxisAlignment: .start,
+        spacing: AppPadding.p10,
+        children: [
+          Text(AppLocalizations.of(context).cast, style: textTheme.labelMedium),
+          ...List.generate(cast.length, (index) {
+            final itemCast = cast[index];
+            return DefaultBuildCardCast(
+              pathImageCast: itemCast.urlSmallImage,
+              nameCast: itemCast.name.isNotEmpty?itemCast.name:"Unknow",
+              characterCast:itemCast.characterName.isNotEmpty?itemCast.characterName:"Unknow",
+            );
+          }),
+        ],
+      ),
     );
   }
 }
@@ -69,7 +72,7 @@ class DefaultBuildCardCast extends StatelessWidget {
               width: width * 0.2,
               height: height * 0.1,
               errorWidget: (_, _, _) {
-                return const Placeholder();
+                return const CharacterImagePlaceholder();
               },
               progressIndicatorBuilder: (_, _, _) {
                 return const CustomIndicator();
@@ -100,6 +103,56 @@ class DefaultBuildCardCast extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CharacterImagePlaceholder extends StatefulWidget {
+  const CharacterImagePlaceholder({super.key});
+
+  @override
+  State<CharacterImagePlaceholder> createState() =>
+      _CharacterImagePlaceholderState();
+}
+
+class _CharacterImagePlaceholderState
+    extends State<CharacterImagePlaceholder>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color(0xFF202020),
+      child: Center(
+        child: FadeTransition(
+          opacity: Tween<double>(
+            begin: 0.45,
+            end: 1,
+          ).animate(_controller),
+          child: const Icon(
+            Icons.person_outline_rounded,
+            size: 45,
+            color: Colors.white54,
+          ),
+        ),
       ),
     );
   }

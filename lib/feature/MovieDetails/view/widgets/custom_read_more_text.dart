@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
-import 'package:readmore_flutter/src/readmore.dart';
+import 'package:readmore_flutter/readmore_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:translator/translator.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
@@ -37,7 +37,7 @@ class CustomReadMoreTextTranslate extends StatelessWidget {
                   highlightColor: Colors.grey.shade700,
                   child: Container(
                     width: double.infinity,
-                    height: context.height*0.1,
+                    height: context.height * 0.1,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(AppBorderRadius.r8),
@@ -79,7 +79,7 @@ class CustomReamMoreText extends StatelessWidget {
       textAlign: .start,
       minLines: 3,
       readMoreIconVisible: false,
-      readMoreText:l10n.read_more,
+      readMoreText: l10n.read_more,
       readLessText: l10n.read_less,
       iconSize: 16,
       readMoreStyle: textTheme.titleLarge?.copyWith(

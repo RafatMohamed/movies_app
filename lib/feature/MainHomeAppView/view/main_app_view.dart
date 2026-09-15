@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
-import 'package:movies_app/feature/explore_tap/view/explore_tap.dart';
+import 'package:movies_app/feature/explore_tap/presentation/view/explore_tap.dart';
 import 'package:movies_app/feature/home_tap/presentation/view/home_tap.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
 import 'package:movies_app/feature/profile_tab/view/profile_tab.dart';
+import '../../../core/cubit/history_list_cubit/history_list_cubit.dart';
 import '../../../core/utilities/package_utilies/get_it.dart';
 import '../../../core/widgets/default_bottom_nav_bar.dart';
 import '../../Search/view/search_view.dart';
@@ -20,7 +22,6 @@ class MainAppView extends StatefulWidget {
 
 class _MainAppViewState extends State<MainAppView> {
   int _currentIndex = 0;
-
   late final List<Widget> _screens = [
     HomeTap(onSeeMoreClicked: updateCurrentIndex),
     BlocProvider(
@@ -32,10 +33,23 @@ class _MainAppViewState extends State<MainAppView> {
   ];
 
   @override
+  void initState() {
+    context.read<WatchListCubit>().getMovieWatchList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<HomeTabCubit>(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<HistoryCubit>(
+            create: (context) => getIt<HistoryCubit>()..getHistory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<HomeTabCubit>(),
+          ),
+        ],
         child: Builder(
           builder: (context) {
             return Stack(
@@ -48,8 +62,7 @@ class _MainAppViewState extends State<MainAppView> {
                   child: DefaultBottomNavigationBar(
                     currentIndex: _currentIndex,
                     onCurrentIndexChange: (index) {
-                      if (context.read<HomeTabCubit>().state
-                          is! HomeTabOnPaginationEror) {
+                      if (context.read<HomeTabCubit>().state is! HomeTabEror) {
                         context
                             .read<HomeTabCubit>()
                             .increaseCurrentIndexOFGenere();

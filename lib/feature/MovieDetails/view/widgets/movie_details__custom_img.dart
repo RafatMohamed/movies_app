@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/utilities/app_assets.dart';
 import 'package:movies_app/core/utilities/app_border_radius.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
@@ -54,38 +55,69 @@ class CustomMovieDetailsImage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   },
-                  child: Container(
-                    height: 24,
-                    width: 24,
-                    color: Colors.transparent,
-                    alignment: .centerStart,
+                  child: DefaultIconDetails(
+                    pathIcon: !isAr
+                        ? AppAssets.arrowBackDetails
+                        : AppAssets.arrowBackAr,
+                  ),
+                ),
+                BlocListener<WatchMovieToggleCubit, WatchMovieToggleState>(
+                  listener: (context, state) {
+                    if (state is MovieToggleFailed) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: const Duration(seconds: 2),
+                          dismissDirection: .horizontal,
+                          behavior: .floating,
+                          width: double.infinity,
+                          padding: const EdgeInsetsDirectional.only(
+                            bottom: AppPadding.p20,
+                          ),
+                          content: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              state.errorMessage,
+                              textAlign: .center,
+                              style: textTheme.labelMedium,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<WatchMovieToggleCubit>().toggleWatched(
+                        movie: movie,
+                      );
+                    },
                     child: DefaultIconDetails(
-                      pathIcon: !isAr
-                          ? AppAssets.arrowBackDetails
-                          : AppAssets.arrowBackAr,
+                      pathIcon:
+                          context.watch<WatchMovieToggleCubit>().isInWatched
+                          ? AppAssets.archiveSvg
+                          : AppAssets.watchListIConSvg,
                     ),
                   ),
                 ),
-                const DefaultIconDetails(pathIcon: AppAssets.archiveSvg),
               ],
             ),
           ),
           GestureDetector(
-            onTap: () async{
+            onTap: () async {
               try {
                 await BlocProvider.of<MovieDetailsCubit>(
                   context,
                   listen: false,
                 ).launchMovie(
-                  url: movie.ytTrailerCode,
+                  url: "https://www.youtube.com/watch?v=${movie.ytTrailerCode}",
                 );
               } catch (error) {
-                if(!context.mounted)return;
+                if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    duration: const Duration(seconds:2),
+                    duration: const Duration(seconds: 2),
                     dismissDirection: .horizontal,
                     behavior: .floating,
                     width: double.infinity,
@@ -146,12 +178,16 @@ class DefaultIconDetails extends StatelessWidget {
   final String pathIcon;
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      pathIcon,
-      colorFilter: const ColorFilter.mode(AppColors.white, .srcIn),
-      fit: .scaleDown,
-      width: 24,
-      height: 24,
+    return SizedBox(
+      height: 50,
+      width: 50,
+      child: SvgPicture.asset(
+        pathIcon,
+        colorFilter: const ColorFilter.mode(AppColors.white, .srcIn),
+        fit: .scaleDown,
+        width: 24,
+        height: 24,
+      ),
     );
   }
 }

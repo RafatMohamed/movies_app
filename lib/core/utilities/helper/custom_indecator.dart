@@ -3,9 +3,7 @@ import '../app_colors.dart';
 import '../app_padding.dart';
 
 class CustomIndicator extends StatelessWidget {
-  const CustomIndicator({
-    super.key,
-  });
+  const CustomIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {

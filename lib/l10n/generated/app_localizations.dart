@@ -379,6 +379,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Read less'**
   String get read_less;
+
+  /// No description provided for @action.
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get action;
+
+  /// No description provided for @adventure.
+  ///
+  /// In en, this message translates to:
+  /// **'Adventure'**
+  String get adventure;
+
+  /// No description provided for @animation.
+  ///
+  /// In en, this message translates to:
+  /// **'Animation'**
+  String get animation;
+
+  /// No description provided for @biography.
+  ///
+  /// In en, this message translates to:
+  /// **'Biography'**
+  String get biography;
+
+  /// No description provided for @comedy.
+  ///
+  /// In en, this message translates to:
+  /// **'Comedy'**
+  String get comedy;
+
+  /// No description provided for @crime.
+  ///
+  /// In en, this message translates to:
+  /// **'Crime'**
+  String get crime;
+
+  /// No description provided for @documentary.
+  ///
+  /// In en, this message translates to:
+  /// **'Documentary'**
+  String get documentary;
+
+  /// No description provided for @drama.
+  ///
+  /// In en, this message translates to:
+  /// **'Drama'**
+  String get drama;
+
+  /// No description provided for @family.
+  ///
+  /// In en, this message translates to:
+  /// **'Family'**
+  String get family;
+
+  /// No description provided for @fantasy.
+  ///
+  /// In en, this message translates to:
+  /// **'Fantasy'**
+  String get fantasy;
+
+  /// No description provided for @horror.
+  ///
+  /// In en, this message translates to:
+  /// **'Horror'**
+  String get horror;
+
+  /// No description provided for @music.
+  ///
+  /// In en, this message translates to:
+  /// **'Music'**
+  String get music;
+
+  /// No description provided for @musical.
+  ///
+  /// In en, this message translates to:
+  /// **'Musical'**
+  String get musical;
+
+  /// No description provided for @mystery.
+  ///
+  /// In en, this message translates to:
+  /// **'Mystery'**
+  String get mystery;
+
+  /// No description provided for @romance.
+  ///
+  /// In en, this message translates to:
+  /// **'Romance'**
+  String get romance;
+
+  /// No description provided for @sciFi.
+  ///
+  /// In en, this message translates to:
+  /// **'Sci-Fi'**
+  String get sciFi;
+
+  /// No description provided for @sport.
+  ///
+  /// In en, this message translates to:
+  /// **'Sport'**
+  String get sport;
+
+  /// No description provided for @thriller.
+  ///
+  /// In en, this message translates to:
+  /// **'Thriller'**
+  String get thriller;
+
+  /// No description provided for @war.
+  ///
+  /// In en, this message translates to:
+  /// **'War'**
+  String get war;
 }
 
 class _AppLocalizationsDelegate
