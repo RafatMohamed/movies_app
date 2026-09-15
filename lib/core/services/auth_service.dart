@@ -94,8 +94,7 @@ class AuthService {
         throw AuthException('Google sign in was cancelled.');
       }
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
         throw AuthException('Failed to get Google authentication tokens.');
@@ -175,7 +174,10 @@ class AuthService {
     }
   }
 
-  Future<void> logout() => _auth.signOut();
+  Future<void> logout() async{
+   await _auth.signOut();
+   await GoogleSignIn().signOut();
+  }
 
   /// Deletes both the Firestore profile document and the Firebase Auth
   /// account. Firebase requires a recent sign-in for this to succeed;
