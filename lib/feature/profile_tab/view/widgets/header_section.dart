@@ -7,17 +7,32 @@ import 'package:movies_app/core/models/img_profile_model.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/auth/auth_cubit.dart';
+import 'package:movies_app/core/utilities/helper/custom_indecator.dart';
+import 'package:movies_app/feature/MovieDetails/view/widgets/movie_details__custom_cast.dart';
 import 'package:svg_flutter/svg.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 import '../../../../core/cubit/history_list_cubit/history_list_state.dart';
-import '../../../../core/utilities/auth/auth_state.dart';
+import '../../../../core/models/user_model.dart';
 
-class HeaderSection extends StatelessWidget {
+class HeaderSection extends StatefulWidget {
   const HeaderSection({super.key});
 
   @override
+  State<HeaderSection> createState() => _HeaderSectionState();
+}
+
+class _HeaderSectionState extends State<HeaderSection> {
+
+  late Future<UserModel?> _currentUserData ;
+  @override
+  void initState() {
+    super.initState();
+    _currentUserData = context.read<AuthCubit>().getCurrentUserData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final String imageProfile = ImgProfileModel.avatars.first.imgPath;
+    final List<ImgProfileModel> imagesProfile = ImgProfileModel.avatars;
     final AppLocalizations l10n = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
@@ -25,43 +40,48 @@ class HeaderSection extends StatelessWidget {
         children: [
           Expanded(
             flex: 8,
-            child: Column(
-              crossAxisAlignment: .center,
-              mainAxisSize: .min,
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: FittedBox(
-                    child: SvgPicture.asset(
-                      imageProfile,
-                      height: 118,
-                      width: 118,
-                      fit: .fill,
+            child: FutureBuilder<UserModel?>(
+              future: _currentUserData,
+              builder: (context, snap) {
+                if (snap.connectionState == .waiting) {
+                  return const CustomIndicator();
+                }
+                if (snap.data ==null) {
+                  return const CharacterImagePlaceholder();
+                }
+                final UserModel item = snap.data!;
+                return Column(
+                  crossAxisAlignment: .center,
+                  mainAxisSize: .min,
+                  children: [
+                    Expanded(
+                      flex: 10,
+                      child: FittedBox(
+                        child: SvgPicture.asset(
+                          imagesProfile[item.avatarIndex].imgPath,
+                          height: 118,
+                          width: 118,
+                          fit: .fill,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const Gap(16),
-               Expanded(
-                  flex: 3,
-                  child: FittedBox(
-                    child: BlocBuilder<AuthCubit, AuthState>(
-                      builder: (context, state) {
-                        final String? name = state is Authenticated
-                            ? state.user.displayName
-                            : "UnKnown";
-                        return Text(
-                          name??"UnKnown",
+                    const Gap(16),
+                    Expanded(
+                      flex: 3,
+                      child: FittedBox(
+                        child: Text(
+                          item.name,
                           style: const TextStyle(
                             color: AppColors.white,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: .center,
-                        );
-                      },
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                  ],
+                );
+              },
             ),
           ),
           Expanded(
