@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:movies_app/core/const.dart';
 import 'package:movies_app/core/models/movie_list_model.dart';

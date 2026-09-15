@@ -10,8 +10,8 @@ import 'package:movies_app/feature/explore_tap/presentation/view_model/explore_c
 import 'package:movies_app/feature/explore_tap/presentation/view_model/explore_cubit_state.dart';
 
 class TabViewByGenre extends StatefulWidget {
-  String genere;
-  TabViewByGenre({super.key, required this.genere});
+  final String genere;
+  const TabViewByGenre({super.key, required this.genere});
 
   @override
   State<TabViewByGenre> createState() => _TabViewByGenreState();

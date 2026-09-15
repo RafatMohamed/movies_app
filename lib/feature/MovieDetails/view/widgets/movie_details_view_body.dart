@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/cubit/history_list_cubit/history_list_cubit.dart';
 import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
+import 'package:movies_app/core/models/movie_history_cach_model.dart';
 import 'package:movies_app/core/utilities/app_colors.dart';
 import 'package:movies_app/core/utilities/app_padding.dart';
 import 'package:movies_app/core/utilities/app_them.dart';
@@ -43,7 +45,19 @@ class _MovieDetailsViewBodyState extends State<MovieDetailsViewBody> {
     final int movieId = ModalRoute.of(context)?.settings.arguments as int;
     final height = context.height;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
+    return BlocConsumer<MovieDetailsCubit, MovieDetailsState>(
+      listener: (context, state) {
+        if (state is MovieDetailsSuccessState) {
+          final movie = state.movieDetails.data.movie;
+          final movieCached = MovieCacheModel(
+            id: movie.id,
+            rating: movie.rating,
+            image: movie.largeCoverImage,
+            openAt: DateTime.now(),
+          );
+          context.read<HistoryCubit>().cacheMovie(movieCached);
+        }
+      },
       builder: (context, state) {
         if (state is MovieDetailsLoadingState) {
           return IgnorePointer(
@@ -75,10 +89,8 @@ class _MovieDetailsViewBodyState extends State<MovieDetailsViewBody> {
         }
         if (state is MovieDetailsSuccessState) {
           final MovieModel movieDetails = state.movieDetails.data.movie;
-          final List<MovieSuggestionItem> moviesSuggestion =
-              state.movieSuggestion.data.movies;
-          final List<ParentalGuideItem> moviesGuide =
-              state.movieParentalGuide.data.parentalGuides;
+          final List<MovieSuggestionItem> moviesSuggestion = state.movieSuggestion.data.movies;
+          final List<ParentalGuideItem> moviesGuide = state.movieParentalGuide.data.parentalGuides;
           return CustomBodyDetails(
             height: height,
             movieDetails: movieDetails,
