@@ -8,8 +8,8 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
-import '../../../../../core/models/film_model.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
+import 'package:translator/translator.dart';
 
 class WatchingNowSection extends StatefulWidget {
   final void Function(int index) onSeeMoreClicked;
@@ -21,12 +21,12 @@ class WatchingNowSection extends StatefulWidget {
 }
 
 class _WatchingNowSectionState extends State<WatchingNowSection> {
-  final List<FilmModel> movies = [];
   late HomeTabCubit myCubit;
+  final translator = GoogleTranslator();
   @override
   void initState() {
     myCubit = context.read<HomeTabCubit>();
-    // TODO: implement initState
+
     super.initState();
   }
 
@@ -66,14 +66,32 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                   }
                   if (state is HomeTabLoaded) {
                     final genreName = myCubit.currentGenreName;
-                    return Text(
-                      genreName.isNotEmpty ? genreName : "Movies",
-                      style: textTheme.titleLarge?.copyWith(
-                        color: AppColors.white,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                      ),
-                    );
+                    bool isArabic =
+                        AppLocalizations.of(context).localeName == 'ar';
+                    return isArabic
+                        ? FutureBuilder(
+                            future: translate(genreName),
+                            builder: (context, asyncSnapshot) {
+                              return Text(
+                                genreName.isNotEmpty
+                                    ? asyncSnapshot.data ?? genreName
+                                    : "Movies",
+                                style: textTheme.titleLarge?.copyWith(
+                                  color: AppColors.white,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              );
+                            },
+                          )
+                        : Text(
+                            genreName.isNotEmpty ? genreName : "Movies",
+                            style: textTheme.titleLarge?.copyWith(
+                              color: AppColors.white,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          );
                   }
 
                   if (state is HomeTabEror) {
@@ -193,5 +211,18 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
         const Gap(16),
       ],
     );
+  }
+
+  Future<String> translate(String text) async {
+    try {
+      final translatedGenreName = await translator.translate(
+        text,
+        from: 'en',
+        to: 'ar',
+      );
+      return translatedGenreName.text;
+    } catch (e) {
+      return text;
+    }
   }
 }
