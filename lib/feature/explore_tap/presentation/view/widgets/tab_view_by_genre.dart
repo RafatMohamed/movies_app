@@ -23,12 +23,19 @@ class _TabViewByGenreState extends State<TabViewByGenre> {
   @override
   void initState() {
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >
-          _scrollController.position.maxScrollExtent - 200) {
+      if (_scrollController.hasClients &&
+          _scrollController.position.pixels >
+              _scrollController.position.maxScrollExtent - 200) {
         myCubit.getOnPagenationListMovies(widget.genere);
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override

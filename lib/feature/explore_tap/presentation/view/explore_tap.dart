@@ -77,7 +77,12 @@ class _ExploreTapState extends State<ExploreTap>
       child: BlocListener<HomeTabCubit, HomeTabState>(
         listener: (context, state) {
           if (state is SeeMorePressed) {
-            tabController.animateTo(generes.indexOf(state.currentGenere));
+            final targetIndex = generes.indexWhere(
+              (g) => g.toLowerCase() == state.currentGenere.toLowerCase(),
+            );
+            if (targetIndex != -1 && targetIndex < tabController.length) {
+              tabController.animateTo(targetIndex);
+            }
           }
         },
         child: Column(
@@ -92,15 +97,12 @@ class _ExploreTapState extends State<ExploreTap>
               dividerColor: Colors.transparent,
               controller: tabController,
               isScrollable: true,
-              tabs: displayGenres
-                  .map(
-                    (genre) => TabItem(
-                      genre: genre,
-                      isSelected:
-                          displayGenres.indexOf(genre) == tabController.index,
-                    ),
-                  )
-                  .toList(),
+              tabs: displayGenres.asMap().entries.map((entry) {
+                return TabItem(
+                  genre: entry.value,
+                  isSelected: entry.key == tabController.index,
+                );
+              }).toList(),
             ),
             Expanded(
               child: TabBarView(

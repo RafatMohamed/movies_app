@@ -40,8 +40,8 @@ class DefaultBottomNavigationBar extends StatelessWidget {
         decoration: const BoxDecoration(color: AppColors.lightBlack),
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: itemsNav.map((item) {
-            final index = itemsNav.indexOf(item);
+          children: itemsNav.asMap().entries.map((entry) {
+            final index = entry.key;
             final isSelected = index == currentIndex;
             return Expanded(
               child: GestureDetector(
@@ -54,7 +54,7 @@ class DefaultBottomNavigationBar extends StatelessWidget {
                   duration: const Duration(milliseconds: 50),
                   alignment: AlignmentDirectional.center,
                   child: SvgPicture.asset(
-                    itemsNav[index].iconPath,
+                    entry.value.iconPath,
                     fit: .scaleDown,
                     width: 30,
                     height: 30,

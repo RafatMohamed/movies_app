@@ -43,8 +43,11 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
       setState(() {
         nameController.text = data.name;
         phoneController.text = data.phone;
-        _avatarIndex = data.avatarIndex;
-        selectedAvatar = ImgProfileModel.avatars[_avatarIndex].imgPath;
+        _avatarIndex = (data.avatarIndex >= 0 &&
+                data.avatarIndex < ImgProfileModel.avatars.length)
+            ? data.avatarIndex
+            : 0;
+        selectedAvatar = ImgProfileModel.getAvatarPath(_avatarIndex);
       });
     }
   }

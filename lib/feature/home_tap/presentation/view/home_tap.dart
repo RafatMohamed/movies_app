@@ -39,8 +39,20 @@ class _HomeTapState extends State<HomeTap> {
               }
 
               if (state is HomeTabLoaded) {
+                if (state.movies.isEmpty) {
+                  return const SizedBox();
+                }
+                final validIndex = (currentIndex >= 0 &&
+                        currentIndex < state.movies.length)
+                    ? currentIndex
+                    : 0;
+                final imageUrl =
+                    state.movies[validIndex].largeCoverImage ?? '';
+                if (imageUrl.isEmpty) {
+                  return const SizedBox();
+                }
                 return CachedNetworkImage(
-                  imageUrl: state.movies[currentIndex].largeCoverImage ?? '',
+                  imageUrl: imageUrl,
                   imageBuilder: (_, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(

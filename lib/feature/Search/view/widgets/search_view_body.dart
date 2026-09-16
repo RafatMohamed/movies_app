@@ -20,6 +20,9 @@ class SearchViewBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
+        if (index >= movies.length) {
+          return const SizedBox();
+        }
         return CustomMovieCard(
           pathImage: movies[index].largeCoverImage,
           rate: movies[index].rating.toString(),

@@ -14,6 +14,7 @@ class PosterImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (collection.isEmpty) return const SizedBox();
     return SizedBox(
       height: contentHeight,
       width: double.infinity,

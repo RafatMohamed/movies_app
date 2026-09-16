@@ -25,6 +25,12 @@ class _TabsViewSectionState extends State<TabsViewSection>
   }
 
   @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     return Padding(
