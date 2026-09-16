@@ -29,6 +29,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final AuthService _authService = AuthService();
   bool _isLoading = false;
 
+  bool _isGoogleLoading = false;
+
   @override
   void dispose() {
     emailController.dispose();
@@ -65,7 +67,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
   Future<void> _handleGoogleLogin() async {
     FocusScope.of(context).unfocus();
-    setState(() => _isLoading = true);
+    setState(() => _isGoogleLoading = true);
     try {
       await _authService.signInWithGoogle();
       if (!mounted) return;
@@ -80,7 +82,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         context,
       ).showSnackBar(SnackBar(content: Text(e.message)));
     } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) setState(() => _isGoogleLoading = false);
     }
   }
 
@@ -218,7 +220,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
   Widget _buildGoogleButton(TextTheme textTheme, AppLocalizations l10n) {
     return GestureDetector(
-      onTap: _isLoading ? null : _handleGoogleLogin,
+      onTap: _isGoogleLoading ? null : _handleGoogleLogin,
       child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsetsDirectional.all(AppPadding.p16),
@@ -226,17 +228,28 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           borderRadius: BorderRadiusDirectional.circular(AppBorderRadius.r16),
           color: AppColors.gold,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(AppAssets.googleIcon, width: 22, height: 22),
-            const Gap(AppPadding.p8),
-            Text(
-              l10n.loginWithGoogle,
-              style: textTheme.labelSmall?.copyWith(color: AppColors.deepBlack),
-            ),
-          ],
-        ),
+        child: _isGoogleLoading
+            ? const SizedBox(
+                height: 22,
+                width: 22,
+                child: CircularProgressIndicator(
+                  color: AppColors.deepBlack,
+                  strokeWidth: 2,
+                ),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(AppAssets.googleIcon, width: 22, height: 22),
+                  const Gap(AppPadding.p8),
+                  Text(
+                    l10n.loginWithGoogle,
+                    style: textTheme.labelSmall?.copyWith(
+                      color: AppColors.deepBlack,
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
