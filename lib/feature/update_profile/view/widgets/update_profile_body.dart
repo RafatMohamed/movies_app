@@ -63,9 +63,10 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
       await context.read<AuthCubit>().updateUserData({'avatarIndex': newIndex});
     } on AuthException catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text(e.message)));
+        ).showSnackBar(SnackBar(content: Text(e.getLocalizedMessage(l10n))));
       }
     }
   }
@@ -87,9 +88,10 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
       }
     } on AuthException catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text(e.message)));
+        ).showSnackBar(SnackBar(content: Text(e.getLocalizedMessage(l10n))));
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -141,9 +143,10 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
       }
     } on AuthException catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text(e.message)));
+        ).showSnackBar(SnackBar(content: Text(e.getLocalizedMessage(l10n))));
       }
     } finally {
       if (mounted) setState(() => _isDeleting = false);

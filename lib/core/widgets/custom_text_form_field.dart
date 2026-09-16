@@ -50,17 +50,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       maxLines: widget.maxLines,
       validator: (value) {
         if (widget.withValidator!) {
-          if (value == null || value.isEmpty) {
-            return "${widget.hintText} ${AppLocalizations.of(context).required}";
+          final l10n = AppLocalizations.of(context);
+          if (value == null || value.trim().isEmpty) {
+            return "${widget.hintText} ${l10n.required}";
           } else if (widget.isPassword == true) {
             if (value.length < 8) {
-              return "Password must be at least 8 characters";
+              return l10n.passwordTooShort;
             }
           } else if (widget.isEmail == true) {
             if (!value.contains("@") ||
                 !value.contains(".") ||
                 !(RegExp(r'[a-zA-Z0-9@._-]')).hasMatch(value)) {
-              return "Email is not valid";
+              return l10n.invalidEmailFormat;
             }
           }
         }

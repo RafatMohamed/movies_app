@@ -74,7 +74,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(e.message)));
+      ).showSnackBar(SnackBar(content: Text(e.getLocalizedMessage(l10n))));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }

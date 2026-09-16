@@ -57,9 +57,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       );
     } on AuthException catch (e) {
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(e.message)));
+      ).showSnackBar(SnackBar(content: Text(e.getLocalizedMessage(l10n))));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -78,9 +79,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       );
     } on AuthException catch (e) {
       if (!mounted) return;
+      final l10n = AppLocalizations.of(context);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(e.message)));
+      ).showSnackBar(SnackBar(content: Text(e.getLocalizedMessage(l10n))));
     } finally {
       if (mounted) setState(() => _isGoogleLoading = false);
     }

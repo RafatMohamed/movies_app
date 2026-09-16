@@ -2,15 +2,82 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:movies_app/core/models/user_model.dart';
 import 'package:movies_app/core/services/firestore_service.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
-/// Thrown by [AuthService] with a human-readable message, so UI code
-/// never needs to know about Firebase error codes directly.
+/// Thrown by [AuthService] with an error code and optional fallback message
+/// so UI code can map errors to localized strings.
 class AuthException implements Exception {
-  final String message;
-  AuthException(this.message);
+  final String code;
+  final String? fallbackMessage;
+
+  AuthException(this.code, [this.fallbackMessage]);
+
+  String getLocalizedMessage(AppLocalizations l10n) {
+    switch (code) {
+      case 'invalid-email':
+        return l10n.authInvalidEmail;
+      case 'user-disabled':
+        return l10n.authUserDisabled;
+      case 'user-not-found':
+        return l10n.authUserNotFound;
+      case 'wrong-password':
+      case 'invalid-credential':
+        return l10n.authWrongPassword;
+      case 'email-already-in-use':
+        return l10n.authEmailAlreadyInUse;
+      case 'weak-password':
+        return l10n.authWeakPassword;
+      case 'network-request-failed':
+        return l10n.authNetworkError;
+      case 'too-many-requests':
+        return l10n.authTooManyRequests;
+      case 'operation-not-allowed':
+        return l10n.authOperationNotAllowed;
+      case 'google-cancelled':
+        return l10n.googleSignInCancelled;
+      case 'google-failed':
+        return l10n.googleSignInFailed;
+      case 'requires-recent-login':
+        return l10n.authRequiresRecentLogin;
+      case 'no-signed-in-user':
+        return l10n.authNoSignedInUser;
+      default:
+        return fallbackMessage ?? l10n.authDefaultError;
+    }
+  }
+
+  String get message => fallbackMessage ?? _mapError(code);
 
   @override
   String toString() => message;
+}
+
+String _mapError(String code) {
+  switch (code) {
+    case 'invalid-email':
+      return 'That email address looks invalid.';
+    case 'user-disabled':
+      return 'This account has been disabled.';
+    case 'user-not-found':
+      return 'No account found with this email.';
+    case 'wrong-password':
+    case 'invalid-credential':
+      return 'Incorrect email or password.';
+    case 'email-already-in-use':
+      return 'An account already exists with this email.';
+    case 'weak-password':
+      return 'Password is too weak.';
+    case 'network-request-failed':
+      return 'Network error. Check your connection.';
+    case 'too-many-requests':
+      return 'Too many attempts. Try again later.';
+    case 'operation-not-allowed':
+      return 'Email/password sign-in is not enabled for this project.';
+    case 'requires-recent-login':
+      return 'Please log in again before completing this action.';
+    default:
+      return 'Something went wrong. Please try again.';
+  }
 }
 
 class AuthService {
@@ -35,7 +102,7 @@ class AuthService {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      throw AuthException(_mapError(e.code));
+      throw AuthException(e.code);
     }
   }
 
@@ -73,7 +140,7 @@ class AuthService {
       }
       return credential;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(_mapError(e.code));
+      throw AuthException(e.code);
     }
   }
 
@@ -81,7 +148,7 @@ class AuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email.trim());
     } on FirebaseAuthException catch (e) {
-      throw AuthException(_mapError(e.code));
+      throw AuthException(e.code);
     }
   }
 
@@ -91,13 +158,13 @@ class AuthService {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser == null) {
-        throw AuthException('Google sign in was cancelled.');
+        throw AuthException('google-cancelled');
       }
 
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
-        throw AuthException('Failed to get Google authentication tokens.');
+        throw AuthException('google-failed');
       }
 
       final credential = GoogleAuthProvider.credential(
@@ -122,10 +189,10 @@ class AuthService {
       }
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      throw AuthException(_mapError(e.code));
+      throw AuthException(e.code);
     } catch (e) {
       if (e is AuthException) rethrow;
-      throw AuthException('Failed to sign in with Google. Please try again.');
+      throw AuthException('google-failed');
     }
   }
 
@@ -147,7 +214,7 @@ class AuthService {
   Future<void> updateUserData(Map<String, dynamic> data) async {
     final uid = currentUser?.uid;
     if (uid == null) {
-      throw AuthException('No signed-in user.');
+      throw AuthException('no-signed-in-user');
     }
     await _firestoreService.updateUserFields(uid, data);
   }
@@ -158,7 +225,7 @@ class AuthService {
   }) async {
     final user = currentUser;
     if (user == null || user.email == null) {
-      throw AuthException('No signed-in user.');
+      throw AuthException('no-signed-in-user');
     }
 
     final credential = EmailAuthProvider.credential(
@@ -170,13 +237,13 @@ class AuthService {
       await user.reauthenticateWithCredential(credential);
       await user.updatePassword(newPassword);
     } on FirebaseAuthException catch (e) {
-      throw AuthException(_mapError(e.code));
+      throw AuthException(e.code);
     }
   }
 
-  Future<void> logout() async{
-   await _auth.signOut();
-   await GoogleSignIn().signOut();
+  Future<void> logout() async {
+    await _auth.signOut();
+    await GoogleSignIn().signOut();
   }
 
   /// Deletes both the Firestore profile document and the Firebase Auth
@@ -185,41 +252,13 @@ class AuthService {
   Future<void> deleteAccount() async {
     final user = currentUser;
     if (user == null) {
-      throw AuthException('No signed-in user.');
+      throw AuthException('no-signed-in-user');
     }
     try {
       await _firestoreService.deleteUser(user.uid);
       await user.delete();
     } on FirebaseAuthException catch (e) {
-      throw AuthException(_mapError(e.code));
-    }
-  }
-
-  String _mapError(String code) {
-    switch (code) {
-      case 'invalid-email':
-        return 'That email address looks invalid.';
-      case 'user-disabled':
-        return 'This account has been disabled.';
-      case 'user-not-found':
-        return 'No account found with this email.';
-      case 'wrong-password':
-      case 'invalid-credential':
-        return 'Incorrect email or password.';
-      case 'email-already-in-use':
-        return 'An account already exists with this email.';
-      case 'weak-password':
-        return 'Password is too weak (min 6 characters).';
-      case 'network-request-failed':
-        return 'Network error. Check your connection.';
-      case 'too-many-requests':
-        return 'Too many attempts. Try again later.';
-      case 'operation-not-allowed':
-        return 'Email/password sign-in is not enabled for this project.';
-      case 'requires-recent-login':
-        return 'Please log in again before deleting your account.';
-      default:
-        return 'Something went wrong. Please try again.';
+      throw AuthException(e.code);
     }
   }
 }

@@ -142,13 +142,74 @@ class AppLocalizationsEn extends AppLocalizations {
   String get character => 'Character';
 
   @override
-  String get required => 'Required';
+  String get required => 'is required';
 
   @override
   String get read_more => 'Read more';
 
   @override
   String get read_less => 'Read less';
+
+  @override
+  String get passwordTooShort => 'Password must be at least 8 characters';
+
+  @override
+  String get invalidEmailFormat => 'Please enter a valid email address';
+
+  @override
+  String get pleaseEnterEmail => 'Please enter your email first';
+
+  @override
+  String get passwordResetSent =>
+      'Password reset email sent successfully! Check your inbox.';
+
+  @override
+  String get verifyEmail => 'Verify Email';
+
+  @override
+  String get authInvalidEmail => 'That email address looks invalid.';
+
+  @override
+  String get authUserDisabled => 'This account has been disabled.';
+
+  @override
+  String get authUserNotFound => 'No account found with this email.';
+
+  @override
+  String get authWrongPassword => 'Incorrect email or password.';
+
+  @override
+  String get authEmailAlreadyInUse =>
+      'An account already exists with this email.';
+
+  @override
+  String get authWeakPassword => 'Password is too weak.';
+
+  @override
+  String get authNetworkError => 'Network error. Check your connection.';
+
+  @override
+  String get authTooManyRequests => 'Too many attempts. Try again later.';
+
+  @override
+  String get authOperationNotAllowed => 'Operation not allowed.';
+
+  @override
+  String get googleSignInCancelled => 'Google sign in was cancelled.';
+
+  @override
+  String get googleSignInFailed =>
+      'Failed to sign in with Google. Please try again.';
+
+  @override
+  String get authRequiresRecentLogin =>
+      'Please log in again to perform this action.';
+
+  @override
+  String get authNoSignedInUser => 'No signed-in user.';
+
+  @override
+  String get authDefaultError => 'Something went wrong. Please try again.';
 
   @override
   String get action => 'Action';
