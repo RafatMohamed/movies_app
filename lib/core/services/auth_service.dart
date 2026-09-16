@@ -94,7 +94,8 @@ class AuthService {
         throw AuthException('Google sign in was cancelled.');
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
       if (googleAuth.accessToken == null || googleAuth.idToken == null) {
         throw AuthException('Failed to get Google authentication tokens.');
@@ -111,14 +112,18 @@ class AuthService {
         // isNewUser tells us whether to seed createdAt, but merge:true
         // makes this safe to call on every Google sign-in either way.
         final isNew = userCredential.additionalUserInfo?.isNewUser ?? false;
-        await _firestoreService.upsertUser(
-          UserModel(
-            uid: user.uid,
-            name: user.displayName ?? '',
-            email: user.email ?? '',
-          ),
-          isNew: isNew,
-        );
+        if (isNew) {
+          await _firestoreService.upsertUser(
+            UserModel(
+              uid: user.uid,
+              name: user.displayName ?? '',
+              email: user.email ?? '',
+            ),
+            isNew: isNew,
+          );
+        } else {
+          _firestoreService.getUser(user.uid);
+        }
       }
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -174,9 +179,9 @@ class AuthService {
     }
   }
 
-  Future<void> logout() async{
-   await _auth.signOut();
-   await GoogleSignIn().signOut();
+  Future<void> logout() async {
+    await _auth.signOut();
+    await GoogleSignIn().signOut();
   }
 
   /// Deletes both the Firestore profile document and the Firebase Auth
