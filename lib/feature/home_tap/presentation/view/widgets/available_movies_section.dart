@@ -86,11 +86,17 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
                   ),
                   carouselController: controller,
                   itemCount: state.movies.length,
-                  itemBuilder: (_, index, _) => CustomMovieCard(
-                    movieId: state.movies[index].id ?? 0,
-                    pathImage: state.movies[index].largeCoverImage ?? '',
-                    rate: state.movies[index].rating.toString(),
-                  ),
+                  itemBuilder: (_, index, _) {
+                    if (index >= state.movies.length) {
+                      return const SizedBox();
+                    }
+                    final movie = state.movies[index];
+                    return CustomMovieCard(
+                      movieId: movie.id ?? 0,
+                      pathImage: movie.largeCoverImage ?? '',
+                      rate: movie.rating?.toString() ?? '0.0',
+                    );
+                  },
                 ),
               );
             }

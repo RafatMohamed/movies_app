@@ -50,7 +50,7 @@ class HeaderSection extends StatelessWidget {
                       flex: 10,
                       child: FittedBox(
                         child: SvgPicture.asset(
-                          imagesProfile[item.avatarIndex].imgPath,
+                          ImgProfileModel.getAvatarPath(item.avatarIndex),
                           height: 118,
                           width: 118,
                           fit: .fill,

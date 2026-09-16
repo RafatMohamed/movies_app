@@ -37,8 +37,11 @@ class HistoryListSection extends StatelessWidget {
                       crossAxisSpacing: 10,
                       mainAxisExtent: MediaQuery.sizeOf(context).height * .3,
                     ),
-                    itemCount: state.movies.length<20?state.movies.length:20,
+                    itemCount: state.movies.length < 20 ? state.movies.length : 20,
                     itemBuilder: (_, index) {
+                      if (index >= state.movies.length) {
+                        return const SizedBox();
+                      }
                       final item = state.movies[index];
                       return CustomMovieCard(
                         pathImage: item.image,

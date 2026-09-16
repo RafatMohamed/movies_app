@@ -40,6 +40,9 @@ class WatchListSection extends StatelessWidget {
                     ),
                     itemCount: state.movies.length,
                     itemBuilder: (_, index) {
+                      if (index >= state.movies.length) {
+                        return const SizedBox();
+                      }
                       final item = state.movies[index];
                       return CustomMovieCard(
                         refresh: () {

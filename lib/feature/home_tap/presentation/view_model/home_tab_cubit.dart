@@ -91,12 +91,21 @@ class HomeTabCubit extends Cubit<HomeTabState> {
     return [];
   }
 
+  String get currentGenreName {
+    if (myGenereList.isNotEmpty &&
+        currentGenereIndex >= 0 &&
+        currentGenereIndex < myGenereList.length) {
+      return myGenereList[currentGenereIndex];
+    }
+    return '';
+  }
+
   void filterMovieByGenreOnNavigation() {
-    if (movies.isNotEmpty) {
+    if (movies.isNotEmpty && currentGenreName.isNotEmpty) {
       final filteredMovies = movies
           .where(
             (movie) =>
-                movie.genres?.contains(myGenereList[currentGenereIndex]) ??
+                movie.genres?.contains(currentGenreName) ??
                 false,
           )
           .toList();
@@ -106,11 +115,11 @@ class HomeTabCubit extends Cubit<HomeTabState> {
   }
 
   List<Movie> filterMovieByGenre() {
-    if (movies.isNotEmpty) {
+    if (movies.isNotEmpty && currentGenreName.isNotEmpty) {
       final filteredMovies = movies
           .where(
             (movie) =>
-                movie.genres?.contains(myGenereList[currentGenereIndex]) ??
+                movie.genres?.contains(currentGenreName) ??
                 false,
           )
           .toList();
@@ -121,7 +130,7 @@ class HomeTabCubit extends Cubit<HomeTabState> {
 
   void increaseCurrentIndexOFGenere() {
     if (myGenereList.isEmpty) return;
-    if (currentGenereIndex == myGenereList.length - 1) {
+    if (currentGenereIndex >= myGenereList.length - 1) {
       currentGenereIndex = 0;
     } else {
       currentGenereIndex++;
@@ -129,6 +138,8 @@ class HomeTabCubit extends Cubit<HomeTabState> {
   }
 
   void seeMoreClicked() {
-    emit(SeeMorePressed(myGenereList[currentGenereIndex]));
+    if (currentGenreName.isNotEmpty) {
+      emit(SeeMorePressed(currentGenreName));
+    }
   }
 }

@@ -65,8 +65,9 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                     );
                   }
                   if (state is HomeTabLoaded) {
+                    final genreName = myCubit.currentGenreName;
                     return Text(
-                      myCubit.myGenereList[myCubit.currentGenereIndex],
+                      genreName.isNotEmpty ? genreName : "Movies",
                       style: textTheme.titleLarge?.copyWith(
                         color: AppColors.white,
                         fontFamily: 'Roboto',
@@ -128,14 +129,16 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                   scrollDirection: Axis.horizontal,
                   itemCount: state.watchingNowMovies.length,
                   itemBuilder: (context, index) {
+                    if (index >= state.watchingNowMovies.length) {
+                      return const SizedBox();
+                    }
+                    final movie = state.watchingNowMovies[index];
                     return SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                       child: CustomMovieCard(
-                        movieId: state.watchingNowMovies[index].id ?? 0,
-                        pathImage:
-                            state.watchingNowMovies[index].largeCoverImage ??
-                            '',
-                        rate: state.watchingNowMovies[index].rating.toString(),
+                        movieId: movie.id ?? 0,
+                        pathImage: movie.largeCoverImage ?? '',
+                        rate: movie.rating?.toString() ?? '0.0',
                       ),
                     );
                   },

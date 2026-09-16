@@ -15,4 +15,11 @@ class ImgProfileModel {
     ImgProfileModel(imgPath: AppAssets.person8),
     ImgProfileModel(imgPath: AppAssets.person9),
   ];
+
+  static String getAvatarPath(int index) {
+    if (index >= 0 && index < avatars.length) {
+      return avatars[index].imgPath;
+    }
+    return avatars.isNotEmpty ? avatars.first.imgPath : '';
+  }
 }

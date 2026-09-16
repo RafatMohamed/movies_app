@@ -39,7 +39,9 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    final currentOnboarding = onboardingList[currentIndex];
+    if (onboardingList.isEmpty) return const SizedBox();
+    final safeIndex = currentIndex.clamp(0, onboardingList.length - 1);
+    final currentOnboarding = onboardingList[safeIndex];
 
     return Stack(
       children: [
@@ -134,16 +136,19 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                         ),
                         child: CustomButtonApp(
                           onTap: () async {
-                            nextPage();
-                            if (currentIndex == onboardingList.length - 1) {
-                              IsFirstOpenApp.setIsFirstOpen(true);
-                              Navigator.pushReplacementNamed(
-                                context,
-                                AppOnRouteText.loginName,
-                              );
+                            if (currentIndex >= onboardingList.length - 1) {
+                              await IsFirstOpenApp.setIsFirstOpen(true);
+                              if (context.mounted) {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  AppOnRouteText.loginName,
+                                );
+                              }
+                            } else {
+                              nextPage();
                             }
                           },
-                          text: currentIndex == onboardingList.length - 1
+                          text: currentIndex >= onboardingList.length - 1
                               ? 'Finish'
                               : 'Next',
                         ),
