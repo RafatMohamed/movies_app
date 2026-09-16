@@ -151,6 +151,67 @@ class AppLocalizationsAr extends AppLocalizations {
   String get read_less => 'اقرأ أقل';
 
   @override
+  String get passwordTooShort => 'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل';
+
+  @override
+  String get invalidEmailFormat => 'يرجى إدخال بريد إلكتروني صالح';
+
+  @override
+  String get pleaseEnterEmail => 'يرجى إدخال البريد الإلكتروني أولاً';
+
+  @override
+  String get passwordResetSent =>
+      'تم إرسال رابط إعادة تعيين كلمة المرور بنجاح! تحقق من صندوق الوارد.';
+
+  @override
+  String get verifyEmail => 'تأكيد البريد الإلكتروني';
+
+  @override
+  String get authInvalidEmail => 'عنوان البريد الإلكتروني غير صالح.';
+
+  @override
+  String get authUserDisabled => 'تم تعطيل هذا الحساب.';
+
+  @override
+  String get authUserNotFound => 'لا يوجد حساب مرتبط بهذا البريد الإلكتروني.';
+
+  @override
+  String get authWrongPassword => 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
+
+  @override
+  String get authEmailAlreadyInUse =>
+      'يوجد حساب بالفعل بهذا البريد الإلكتروني.';
+
+  @override
+  String get authWeakPassword => 'كلمة المرور ضعيفة جداً.';
+
+  @override
+  String get authNetworkError => 'خطأ في الشبكة. يرجى التحقق من اتصالك.';
+
+  @override
+  String get authTooManyRequests => 'محاولات كثيرة جداً. يرجى المحاولة لاحقاً.';
+
+  @override
+  String get authOperationNotAllowed => 'العملية غير مسموح بها.';
+
+  @override
+  String get googleSignInCancelled => 'تم إلغاء تسجيل الدخول عبر جوجل.';
+
+  @override
+  String get googleSignInFailed =>
+      'فشل تسجيل الدخول عبر جوجل. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get authRequiresRecentLogin =>
+      'يرجى تسجيل الدخول مجدداً لإجراء هذه العملية.';
+
+  @override
+  String get authNoSignedInUser => 'لا يوجد مستخدم مسجل الدخول.';
+
+  @override
+  String get authDefaultError => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.';
+
+  @override
   String get action => 'أكشن';
 
   @override

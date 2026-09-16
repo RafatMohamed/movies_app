@@ -365,7 +365,7 @@ abstract class AppLocalizations {
   /// No description provided for @required.
   ///
   /// In en, this message translates to:
-  /// **'Required'**
+  /// **'is required'**
   String get required;
 
   /// No description provided for @read_more.
@@ -379,6 +379,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Read less'**
   String get read_less;
+
+  /// No description provided for @passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get passwordTooShort;
+
+  /// No description provided for @invalidEmailFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get invalidEmailFormat;
+
+  /// No description provided for @pleaseEnterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email first'**
+  String get pleaseEnterEmail;
+
+  /// No description provided for @passwordResetSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent successfully! Check your inbox.'**
+  String get passwordResetSent;
+
+  /// No description provided for @verifyEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Email'**
+  String get verifyEmail;
+
+  /// No description provided for @authInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'That email address looks invalid.'**
+  String get authInvalidEmail;
+
+  /// No description provided for @authUserDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'This account has been disabled.'**
+  String get authUserDisabled;
+
+  /// No description provided for @authUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No account found with this email.'**
+  String get authUserNotFound;
+
+  /// No description provided for @authWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect email or password.'**
+  String get authWrongPassword;
+
+  /// No description provided for @authEmailAlreadyInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'An account already exists with this email.'**
+  String get authEmailAlreadyInUse;
+
+  /// No description provided for @authWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak.'**
+  String get authWeakPassword;
+
+  /// No description provided for @authNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Check your connection.'**
+  String get authNetworkError;
+
+  /// No description provided for @authTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Try again later.'**
+  String get authTooManyRequests;
+
+  /// No description provided for @authOperationNotAllowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation not allowed.'**
+  String get authOperationNotAllowed;
+
+  /// No description provided for @googleSignInCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign in was cancelled.'**
+  String get googleSignInCancelled;
+
+  /// No description provided for @googleSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to sign in with Google. Please try again.'**
+  String get googleSignInFailed;
+
+  /// No description provided for @authRequiresRecentLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Please log in again to perform this action.'**
+  String get authRequiresRecentLogin;
+
+  /// No description provided for @authNoSignedInUser.
+  ///
+  /// In en, this message translates to:
+  /// **'No signed-in user.'**
+  String get authNoSignedInUser;
+
+  /// No description provided for @authDefaultError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get authDefaultError;
 
   /// No description provided for @action.
   ///
