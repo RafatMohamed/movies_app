@@ -144,5 +144,9 @@
   "sciFi": "Sci-Fi",
   "sport": "Sport",
   "thriller": "Thriller",
-  "war": "War"
+  "war": "War",
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+  "cancel": "Cancel",
+  "delete": "Delete"
 }

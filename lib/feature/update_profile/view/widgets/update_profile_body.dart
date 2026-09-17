@@ -85,8 +85,9 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
         'avatarIndex': _avatarIndex,
       });
       if (mounted) {
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile updated successfully')),
+          SnackBar(content: Text(l10n.profileUpdatedSuccessfully)),
         );
       }
     } on AuthException catch (e) {
@@ -102,30 +103,31 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
   }
 
   Future<void> _handleDeleteAccount() async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: AppColors.caviar,
         title: Text(
-          AppLocalizations.of(context).deleteAccount,
+          l10n.deleteAccount,
           style: const TextStyle(color: AppColors.white),
         ),
-        content: const Text(
-          'Are you sure you want to delete your account? This action cannot be undone.',
+        content: Text(
+          l10n.deleteAccountConfirmation,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.white, fontSize: 20),
+            child: Text(
+              l10n.cancel,
+              style: const TextStyle(color: AppColors.white, fontSize: 20),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            child: const Text(
-              'Delete',
-              style: TextStyle(color: AppColors.red, fontSize: 20),
+            child: Text(
+              l10n.delete,
+              style: const TextStyle(color: AppColors.red, fontSize: 20),
             ),
           ),
         ],
