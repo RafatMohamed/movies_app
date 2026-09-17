@@ -46,7 +46,9 @@ class AppAssets {
   static const String collectionPic27 = "assets/images/png/collectionPic27.png";
   static const String collectionPic28 = "assets/images/png/collectionPic28.png";
   static const String availableNowImage = "assets/images/png/available_now.png";
+  static const String availableNowImageAr = "assets/images/png/Available_now_ar.png";
   static const String watchNowImage = "assets/images/png/watch_now.png";
+  static const String watchNowImageAr = "assets/images/png/watch_now_ar.png";
   static const String forgetPasswordImage =
       "assets/images/png/forget_password.png";
   static const String appLogo = "assets/images/png/logo_app.png";

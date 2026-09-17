@@ -9,51 +9,74 @@ import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 import '../../../../core/utilities/app_locale_controller.dart';
 
-class CustomReadMoreTextTranslate extends StatelessWidget {
+class CustomReadMoreTextTranslate extends StatefulWidget {
   const CustomReadMoreTextTranslate({super.key, required this.text});
   final String text;
-  Future<String> getTextTr(String text) async {
-    final result = await GoogleTranslator().translate(
-      text,
-      from: 'en',
-      to: 'ar',
-    );
 
-    return result.text;
+  @override
+  State<CustomReadMoreTextTranslate> createState() =>
+      _CustomReadMoreTextTranslateState();
+}
+
+class _CustomReadMoreTextTranslateState
+    extends State<CustomReadMoreTextTranslate> {
+  late final Future<String> _translationFuture;
+  final bool _isAr = AppLocaleController.instance.value.languageCode == 'ar';
+
+  @override
+  void initState() {
+    super.initState();
+    // Only kick off the translation when the locale is Arabic
+    _translationFuture = _isAr ? _getTextTr(widget.text) : Future.value('');
+  }
+
+  Future<String> _getTextTr(String text) async {
+    try {
+      if (text.trim().isEmpty) return text;
+      final result = await GoogleTranslator().translate(
+        text,
+        from: 'en',
+        to: 'ar',
+      );
+      return result.text.trim().isEmpty ? text : result.text;
+    } catch (_) {
+      // Fall back to the original text on any network / parse error
+      return text;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool isAr = AppLocaleController.instance.value.languageCode == "ar";
     final TextTheme textTheme = Theme.of(context).textTheme;
-    return !isAr || getTextTr(text).toString().isEmpty
-        ? CustomReamMoreText(text: text, textTheme: textTheme)
-        : FutureBuilder(
-            future: getTextTr(text),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == .waiting) {
-                return Shimmer.fromColors(
-                  baseColor: Colors.grey.shade800,
-                  highlightColor: Colors.grey.shade700,
-                  child: Container(
-                    width: double.infinity,
-                    height: context.height * 0.1,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(AppBorderRadius.r8),
-                    ),
-                  ),
-                );
-              }
-              if (!snapshot.hasData) {
-                return const SizedBox();
-              }
-              return CustomReamMoreText(
-                text: snapshot.data ?? text,
-                textTheme: textTheme,
-              );
-            },
+
+    if (!_isAr) {
+      return CustomReamMoreText(text: widget.text, textTheme: textTheme);
+    }
+
+    return FutureBuilder<String>(
+      future: _translationFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Shimmer.fromColors(
+            baseColor: Colors.grey.shade800,
+            highlightColor: Colors.grey.shade700,
+            child: Container(
+              width: double.infinity,
+              height: context.height * 0.1,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(AppBorderRadius.r8),
+              ),
+            ),
           );
+        }
+        // On error or missing data, show original text
+        return CustomReamMoreText(
+          text: snapshot.data ?? widget.text,
+          textTheme: textTheme,
+        );
+      },
+    );
   }
 }
 

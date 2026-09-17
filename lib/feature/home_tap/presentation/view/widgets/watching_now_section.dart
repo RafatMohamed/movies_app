@@ -40,7 +40,14 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
           height: MediaQuery.of(context).size.height * 0.127,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Image.asset(AppAssets.watchNowImage, fit: BoxFit.cover)],
+            children: [
+              Image.asset(
+                AppLocalizations.of(context).localeName == 'ar'
+                    ? AppAssets.watchNowImageAr
+                    : AppAssets.watchNowImage,
+                fit: BoxFit.cover,
+              ),
+            ],
           ),
         ),
         Padding(
