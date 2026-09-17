@@ -36,14 +36,31 @@ class CustomMovieDetailsImage extends StatelessWidget {
             ),
             child: CachedNetworkImage(
               imageUrl: movie.largeCoverImage,
-              fit: .cover,
               width: width,
               height: height * 0.8,
-              placeholder: (_, _) {
-                return const MovieCardShimmer();
-              },
+              placeholder: (_, _) => const MovieCardShimmer(),
               errorWidget: (context, url, error) =>
                   const Icon(Icons.image_not_supported),
+              imageBuilder: (context, imageProvider) => Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image(image: imageProvider, fit: BoxFit.cover),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.3),
+                          Colors.black.withValues(alpha: 0.85),
+                        ],
+                        stops: const [0.3, 0.65, 1.0],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Positioned(

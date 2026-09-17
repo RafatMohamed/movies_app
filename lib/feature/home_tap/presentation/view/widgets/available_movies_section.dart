@@ -8,6 +8,7 @@ import 'package:movies_app/core/widgets/custom_movie_card.dart';
 import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
 import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
 
 class AvailableMoviesSection extends StatefulWidget {
   final void Function(int index) onPageChanged;
@@ -43,7 +44,13 @@ class _AvailableMoviesSectionState extends State<AvailableMoviesSection> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(AppAssets.availableNowImage, width: 200, height: 300),
+              Image.asset(
+                AppLocalizations.of(context).localeName == 'ar'
+                    ? AppAssets.availableNowImageAr
+                    : AppAssets.availableNowImage,
+                width: 200,
+                height: 300,
+              ),
             ],
           ),
         ),
