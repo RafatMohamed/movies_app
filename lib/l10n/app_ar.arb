@@ -85,5 +85,9 @@
   "sciFi": "خيال علمي",
   "sport": "رياضي",
   "thriller": "إثارة",
-  "war": "حرب"
+  "war": "حرب",
+  "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
+  "deleteAccountConfirmation": "هل أنت متاكد من أنك تريد حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.",
+  "cancel": "إلغاء",
+  "delete": "حذف"
 }

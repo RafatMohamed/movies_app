@@ -267,4 +267,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get war => 'حرب';
+
+  @override
+  String get profileUpdatedSuccessfully => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'هل أنت متاكد من أنك تريد حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get delete => 'حذف';
 }
