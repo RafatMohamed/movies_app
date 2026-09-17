@@ -15,6 +15,8 @@ import 'package:movies_app/core/widgets/custom_text_form_field.dart';
 import 'package:movies_app/core/widgets/language_toggle.dart';
 import 'package:movies_app/l10n/generated/app_localizations.dart';
 
+import '../../../core/utilities/app_locale_controller.dart';
+
 class RegisterViewBody extends StatefulWidget {
   const RegisterViewBody({super.key});
 
@@ -185,7 +187,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: SvgPicture.asset(
-                AppAssets.arrowBackDetails,
+              AppLocaleController.instance.value.languageCode == 'en'?
+                AppAssets.arrowBackDetails:AppAssets.arrowBackAr,
                 colorFilter: const ColorFilter.mode(
                   AppColors.gold,
                   BlendMode.srcIn,

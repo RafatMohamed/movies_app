@@ -140,11 +140,12 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
     try {
       if (!mounted) return;
       await context.read<AuthCubit>().deleteAccount();
-
+      if (!mounted) return;
+      await context.read<AuthCubit>().logout();
       if (mounted) {
         Navigator.of(
           context,
-        ).pushNamedAndRemoveUntil(AppOnRouteText.loginName, (route) => false);
+        ).pushReplacementNamed(AppOnRouteText.loginName,);
       }
     } on AuthException catch (e) {
       if (mounted) {

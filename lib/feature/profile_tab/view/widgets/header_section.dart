@@ -19,7 +19,6 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ImgProfileModel> imagesProfile = ImgProfileModel.avatars;
 
     final AppLocalizations l10n = AppLocalizations.of(context);
 

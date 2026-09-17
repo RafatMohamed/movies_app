@@ -42,7 +42,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get createAccount => 'إنشاء حساب';
 
   @override
-  String get avatar => 'الصورة الرمزية';
+  String get avatar => 'الصورة الشخصيه';
 
   @override
   String get register => 'التسجيل';
@@ -81,7 +81,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get seeMore => 'عرض المزيد';
 
   @override
-  String get pickAvatar => 'اختيار الصورة الرمزية';
+  String get pickAvatar => 'اختيار الصورة الشخصيه';
 
   @override
   String get enterYourName => 'أدخل اسمك';

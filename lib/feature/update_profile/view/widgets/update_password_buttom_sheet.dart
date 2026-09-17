@@ -50,9 +50,9 @@ class _UpdatePasswordButtomSheetState extends State<UpdatePasswordButtomSheet> {
         newPassword: newPasswordFailed.text,
       );
       if (context.mounted) Navigator.pop(context);
-    } on AuthException catch (e) {
+    } on AuthException catch (_) {
       if (!mounted) return;
-      setState(() => errorMessage = e.getLocalizedMessage(AppLocalizations.of(context)));
+      setState(() => errorMessage = AppLocalizations.of(context).oldPasswordIncorrect);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
