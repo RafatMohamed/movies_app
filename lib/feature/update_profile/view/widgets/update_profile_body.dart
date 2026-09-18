@@ -10,6 +10,7 @@ import 'package:movies_app/feature/update_profile/view/widgets/update_password_b
 import 'package:svg_flutter/svg.dart';
 import '../../../../core/utilities/app_colors.dart';
 import '../../../../core/utilities/app_padding.dart';
+import '../../../../core/utilities/app_them.dart';
 import '../../../../core/widgets/custom_button_app.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../l10n/generated/app_localizations.dart';
@@ -196,162 +197,154 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p16,
-                vertical: AppPadding.p20,
-              ),
-              child: IntrinsicHeight(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Center(
-                      child: InkWell(
-                        onTap: () {
-                          _showAvatarBottomSheet(context);
-                        },
-                        child: SizedBox(
-                          width: 140,
-                          height: 140,
-                          child: SvgPicture.asset(
-                            selectedAvatar,
-                            fit: BoxFit.contain,
-                            placeholderBuilder: (context) => const CircleAvatar(
-                              radius: 70,
-                              backgroundColor: AppColors.lightBlack,
-                              child: Icon(
-                                Icons.person,
-                                size: 70,
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ),
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: SizedBox(
+        height: context.height*0.8,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppPadding.p16,
+            vertical: AppPadding.p20,
+          ),
+          child: Column(
+            children: [
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    _showAvatarBottomSheet(context);
+                  },
+                  child: SizedBox(
+                    width: 140,
+                    height: 140,
+                    child: SvgPicture.asset(
+                      selectedAvatar,
+                      fit: BoxFit.contain,
+                      placeholderBuilder: (context) => const CircleAvatar(
+                        radius: 70,
+                        backgroundColor: AppColors.lightBlack,
+                        child: Icon(
+                          Icons.person,
+                          size: 70,
+                          color: AppColors.white,
                         ),
                       ),
                     ),
-                    const SizedBox(height: AppPadding.p24),
-                    Form(
-                      key: formKey,
-                      child: Theme(
-                        data: Theme.of(context).copyWith(
-                          primaryColor: AppColors.white,
-                          hintColor: Colors.white60,
-                          inputDecorationTheme: const InputDecorationTheme(
-                            hintStyle: TextStyle(
-                              color: Colors.white60,
-                              fontSize: 16,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            CustomTextFormField(
-                              controller: nameController,
-                              hintText: AppLocalizations.of(
-                                context,
-                              ).enterYourName,
-                              isName: true,
-                              prefixIconPath: 'assets/icons/person.svg',
-                            ),
-                            const SizedBox(height: AppPadding.p16),
-                            CustomTextFormField(
-                              controller: phoneController,
-                              hintText: AppLocalizations.of(
-                                context,
-                              ).enterYourPhoneNumber,
-                              keyboardType: TextInputType.phone,
-                              prefixIconPath: 'assets/icons/phone.svg',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AppPadding.p16),
-                    Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            builder: (context) {
-                              return const UpdatePasswordButtomSheet();
-                            },
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context).resetPassword,
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    const SizedBox(height: AppPadding.p16),
-                    CustomButtonApp(
-                      textStyle: Theme.of(context).textTheme.labelSmall
-                          ?.copyWith(
-                            color: AppColors.white,
-                            fontWeight: .normal,
-                          ),
-                      text: AppLocalizations.of(context).deleteAccount,
-                      background: AppColors.red,
-                      onTap: () {
-                        if (!_isDeleting) {
-                          _handleDeleteAccount();
-                        }
-                      },
-                    ),
-                    const SizedBox(height: AppPadding.p10),
-                    CustomButtonApp(
-                      text: AppLocalizations.of(context).updateData,
-                      background: AppColors.gold,
-                      onTap: () {
-                        if (!_isLoading) {
-                          _handleUpdate();
-                        }
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(height: AppPadding.p24),
+              Form(
+                key: formKey,
+                child: Theme(
+                  data: Theme.of(context).copyWith(
+                    primaryColor: AppColors.white,
+                    hintColor: Colors.white60,
+                    inputDecorationTheme: const InputDecorationTheme(
+                      hintStyle: TextStyle(
+                        color: Colors.white60,
+                        fontSize: 16,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        controller: nameController,
+                        hintText: AppLocalizations.of(
+                          context,
+                        ).enterYourName,
+                        isName: true,
+                        prefixIconPath: 'assets/icons/person.svg',
+                      ),
+                      const SizedBox(height: AppPadding.p16),
+                      CustomTextFormField(
+                        controller: phoneController,
+                        hintText: AppLocalizations.of(
+                          context,
+                        ).enterYourPhoneNumber,
+                        keyboardType: TextInputType.phone,
+                        prefixIconPath: 'assets/icons/phone.svg',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppPadding.p16),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return const UpdatePasswordButtomSheet();
+                      },
+                    );
+                  },
+                  child: Text(
+                    AppLocalizations.of(context).resetPassword,
+                    style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              CustomButtonApp(
+                textStyle: Theme.of(context).textTheme.labelSmall
+                    ?.copyWith(
+                  color: AppColors.white,
+                  fontWeight: .normal,
+                ),
+                text: AppLocalizations.of(context).deleteAccount,
+                background: AppColors.red,
+                onTap: () {
+                  if (!_isDeleting) {
+                    _handleDeleteAccount();
+                  }
+                },
+              ),
+              const SizedBox(height: AppPadding.p10),
+              CustomButtonApp(
+                text: AppLocalizations.of(context).updateData,
+                background: AppColors.gold,
+                onTap: () {
+                  if (!_isLoading) {
+                    _handleUpdate();
+                  }
+                },
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
