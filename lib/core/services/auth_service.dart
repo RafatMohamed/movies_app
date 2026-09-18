@@ -262,6 +262,7 @@ class AuthService {
     try {
       await _firestoreService.deleteUser(user.uid);
       await user.delete();
+      await logout();
     } on FirebaseAuthException catch (e) {
       throw AuthException(e.code);
     }
