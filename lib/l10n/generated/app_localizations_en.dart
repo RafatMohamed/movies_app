@@ -54,6 +54,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginWithGoogle => 'Login With Google';
 
   @override
+  String get reloginWithGoogle => 'Re-login With Google';
+
+  @override
   String get editProfile => 'Edit Profile';
 
   @override
@@ -267,6 +270,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get war => 'War';
+
+  @override
+  String get movies => 'Movies';
 
   @override
   String get profileUpdatedSuccessfully => 'Profile updated successfully';

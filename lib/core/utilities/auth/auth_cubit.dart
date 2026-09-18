@@ -63,6 +63,22 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> reauthenticate(String password) async {
+    try {
+      await _authService.reauthenticate(password);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> reauthenticateWithGoogle() async {
+    try {
+      await _authService.reauthenticateWithGoogle();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> updatePassword({
     required String currentPassword,
     required String newPassword,

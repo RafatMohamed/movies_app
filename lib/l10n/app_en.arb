@@ -72,6 +72,7 @@
   },
 
   "loginWithGoogle": "Login With Google",
+  "reloginWithGoogle": "Re-login With Google",
   "@loginWithGoogle": {
     "description": "Google sign-in button text"
   },
@@ -145,6 +146,7 @@
   "sport": "Sport",
   "thriller": "Thriller",
   "war": "War",
+  "movies": "Movies",
   "profileUpdatedSuccessfully": "Profile updated successfully",
   "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
   "cancel": "Cancel",

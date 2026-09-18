@@ -188,6 +188,12 @@ abstract class AppLocalizations {
   /// **'Login With Google'**
   String get loginWithGoogle;
 
+  /// No description provided for @reloginWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-login With Google'**
+  String get reloginWithGoogle;
+
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:
@@ -607,6 +613,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'War'**
   String get war;
+
+  /// No description provided for @movies.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies'**
+  String get movies;
 
   /// No description provided for @profileUpdatedSuccessfully.
   ///
