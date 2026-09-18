@@ -224,6 +224,61 @@ class AuthService {
     await _firestoreService.updateUserFields(uid, data);
   }
 
+  Future<void> reauthenticate(String password) async {
+    final user = currentUser;
+    if (user == null || user.email == null) {
+      throw AuthException('no-signed-in-user');
+    }
+
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: password,
+    );
+
+    try {
+      await user.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(e.code);
+    }
+  }
+
+  Future<void> reauthenticateWithGoogle() async {
+    final user = currentUser;
+    if (user == null) {
+      throw AuthException('no-signed-in-user');
+    }
+
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      // Disconnect cached session so the account picker always appears.
+      await googleSignIn.signOut();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser == null) {
+        throw AuthException('google-cancelled');
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      if (googleAuth.accessToken == null || googleAuth.idToken == null) {
+        throw AuthException('google-failed');
+      }
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await user.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw AuthException(e.code);
+    } catch (e) {
+      if (e is AuthException) rethrow;
+      throw AuthException('google-failed');
+    }
+  }
+
   Future<void> updatePassword({
     required String currentPassword,
     required String newPassword,

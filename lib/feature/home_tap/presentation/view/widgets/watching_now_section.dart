@@ -82,7 +82,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                               return Text(
                                 genreName.isNotEmpty
                                     ? asyncSnapshot.data ?? genreName
-                                    : "Movies",
+                                    : AppLocalizations.of(context).movies,
                                 style: textTheme.titleLarge?.copyWith(
                                   color: AppColors.white,
                                   fontFamily: 'Roboto',
@@ -92,7 +92,9 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
                             },
                           )
                         : Text(
-                            genreName.isNotEmpty ? genreName : "Movies",
+                            genreName.isNotEmpty
+                                ? genreName
+                                : AppLocalizations.of(context).movies,
                             style: textTheme.titleLarge?.copyWith(
                               color: AppColors.white,
                               fontFamily: 'Roboto',
@@ -223,7 +225,7 @@ class _WatchingNowSectionState extends State<WatchingNowSection> {
   Future<String> translate(String text) async {
     try {
       final translatedGenreName = await translator.translate(
-        text,
+        "$text Movies",
         from: 'en',
         to: 'ar',
       );

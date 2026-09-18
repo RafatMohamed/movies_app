@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
 import 'package:movies_app/core/models/img_profile_model.dart';
 import 'package:movies_app/core/models/user_model.dart';
 import 'package:movies_app/core/services/auth_service.dart';
@@ -13,6 +14,7 @@ import '../../../../core/widgets/custom_button_app.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 import 'avatar_bottom_sheet.dart';
+import 'reauthenticate_dialog.dart';
 
 class UpdateProfileBody extends StatefulWidget {
   const UpdateProfileBody({super.key});
@@ -43,7 +45,8 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
       setState(() {
         nameController.text = data.name;
         phoneController.text = data.phone;
-        _avatarIndex = (data.avatarIndex >= 0 &&
+        _avatarIndex =
+            (data.avatarIndex >= 0 &&
                 data.avatarIndex < ImgProfileModel.avatars.length)
             ? data.avatarIndex
             : 0;
@@ -103,6 +106,14 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
   }
 
   Future<void> _handleDeleteAccount() async {
+    final reauthenticated = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => const ReauthenticateDialog(),
+    );
+
+    if (reauthenticated != true) return;
+
+    if (!mounted) return;
     final l10n = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
@@ -112,9 +123,7 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
           l10n.deleteAccount,
           style: const TextStyle(color: AppColors.white),
         ),
-        content: Text(
-          l10n.deleteAccountConfirmation,
-        ),
+        content: Text(l10n.deleteAccountConfirmation),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
@@ -141,9 +150,12 @@ class _UpdateProfileBodyState extends State<UpdateProfileBody> {
       if (!mounted) return;
       await context.read<AuthCubit>().deleteAccount();
       if (mounted) {
+        context.read<WatchListCubit>().stopWatchListStream();
+      }
+      if (mounted) {
         Navigator.of(
           context,
-        ).pushNamedAndRemoveUntil(AppOnRouteText.loginName,(route) => false,);
+        ).pushNamedAndRemoveUntil(AppOnRouteText.loginName, (route) => false);
       }
     } on AuthException catch (e) {
       if (mounted) {
