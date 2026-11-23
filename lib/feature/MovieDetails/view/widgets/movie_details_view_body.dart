@@ -1,0 +1,193 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/cubit/history_list_cubit/history_list_cubit.dart';
+import 'package:movies_app/core/cubit/watch_list_cubit/watch_list_cubit/watch_list_cubit.dart';
+import 'package:movies_app/core/models/movie_history_cach_model.dart';
+import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/core/utilities/app_them.dart';
+import 'package:movies_app/core/utilities/package_utilies/get_it.dart';
+import 'package:movies_app/core/widgets/custom_button_app.dart';
+import 'package:movies_app/feature/MovieDetails/model/model_name/movie_details_model.dart';
+import 'package:movies_app/feature/MovieDetails/model/model_name/parental_guide_model.dart';
+import 'package:movies_app/feature/MovieDetails/view_model/movie_details_state.dart';
+import 'package:movies_app/feature/MovieDetails/view_model/state_mangment.dart';
+import 'package:shimmer/shimmer.dart';
+import '../../../../core/utilities/helper/custom_error_msg.dart';
+import '../../../../l10n/generated/app_localizations.dart';
+import '../../model/model_name/movie_suggestion_model.dart';
+import 'movie_details__custom_cast.dart';
+import 'movie_details__custom_genres.dart';
+import 'movie_details__custom_img.dart';
+import 'movie_details__custom_info_popular.dart';
+import 'movie_details__custom_screen_shot.dart';
+import 'movie_details__custom_similar.dart';
+import 'movie_details__custom_summary.dart';
+import 'movie_details__parental_guide.dart';
+
+class MovieDetailsViewBody extends StatefulWidget {
+  const MovieDetailsViewBody({super.key, required this.movieID});
+  final int movieID;
+  @override
+  State<MovieDetailsViewBody> createState() => _MovieDetailsViewBodyState();
+}
+
+class _MovieDetailsViewBodyState extends State<MovieDetailsViewBody> {
+  @override
+  void initState() {
+    context.read<WatchMovieToggleCubit>().getIsWatched(
+      movieID: widget.movieID.toString(),
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final int movieId = ModalRoute.of(context)?.settings.arguments as int;
+    final height = context.height;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return BlocProvider.value(
+      value: getIt<HistoryCubit>(),
+      child: BlocConsumer<MovieDetailsCubit, MovieDetailsState>(
+        listener: (cont, state) {
+          if (state is MovieDetailsSuccessState) {
+            final movie = state.movieDetails.data.movie;
+            final movieCached = MovieCacheModel(
+              id: movie.id,
+              rating: movie.rating,
+              image: movie.largeCoverImage,
+              openAt: DateTime.now(),
+            );
+            cont.read<HistoryCubit>().cacheMovie(movieCached);
+          }
+        },
+        builder: (cont, state) {
+          if (state is MovieDetailsLoadingState) {
+            return IgnorePointer(
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey.shade800,
+                highlightColor: AppColors.caviar,
+                child: CustomBodyDetails(
+                  height: height,
+                  movieDetails: MovieModel.empty(),
+                  textTheme: textTheme,
+                  moviesSuggestion: const [],
+                  moviesGuide: const [],
+                ),
+              ),
+            );
+          }
+          if (state is MovieDetailsFailerState) {
+            return SizedBox(
+              height: context.height,
+              child: CustomErrorBuilder(
+                errorMsg: state.messageError,
+                onTapAgain: () {
+                  context.read<MovieDetailsCubit>().getMovieDetails(
+                    movieID: movieId,
+                  );
+                },
+              ),
+            );
+          }
+          if (state is MovieDetailsSuccessState) {
+            final MovieModel movieDetails = state.movieDetails.data.movie;
+            final List<MovieSuggestionItem> moviesSuggestion =
+                state.movieSuggestion.data.movies;
+            final List<ParentalGuideItem> moviesGuide =
+                state.movieParentalGuide.data.parentalGuides;
+            return CustomBodyDetails(
+              height: height,
+              movieDetails: movieDetails,
+              textTheme: textTheme,
+              moviesSuggestion: moviesSuggestion,
+              moviesGuide: moviesGuide,
+            );
+          }
+          return const SizedBox();
+        },
+      ),
+    );
+  }
+}
+
+class CustomBodyDetails extends StatelessWidget {
+  const CustomBodyDetails({
+    super.key,
+    required this.height,
+    required this.movieDetails,
+    required this.textTheme,
+    required this.moviesSuggestion,
+    required this.moviesGuide,
+  });
+
+  final double height;
+  final MovieModel movieDetails;
+  final TextTheme textTheme;
+  final List<MovieSuggestionItem> moviesSuggestion;
+  final List<ParentalGuideItem> moviesGuide;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations translate = AppLocalizations.of(context);
+    return Column(
+      spacing: height * (AppPadding.p16 / height),
+      crossAxisAlignment: .start,
+      children: [
+        CustomMovieDetailsImage(movie: movieDetails),
+        Padding(
+          padding: const EdgeInsetsDirectional.symmetric(
+            horizontal: AppPadding.p16,
+          ),
+          child: Column(
+            crossAxisAlignment: .start,
+            spacing: height * (AppPadding.p16 / height),
+            children: [
+              CustomButtonApp(
+                onTap: () async {
+                  try {
+                    await BlocProvider.of<MovieDetailsCubit>(
+                      context,
+                      listen: false,
+                    ).launchMovie(url: movieDetails.url);
+                  } catch (error) {
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 2),
+                        dismissDirection: .horizontal,
+                        behavior: .floating,
+                        width: double.infinity,
+                        padding: const EdgeInsetsDirectional.only(
+                          bottom: AppPadding.p20,
+                        ),
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            textAlign: .center,
+                            error.toString(),
+                            style: textTheme.labelMedium,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                },
+                text: translate.watch,
+                background: AppColors.red,
+                textStyle: textTheme.labelSmall,
+              ),
+              CustomMovieDetailsInfoPopular(movie: movieDetails),
+              CustomMovieDetailsScreenShot(movie: movieDetails),
+              CustomMovieDetailsSimilar(moviesSuggestion: moviesSuggestion),
+              CustomMovieDetailsSummary(summary: movieDetails.descriptionFull),
+              CustomMovieParentalGuide(parentalGuides: moviesGuide),
+              CustomMovieDetailsCast(cast: movieDetails.cast),
+              CustomMovieDetailsGenres(genres: movieDetails.genres),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

@@ -1,0 +1,237 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gap/flutter_gap.dart';
+import 'package:movies_app/core/utilities/app_assets.dart';
+import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:movies_app/core/widgets/custom_movie_card.dart';
+import 'package:movies_app/core/widgets/movie_card_shemmer.dart';
+import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_cubit.dart';
+import 'package:movies_app/feature/home_tap/presentation/view_model/home_tab_state.dart';
+import 'package:movies_app/l10n/generated/app_localizations.dart';
+import 'package:translator/translator.dart';
+
+class WatchingNowSection extends StatefulWidget {
+  final void Function(int index) onSeeMoreClicked;
+
+  const WatchingNowSection({required this.onSeeMoreClicked, super.key});
+
+  @override
+  State<WatchingNowSection> createState() => _WatchingNowSectionState();
+}
+
+class _WatchingNowSectionState extends State<WatchingNowSection> {
+  late HomeTabCubit myCubit;
+  final translator = GoogleTranslator();
+  @override
+  void initState() {
+    myCubit = context.read<HomeTabCubit>();
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.127,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                AppLocalizations.of(context).localeName == 'ar'
+                    ? AppAssets.watchNowImageAr
+                    : AppAssets.watchNowImage,
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.symmetric(
+            vertical: 12,
+            horizontal: AppPadding.p16,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BlocBuilder<HomeTabCubit, HomeTabState>(
+                buildWhen: (previous, current) => current is! SeeMorePressed,
+                builder: (_, state) {
+                  if (state is HomeTabLoading) {
+                    return Text(
+                      "genere",
+                      style: textTheme.titleLarge?.copyWith(
+                        color: AppColors.white,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    );
+                  }
+                  if (state is HomeTabLoaded) {
+                    final genreName = myCubit.currentGenreName;
+                    bool isArabic =
+                        AppLocalizations.of(context).localeName == 'ar';
+                    return isArabic
+                        ? FutureBuilder(
+                            future: translate(genreName),
+                            builder: (context, asyncSnapshot) {
+                              return Text(
+                                genreName.isNotEmpty
+                                    ? asyncSnapshot.data ?? genreName
+                                    : AppLocalizations.of(context).movies,
+                                style: textTheme.titleLarge?.copyWith(
+                                  color: AppColors.white,
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              );
+                            },
+                          )
+                        : Text(
+                            genreName.isNotEmpty
+                                ? genreName
+                                : AppLocalizations.of(context).movies,
+                            style: textTheme.titleLarge?.copyWith(
+                              color: AppColors.white,
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          );
+                  }
+
+                  if (state is HomeTabEror) {
+                    return Text(
+                      'genre',
+                      style: textTheme.titleLarge?.copyWith(
+                        color: AppColors.white,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    );
+                  }
+                  return const SizedBox();
+                },
+              ),
+              InkWell(
+                onTap: () {
+                  context.read<HomeTabCubit>().seeMoreClicked();
+                  widget.onSeeMoreClicked(2);
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).seeMore,
+                      style: textTheme.titleLarge?.copyWith(
+                        color: AppColors.gold,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const Gap(AppPadding.p4),
+                    const Icon(
+                      Icons.arrow_forward,
+                      size: 16,
+                      color: AppColors.gold,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        BlocBuilder<HomeTabCubit, HomeTabState>(
+          builder: (context, state) {
+            if (state is HomeTabLoaded) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: ListView.separated(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppPadding.p16,
+                  ),
+                  separatorBuilder: (context, index) => const Gap(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.watchingNowMovies.length,
+                  itemBuilder: (context, index) {
+                    if (index >= state.watchingNowMovies.length) {
+                      return const SizedBox();
+                    }
+                    final movie = state.watchingNowMovies[index];
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: CustomMovieCard(
+                        movieId: movie.id ?? 0,
+                        pathImage: movie.largeCoverImage ?? '',
+                        rate: movie.rating?.toString() ?? '0.0',
+                      ),
+                    );
+                  },
+                ),
+              );
+            }
+            if (state is HomeTabLoading) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: ListView.separated(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppPadding.p16,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => const Gap(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: const MovieCardShimmer(),
+                    );
+                  },
+                ),
+              );
+            }
+            if (state is HomeTabEror) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height * 0.25,
+                child: ListView.separated(
+                  padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: AppPadding.p16,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => const Gap(16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      child: const MovieCardShimmer(),
+                    );
+                  },
+                ),
+              );
+            }
+
+            return const SizedBox();
+          },
+        ),
+
+        const Gap(16),
+      ],
+    );
+  }
+
+  Future<String> translate(String text) async {
+    try {
+      final translatedGenreName = await translator.translate(
+        "$text Movies",
+        from: 'en',
+        to: 'ar',
+      );
+      return translatedGenreName.text;
+    } catch (e) {
+      return text;
+    }
+  }
+}

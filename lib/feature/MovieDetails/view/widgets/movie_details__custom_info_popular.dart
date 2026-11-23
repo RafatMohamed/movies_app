@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+import 'package:movies_app/core/utilities/app_assets.dart';
+import 'package:movies_app/core/utilities/app_border_radius.dart';
+import 'package:movies_app/core/utilities/app_colors.dart';
+import 'package:movies_app/core/utilities/app_padding.dart';
+import 'package:svg_flutter/svg.dart';
+
+import '../../model/model_name/movie_details_model.dart';
+
+class CustomMovieDetailsInfoPopular extends StatelessWidget {
+  const CustomMovieDetailsInfoPopular({super.key, required this.movie});
+  final MovieModel movie;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<CategoryInfoModelPopular> itemList = [
+      CategoryInfoModelPopular(
+        pathIcon: AppAssets.favIcon,
+        text: movie.likeCount.toString(),
+      ),
+      CategoryInfoModelPopular(
+        pathIcon: AppAssets.watchIcon,
+        text: movie.runtime.toString(),
+      ),
+      CategoryInfoModelPopular(
+        pathIcon: AppAssets.starIcon,
+        text: movie.rating.toString(),
+      ),
+    ];
+    return Row(
+      spacing: AppPadding.p10,
+      children: List.generate(3, (index) {
+        return DefaultInfoDetails(item: itemList[index]);
+      }),
+    );
+  }
+}
+
+class DefaultInfoDetails extends StatelessWidget {
+  const DefaultInfoDetails({super.key, required this.item});
+  final CategoryInfoModelPopular item;
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsetsDirectional.symmetric(vertical: AppPadding.p8),
+        decoration: BoxDecoration(
+          color: AppColors.lightBlack,
+          borderRadius: BorderRadius.circular(AppBorderRadius.r16),
+        ),
+        child: Row(
+          mainAxisAlignment: .spaceEvenly,
+          children: [
+            SvgPicture.asset(
+              item.pathIcon,
+              colorFilter: const ColorFilter.mode(AppColors.gold, .srcIn),
+              fit: .scaleDown,
+              width: 24,
+              height: 24,
+            ),
+            Text(item.text, style: textTheme.labelMedium),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryInfoModelPopular {
+  final String pathIcon;
+  final String text;
+  const CategoryInfoModelPopular({required this.pathIcon, required this.text});
+}

@@ -1,0 +1,154 @@
+{
+  "@@locale": "en",
+
+  "emailHint": "Email",
+  "@emailHint": {
+    "description": "Hint text for the email field on Login/Register"
+  },
+
+  "passwordHint": "Password",
+  "@passwordHint": {
+    "description": "Hint text for the password field"
+  },
+
+  "confirmPasswordHint": "Confirm Password",
+  "@confirmPasswordHint": {
+    "description": "Hint text for the confirm password field on Register"
+  },
+
+  "nameHint": "Name",
+  "@nameHint": {
+    "description": "Hint text for the name field on Register"
+  },
+
+  "phoneHint": "Phone Number",
+  "@phoneHint": {
+    "description": "Hint text for the phone field on Register"
+  },
+
+  "forgetPassword": "Forget Password ?",
+  "@forgetPassword": {
+    "description": "Link on Login that navigates to forget password screen"
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "Login button text and Register screen's link back to Login"
+  },
+
+  "dontHaveAccount": "Don't Have Account ? ",
+  "@dontHaveAccount": {
+    "description": "Text on Login before the Create One link"
+  },
+
+  "createOne": "Create One",
+  "@createOne": {
+    "description": "Link on Login that navigates to the Register screen"
+  },
+
+  "alreadyHaveAccount": "Already Have Account ? ",
+  "@alreadyHaveAccount": {
+    "description": "Text on Register before the Login link"
+  },
+
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Register button text"
+  },
+
+  "avatar": "Avatar",
+  "@avatar": {
+    "description": "Label under the avatar carousel on Register"
+  },
+
+  "register": "Register",
+  "@register": {
+    "description": "Register screen app bar title"
+  },
+
+  "orDivider": "OR",
+  "@orDivider": {
+    "description": "Divider label between the login form and the Google button"
+  },
+
+  "loginWithGoogle": "Login With Google",
+  "reloginWithGoogle": "Re-login With Google",
+  "@loginWithGoogle": {
+    "description": "Google sign-in button text"
+  },
+  "editProfile": "Edit Profile",
+  "exit": "Exit",
+  "watchList": "Watch List",
+  "history": "History",
+  "search": "Search",
+  "home": "Home",
+  "explore": "Explore",
+  "profile": "Profile",  
+  "seeMore": "See More",
+    "pickAvatar": "Pick Avatar",
+  "enterYourName": "Enter your name",
+  "enterYourPhoneNumber": "Enter your phone number",
+  "resetPassword": "Reset Password",
+  "deleteAccount": "Delete Account",
+  "updateData": "Update Data",
+  "currentPasswordHint": "Current password",
+  "newPasswordHint": "New password",
+  "confirmNewPasswordHint": "Confirm New password",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "oldPasswordIncorrect": "old password is Incorrect",
+  "newPasswordMustDiffer": "New password must be another for current",
+  "watch": "Watch",
+  "screen_shots": "Screen Shots",
+  "similar": "Similar",
+  "summary": "Summary",
+  "parental_guide": "Parental Guide",
+  "cast": "Cast",
+  "genres": "Genres",
+  "character": "Character",
+  "required": "is required",
+  "read_more": "Read more",
+  "read_less": "Read less",
+  "passwordTooShort": "Password must be at least 8 characters",
+  "invalidEmailFormat": "Please enter a valid email address",
+  "pleaseEnterEmail": "Please enter your email first",
+  "passwordResetSent": "Password reset email sent successfully! Check your inbox.",
+  "verifyEmail": "Verify Email",
+  "authInvalidEmail": "That email address looks invalid.",
+  "authUserDisabled": "This account has been disabled.",
+  "authUserNotFound": "No account found with this email.",
+  "authWrongPassword": "Incorrect email or password.",
+  "authEmailAlreadyInUse": "An account already exists with this email.",
+  "authWeakPassword": "Password is too weak.",
+  "authNetworkError": "Network error. Check your connection.",
+  "authTooManyRequests": "Too many attempts. Try again later.",
+  "authOperationNotAllowed": "Operation not allowed.",
+  "googleSignInCancelled": "Google sign in was cancelled.",
+  "googleSignInFailed": "Failed to sign in with Google. Please try again.",
+  "authRequiresRecentLogin": "Please log in again to perform this action.",
+  "authNoSignedInUser": "No signed-in user.",
+  "authDefaultError": "Something went wrong. Please try again.",
+  "action": "Action",
+  "adventure": "Adventure",
+  "animation": "Animation",
+  "biography": "Biography",
+  "comedy": "Comedy",
+  "crime": "Crime",
+  "documentary": "Documentary",
+  "drama": "Drama",
+  "family": "Family",
+  "fantasy": "Fantasy",
+  "horror": "Horror",
+  "music": "Music",
+  "musical": "Musical",
+  "mystery": "Mystery",
+  "romance": "Romance",
+  "sciFi": "Sci-Fi",
+  "sport": "Sport",
+  "thriller": "Thriller",
+  "war": "War",
+  "movies": "Movies",
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone.",
+  "cancel": "Cancel",
+  "delete": "Delete"
+}
